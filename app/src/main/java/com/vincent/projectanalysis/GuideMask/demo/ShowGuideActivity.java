@@ -2,7 +2,6 @@ package com.vincent.projectanalysis.GuideMask.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.widget.TextView;
 
 import com.vincent.projectanalysis.GuideMask.base.GuideBuilder;
@@ -28,8 +27,8 @@ public class ShowGuideActivity extends Activity {
     private TextView mTvE;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_show_guide_activity);
         mTvA = (TextView) findViewById(R.id.tv_A);
         mTvB = (TextView) findViewById(R.id.tv_B);
@@ -37,6 +36,7 @@ public class ShowGuideActivity extends Activity {
         mTvD = (TextView) findViewById(R.id.tv_D);
         mTvE = (TextView) findViewById(R.id.tv_E);
         mActivity = this;
+        AppPreferences.getPreferences().removeAllPreference();
         showGuidePage();
     }
 

@@ -20,7 +20,7 @@ public class AppPreferences {
     private static String mPrefPrefix     = "";
     private static AppPreferences mPreferences;
 
-    private SharedPreferences        mSharedPreferences;
+    private  static SharedPreferences        mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
     private AppPreferences(Context context) {
@@ -224,4 +224,9 @@ public class AppPreferences {
         return getInstance().getIntListValue(key);
     }
 
+    public static void removeAllPreference(){
+        SharedPreferences.Editor edit = mSharedPreferences.edit();
+        edit.clear();
+        edit.commit();
+    }
 }

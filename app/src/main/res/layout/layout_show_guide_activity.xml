@@ -33,7 +33,7 @@
         android:id="@+id/tv_D"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:text="E"
+        android:text="D"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:gravity="center"
