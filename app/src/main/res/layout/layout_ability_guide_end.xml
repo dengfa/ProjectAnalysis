@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="160dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_ability_elephant_guide_bg"
+            android:text="@string/ability_guide_end"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="-1dp"
+            android:src="@drawable/icon_ability_elephant_guide_arrow_down"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_panel"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="-20dp"
+        android:src="@drawable/icon_ability_elephant_guide_end"/>
+
+
+    <TextView
+        android:layout_width="240dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="500dp"
+        android:background="@color/gray"
+        android:gravity="center"
+        android:text="知道啦"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+
+</RelativeLayout>

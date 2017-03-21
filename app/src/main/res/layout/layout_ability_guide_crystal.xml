@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/ll_pannel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/icon_ability_elephant_guide_arrow_up"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_ability_elephant_guide_bg"
+            android:text="@string/ability_guide_crystal"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/ll_pannel"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="-50dp"
+        android:src="@drawable/icon_ability_elephant_guide_crystal"/>
+</RelativeLayout>

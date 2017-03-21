@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_A"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:text="A"
+        android:gravity="center"
+        android:background="@color/gray"/>
+
+    <TextView
+        android:id="@+id/tv_B"
+        android:layout_alignParentRight="true"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:text="B"
+        android:gravity="center"
+        android:background="@color/gray"/>
+
+    <TextView
+        android:id="@+id/tv_C"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:text="C"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray"/>
+
+    <TextView
+        android:id="@+id/tv_D"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:text="E"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:background="@color/gray"/>
+
+    <TextView
+        android:id="@+id/tv_E"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:text="E"
+       android:layout_centerInParent="true"
+        android:gravity="center"
+        android:background="@color/gray"/>
+</RelativeLayout>

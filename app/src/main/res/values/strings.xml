@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ProjectAnalysis</string>
+
+
+    <string name="ability_guide_start">Hey！欢迎来到魔法学院！\n布克可以帮你在这里强化\n数学魔法哦，快来和我一\n起变强吧！</string>
+    <string name="ability_guide_crystal">水晶会在每天夜晚0点消失\n升级魔法学院，可以每日获\n得更多水晶哦！</string>
+    <string name="ability_guide_card">这是你拥有的魔法能力，\n需要使用水晶来强化魔法\n等级。</string>
+    <string name="ability_guide_value">能力值代表你的实力，\n在学院榜中看看你第几名。</string>
+    <string name="ability_guide_end">快去强化魔法，成为一名\n大魔法师吧！</string>
+</resources>
