@@ -10,11 +10,12 @@ import android.widget.ListView;
 
 import com.vincent.projectanalysis.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.mapScene.MapSceneActivity;
+import com.vincent.projectanalysis.widgets.RippleAndWaveActivity;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
-    private String[] tabs = {"引导遮罩","地图场景"};
+    private String[] tabs = {"引导遮罩","地图场景","RippleView"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 1:
                 startActivity(new Intent(MainActivity.this, MapSceneActivity.class));
+                break;
+            case 2:
+                startActivity(new Intent(MainActivity.this, RippleAndWaveActivity.class));
                 break;
         }
     }

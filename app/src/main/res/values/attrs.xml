@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RippleView">
+       <attr name="RvColor" format="color"/>
+       <attr name="RvRadius" format="dimension"/>
+    </declare-styleable>
+</resources>
