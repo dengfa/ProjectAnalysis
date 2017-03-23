@@ -2,6 +2,7 @@
 <RelativeLayout
     android:id="@+id/activity_ripple"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,18 +12,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.vincent.projectanalysis.widgets.RippleAndWaveActivity">
 
+    <com.vincent.projectanalysis.widgets.WaterWaveView
+        android:id="@+id/wave_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
     <com.vincent.projectanalysis.widgets.RippleView
         android:id="@+id/ripple_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
-
-    <com.vincent.projectanalysis.widgets.WaterWaveView
-        android:id="@+id/wave_view"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"/>
+        android:layout_centerHorizontal="true"
+        app:RvColor="#ffcdff"
+        app:RvRadius="100dp"/>
 
 </RelativeLayout>
