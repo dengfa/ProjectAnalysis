@@ -1,4 +1,4 @@
-package com.vincent.projectanalysis.GuideMask.base;
+package com.vincent.projectanalysis.guideMask.base;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -1,4 +1,4 @@
-package com.vincent.projectanalysis.GuideMask.base;
+package com.vincent.projectanalysis.guideMask.base;
 
 import android.app.Activity;
 import android.graphics.RectF;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.vincent.projectanalysis.Utils.UIUtils;
+import com.vincent.projectanalysis.utils.UIUtils;
 
 import java.util.ArrayList;
 import java.util.List;

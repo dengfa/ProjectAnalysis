@@ -1,4 +1,4 @@
-package com.vincent.projectanalysis.Utils;
+package com.vincent.projectanalysis.utils;
 
 import android.app.Activity;
 import android.app.ActivityManager;

@@ -1,19 +1,20 @@
 package com.vincent.projectanalysis;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.vincent.projectanalysis.GuideMask.demo.ShowGuideActivity;
+import com.vincent.projectanalysis.guideMask.demo.ShowGuideActivity;
+import com.vincent.projectanalysis.mapScene.MapSceneActivity;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
-    private String[] tabs = {"引导遮罩"};
+    private String[] tabs = {"引导遮罩","地图场景"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         switch (position) {
             case 0:
                 startActivity(new Intent(MainActivity.this, ShowGuideActivity.class));
+                break;
+            case 1:
+                startActivity(new Intent(MainActivity.this, MapSceneActivity.class));
                 break;
         }
     }

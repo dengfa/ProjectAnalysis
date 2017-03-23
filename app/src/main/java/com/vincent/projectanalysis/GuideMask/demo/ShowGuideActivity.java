@@ -1,13 +1,13 @@
-package com.vincent.projectanalysis.GuideMask.demo;
+package com.vincent.projectanalysis.guideMask.demo;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.vincent.projectanalysis.GuideMask.base.GuideBuilder;
+import com.vincent.projectanalysis.guideMask.base.GuideBuilder;
 import com.vincent.projectanalysis.R;
-import com.vincent.projectanalysis.Utils.AppPreferences;
-import com.vincent.projectanalysis.Utils.UiThreadHandler;
+import com.vincent.projectanalysis.utils.AppPreferences;
+import com.vincent.projectanalysis.utils.UiThreadHandler;
 
 /**
  * Created by dengfa on 17/3/21.

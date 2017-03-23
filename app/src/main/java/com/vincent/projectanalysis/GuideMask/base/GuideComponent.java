@@ -1,4 +1,4 @@
-package com.vincent.projectanalysis.GuideMask.base;
+package com.vincent.projectanalysis.guideMask.base;
 
 import android.view.LayoutInflater;
 import android.view.View;

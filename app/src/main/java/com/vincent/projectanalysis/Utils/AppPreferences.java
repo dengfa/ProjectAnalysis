@@ -1,4 +1,4 @@
-package com.vincent.projectanalysis.Utils;
+package com.vincent.projectanalysis.utils;
 
 import android.annotation.TargetApi;
 import android.content.Context;

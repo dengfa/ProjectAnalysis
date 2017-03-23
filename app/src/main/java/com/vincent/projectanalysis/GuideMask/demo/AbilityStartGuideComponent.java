@@ -1,9 +1,9 @@
-package com.vincent.projectanalysis.GuideMask.demo;
+package com.vincent.projectanalysis.guideMask.demo;
 
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.vincent.projectanalysis.GuideMask.base.GuideComponent;
+import com.vincent.projectanalysis.guideMask.base.GuideComponent;
 import com.vincent.projectanalysis.R;
 
 public class AbilityStartGuideComponent implements GuideComponent {
