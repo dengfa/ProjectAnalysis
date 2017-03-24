@@ -28,8 +28,16 @@ public class RippleAndWaveActivity extends AppCompatActivity {
             }
         });
         mWaterWaveView = (WaterWaveView) findViewById(R.id.wave_view);
-        mWaterWaveView.setmWaterLevel(0.5F);
-        mWaterWaveView.startWave();
+        mWaterWaveView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mWaterWaveView.IsWaving()) {
+                    mWaterWaveView.stopWave();
+                } else {
+                    mWaterWaveView.startWave();
+                }
+            }
+        });
     }
 
     @Override

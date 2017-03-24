@@ -1,368 +1,322 @@
 /**
- * 
+ *
  */
 package com.vincent.projectanalysis.widgets;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.RectF;
+import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
-/**
- * @author kince
- * @category View必须是正方形
- * 
- */
+import com.vincent.projectanalysis.R;
+
 public class WaterWaveView extends View {
+    public static final String TAG = "WaterWaveView";
+    public static final int    T   = 2;//周期
 
-	private Context mContext;
+    private Context mContext;
 
-	private int mScreenWidth;
-	private int mScreenHeight;
+    private int     mWidth;
+    private int     mHeight;
+    private float[] mYPositions;
+    private static final int   WAVE_PAINT_COLOR = 0x880000aa;
+    // y = Asin(wx+b)+h
+    private static final float STRETCH_FACTOR_A = 20;
+    private              int   offY             = 100;
+    private Handler mHandler;
+    private double mCycleFactorW = 2 * Math.PI / 400;
+    private boolean mStarted;
+    private int     mXOneOffset;
+    private float[] mResetOneYPositions;
+    private float[] mResetTwoYPositions;
+    private int mXTwoOffset = 100;
+    private Paint                mWavePaint;
+    private int                  mXOffsetSpeedOne;
+    private int                  mXOffsetSpeedTwo;
+    private PaintFlagsDrawFilter mDrawFilter;
+    private float                c;
+    private Bitmap               mMaskBitmap;
+    private Rect                 mMaskSrcRect;
+    private Rect                 mMaskDestRect;
 
-	private Paint mRingPaint;
-	private Paint mCirclePaint;
-	private Paint mWavePaint;
-	private Paint linePaint;
-	private Paint flowPaint;
-	private Paint leftPaint;
-
-	private int mRingSTROKEWidth = 15;
-	private int mCircleSTROKEWidth = 2;
-	private int mLineSTROKEWidth = 1;
-
-	private int mCircleColor = Color.WHITE;
-	private int mRingColor = Color.WHITE;
-	private int mWaveColor = Color.WHITE;
-
-	private Handler mHandler;
-	private long c = 0L;
-	private boolean mStarted = false;
-	private final float f = 0.033F;
-	private int mAlpha = 50;// 透明度
-	private float mAmplitude = 10.0F; // 振幅
-	private float mWaterLevel = 0.5F;// 水高(0~1)
-	private Path mPath;
-
-	private String flowNum = "1024M";
-	private String flowLeft = "还剩余";
-
-	/**
-	 * @param context
-	 */
-	public WaterWaveView(Context context) {
-		super(context);
-		// TODO Auto-generated constructor stub
-		mContext = context;
-		init(mContext);
-	}
-
-	/**
-	 * @param context
-	 * @param attrs
-	 */
-	public WaterWaveView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		// TODO Auto-generated constructor stub
-		mContext = context;
-		init(mContext);
-	}
-
-	/**
-	 * @param context
-	 * @param attrs
-	 * @param defStyleAttr
-	 */
-	public WaterWaveView(Context context, AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
-		// TODO Auto-generated constructor stub
-		mContext = context;
-		init(mContext);
-	}
-
-    public void setmWaterLevel(float mWaterLevel) {
-        this.mWaterLevel = mWaterLevel;
+    /**
+     * @param context
+     */
+    public WaterWaveView(Context context) {
+        super(context);
+        mContext = context;
+        init(mContext);
     }
 
+    /**
+     * @param context
+     * @param attrs
+     */
+    public WaterWaveView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        mContext = context;
+        init(mContext);
+    }
+
+    /**
+     * @param context
+     * @param attrs
+     * @param defStyleAttr
+     */
+    public WaterWaveView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+        mContext = context;
+        init(mContext);
+    }
+
+
     private void init(Context context) {
-		mRingPaint = new Paint();
-		mRingPaint.setColor(mRingColor);
-		mRingPaint.setAlpha(50);
-		mRingPaint.setStyle(Paint.Style.STROKE);
-		mRingPaint.setAntiAlias(true);
-		mRingPaint.setStrokeWidth(mRingSTROKEWidth);
+        mXOffsetSpeedOne = 5;
+        mXOffsetSpeedTwo = 10;
 
-		mCirclePaint = new Paint();
-		mCirclePaint.setColor(mCircleColor);
-		mCirclePaint.setStyle(Paint.Style.STROKE);
-		mCirclePaint.setAntiAlias(true);
-		mCirclePaint.setStrokeWidth(mCircleSTROKEWidth);
+        // 初始绘制波纹的画笔
+        mWavePaint = new Paint();
+        // 去除画笔锯齿
+        mWavePaint.setAntiAlias(true);
+        // 设置风格为实线
+        mWavePaint.setStyle(Paint.Style.FILL);
+        // 设置画笔颜色
+        mWavePaint.setColor(WAVE_PAINT_COLOR);
 
-		linePaint = new Paint();
-		linePaint.setColor(mCircleColor);
-		linePaint.setStyle(Paint.Style.STROKE);
-		linePaint.setAntiAlias(true);
-		linePaint.setStrokeWidth(mLineSTROKEWidth);
+        mDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
 
-		flowPaint = new Paint();
-		flowPaint.setColor(mCircleColor);
-		flowPaint.setStyle(Paint.Style.FILL);
-		flowPaint.setAntiAlias(true);
-		flowPaint.setTextSize(36);
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(android.os.Message msg) {
+                if (msg.what == 0) {
+                    resetPositonY();
+                    // 改变两条波纹的移动点
+                    mXOneOffset += mXOffsetSpeedOne;
+                    mXTwoOffset += mXOffsetSpeedTwo;
 
-		leftPaint = new Paint();
-		leftPaint.setColor(mCircleColor);
-		leftPaint.setStyle(Paint.Style.FILL);
-		leftPaint.setAntiAlias(true);
-		leftPaint.setTextSize(18);
+                    // 如果已经移动到结尾处，则重头记录
+                    if (mXOneOffset >= mWidth) {
+                        mXOneOffset = 0;
+                    }
+                    if (mXTwoOffset > mWidth) {
+                        mXTwoOffset = 0;
+                    }
+                    invalidate();
+                    mHandler.sendEmptyMessageDelayed(0, 20);
+                }
+            }
+        };
+    }
 
-		mWavePaint = new Paint();
-		mWavePaint.setStrokeWidth(1.0F);
-		mWavePaint.setColor(mWaveColor);
-		mWavePaint.setAlpha(mAlpha);
-		mPath = new Path();
-
-		mHandler = new Handler() {
-			@Override
-			public void handleMessage(android.os.Message msg) {
-				if (msg.what == 0) {
-					invalidate();
-					if (mStarted) {
-						// 不断发消息给自己，使自己不断被重绘
-						mHandler.sendEmptyMessageDelayed(0, 60L);
-					}
-				}
-			}
-		};
-	}
-
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int width = measure(widthMeasureSpec, true);
-		int height = measure(heightMeasureSpec, false);
-		if (width < height) {
-			setMeasuredDimension(width, width);
-		} else {
-			setMeasuredDimension(height, height);
-		}
-
-	}
-
-	/**
-	 * @category 测量
-	 * @param measureSpec
-	 * @param isWidth
-	 * @return
-	 */
-	private int measure(int measureSpec, boolean isWidth) {
-		int result;
-		int mode = MeasureSpec.getMode(measureSpec);
-		int size = MeasureSpec.getSize(measureSpec);
-		int padding = isWidth ? getPaddingLeft() + getPaddingRight()
-				: getPaddingTop() + getPaddingBottom();
-		if (mode == MeasureSpec.EXACTLY) {
-			result = size;
-		} else {
-			result = isWidth ? getSuggestedMinimumWidth()
-					: getSuggestedMinimumHeight();
-			result += padding;
-			if (mode == MeasureSpec.AT_MOST) {
-				if (isWidth) {
-					result = Math.max(result, size);
-				} else {
-					result = Math.min(result, size);
-				}
-			}
-		}
-		return result;
-	}
-
-	@Override
-	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-		// TODO Auto-generated method stub
-		super.onSizeChanged(w, h, oldw, oldh);
-		mScreenWidth = w;
-		mScreenHeight = h;
-	}
-
-	@Override
-	protected void onDraw(Canvas canvas) {
-		// TODO Auto-generated method stub
-		super.onDraw(canvas);
-		// 得到控件的宽高
-		int width = getWidth();
-		int height = getHeight();
-		setBackgroundColor(0x88ff2345);
-
-        //计算当前油量线和水平中线的距离
-        float centerOffset = Math.abs(mScreenWidth / 2 * mWaterLevel - mScreenWidth / 4);
-        //计算油量线和与水平中线的角度
-        float horiAngle = (float)(Math.asin(centerOffset / (mScreenWidth / 4)) * 180 / Math.PI);
-        //扇形的起始角度和扫过角度
-        float startAngle, sweepAngle;
-        if (mWaterLevel > 0.5F) {
-            startAngle = 360F - horiAngle;
-            sweepAngle = 180F + 2 * horiAngle;
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int width = measure(widthMeasureSpec, true);
+        int height = measure(heightMeasureSpec, false);
+        if (width < height) {
+            setMeasuredDimension(width, width);
         } else {
-            startAngle = horiAngle;
-            sweepAngle = 180F - 2 * horiAngle;
+            setMeasuredDimension(height, height);
         }
+    }
 
-		canvas.drawLine(mScreenWidth * 3 / 8, mScreenHeight * 5 / 8,
-				mScreenWidth * 5 / 8, mScreenHeight * 5 / 8, linePaint);
-		float num = flowPaint.measureText(flowNum);
-		canvas.drawText(flowNum, mScreenWidth * 4 / 8 - num / 2,
-				mScreenHeight * 4 / 8, flowPaint);
-		float left = leftPaint.measureText(flowLeft);
-		canvas.drawText(flowLeft, mScreenWidth * 4 / 8 - left / 2,
-				mScreenHeight * 3 / 8, leftPaint);
-
-		// 如果未开始（未调用startWave方法）,绘制一个扇形
-		if ((!mStarted) || (mScreenWidth == 0) || (mScreenHeight == 0)) {
-            // 绘制,即水面静止时的高度
-            RectF oval = new RectF(mScreenWidth / 4, mScreenHeight / 4,
-                    mScreenWidth * 3 / 4, mScreenHeight * 3 / 4 );
-            canvas.drawArc(oval, startAngle, sweepAngle, false, mWavePaint);
-			return;
-		}
-		// 绘制,即水面静止时的高度
-        // 绘制,即水面静止时的高度
-        RectF oval = new RectF(mScreenWidth / 4, mScreenHeight / 4,
-                mScreenWidth * 3 / 4, mScreenHeight * 3 / 4 );
-        canvas.drawArc(oval, startAngle, sweepAngle, false, mWavePaint);
-
-		if (this.c >= 8388607L) {
-			this.c = 0L;
-		}
-        // 每次onDraw时c都会自增
-        c = (1L + c);
-        float f1 = mScreenHeight * (1.0F - (0.25F + mWaterLevel / 2)) - mAmplitude;
-        //当前油量线的长度
-        float waveWidth = (float)Math.sqrt(mScreenWidth * mScreenWidth / 16 - centerOffset * centerOffset);
-        //与圆半径的偏移量
-        float offsetWidth = mScreenWidth / 4 - waveWidth;
-
-        int top = (int) (f1 + mAmplitude);
-        mPath.reset();
-        //起始振动X坐标，结束振动X坐标
-        int startX, endX;
-        if (mWaterLevel > 0.50F) {
-            startX = (int) (mScreenWidth / 4 + offsetWidth);
-            endX = (int) (mScreenWidth / 2 + mScreenWidth / 4 - offsetWidth);
+    /**
+     * @param measureSpec
+     * @param isWidth
+     * @return
+     * @category 测量
+     */
+    private int measure(int measureSpec, boolean isWidth) {
+        int result;
+        int mode = MeasureSpec.getMode(measureSpec);
+        int size = MeasureSpec.getSize(measureSpec);
+        int padding = isWidth ? getPaddingLeft() + getPaddingRight()
+                : getPaddingTop() + getPaddingBottom();
+        if (mode == MeasureSpec.EXACTLY) {
+            result = size;
         } else {
-            startX = (int) (mScreenWidth / 4 + offsetWidth - mAmplitude);
-            endX = (int) (mScreenWidth / 2 + mScreenWidth / 4 - offsetWidth + mAmplitude);
+            result = isWidth ? getSuggestedMinimumWidth()
+                    : getSuggestedMinimumHeight();
+            result += padding;
+            if (mode == MeasureSpec.AT_MOST) {
+                if (isWidth) {
+                    result = Math.max(result, size);
+                } else {
+                    result = Math.min(result, size);
+                }
+            }
         }
-        // 波浪效果
-        while (startX < endX) {
-            int startY = (int)
-                    (f1 - mAmplitude * Math.sin(Math.PI * (2.0F * (startX + this.c * width * this.f)) / width));
-            canvas.drawLine(startX, startY, startX, top, mWavePaint);
-            startX++;
+        return result;
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        Log.d(TAG, "onSizeChanged: ");
+        super.onSizeChanged(w, h, oldw, oldh);
+        mWidth = w;
+        mHeight = h;
+        mCycleFactorW = 2 * Math.PI / mWidth * T;
+        mYPositions = new float[mWidth];
+        // 根据view总宽度得出所有对应的y值
+        for (int i = 0; i < mWidth; i++) {
+            mYPositions[i] = (float) (STRETCH_FACTOR_A * Math.sin(mCycleFactorW * i));
         }
-        canvas.drawCircle(mScreenWidth / 2, mScreenHeight / 2,
-                mScreenWidth / 4 + mRingSTROKEWidth / 2, mRingPaint);
 
-        canvas.drawCircle(mScreenWidth / 2, mScreenHeight / 2, mScreenWidth / 4, mCirclePaint);
-        canvas.restore();
-	}
-/*
+        // 用于保存波纹一的y值
+        mResetOneYPositions = new float[mWidth];
+        // 用于保存波纹二的y值
+        mResetTwoYPositions = new float[mWidth];
+        resetPositonY();
+    }
 
-	@Override
-	public Parcelable onSaveInstanceState() {
-		// Force our ancestor class to save its state
-		Parcelable superState = super.onSaveInstanceState();
-		SavedState ss = new SavedState(superState);
-		ss.progress = (int) c;
-		return ss;
-	}
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        // 从canvas层面去除绘制时锯齿
+        canvas.setDrawFilter(mDrawFilter);
+        for (int i = 0; i < mWidth; i++) {
+            // 绘制第一条水波纹
+            canvas.drawLine(i, mHeight - mResetOneYPositions[i] - offY, i, mHeight, mWavePaint);
+            // 绘制第二条水波纹
+            canvas.drawLine(i, mHeight - mResetTwoYPositions[i] - offY, i, mHeight, mWavePaint);
+        }
 
-	@Override
-	public void onRestoreInstanceState(Parcelable state) {
-		SavedState ss = (SavedState) state;
-		super.onRestoreInstanceState(ss.getSuperState());
-		c = ss.progress;
-	}
-*/
 
-	@Override
-	protected void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		// 关闭硬件加速，防止异常unsupported operation exception
-		this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-	}
+        //添加遮罩
+        int sc = canvas.saveLayer(0, 0, 200, 200, mWavePaint, Canvas.ALL_SAVE_FLAG);
+        for (int i = 0; i < mWidth; i++) {
+            // 绘制第一条水波纹
+            canvas.drawLine(i, 0, i, mResetOneYPositions[i] + offY, mWavePaint);
 
-	@Override
-	protected void onDetachedFromWindow() {
-		super.onDetachedFromWindow();
-	}
+            // 绘制第二条水波纹
+            canvas.drawLine(i, 0, i, mResetTwoYPositions[i] + offY, mWavePaint);
+        }
+        mWavePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+        mMaskBitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.circle_500)).getBitmap();
+        int maskWidth = mMaskBitmap.getWidth();
+        int maskHeight = mMaskBitmap.getHeight();
+        mMaskSrcRect = new Rect(0, 0, maskWidth, maskHeight);
+        mMaskDestRect = new Rect(0, 0, 200, 200);
+        canvas.drawBitmap(mMaskBitmap, mMaskSrcRect, mMaskDestRect, mWavePaint);
+        mWavePaint.setXfermode(null);
+        canvas.restoreToCount(sc);
+    }
 
-	/**
-	 * @category 开始波动
-	 */
-	public void startWave() {
-		if (!mStarted) {
-			this.c = 0L;
-			mStarted = true;
-			this.mHandler.sendEmptyMessage(0);
-		}
-	}
+    private void resetPositonY() {
+        // mXOneOffset代表当前第一条水波纹要移动的距离
+        int yOneInterval = mYPositions.length - mXOneOffset;
+        // 使用System.arraycopy方式重新填充第一条波纹的数据
+        System.arraycopy(mYPositions, mXOneOffset, mResetOneYPositions, 0, yOneInterval);
+        System.arraycopy(mYPositions, 0, mResetOneYPositions, yOneInterval, mXOneOffset);
 
-	/**
-	 * @category 停止波动
-	 */
-	public void stopWave() {
-		if (mStarted) {
-			this.c = 0L;
-			mStarted = false;
-			this.mHandler.removeMessages(0);
-		}
-	}
+        int yTwoInterval = mYPositions.length - mXTwoOffset;
+        System.arraycopy(mYPositions, mXTwoOffset, mResetTwoYPositions, 0,
+                yTwoInterval);
+        System.arraycopy(mYPositions, 0, mResetTwoYPositions, yTwoInterval, mXTwoOffset);
+    }
 
-	/**
-	 * @category 保存状态
-	 */
-	static class SavedState extends BaseSavedState {
-		int progress;
+    @Override
+    public Parcelable onSaveInstanceState() {
+        // Force our ancestor class to save its state
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState ss = new SavedState(superState);
+        ss.progress = (int) c;
+        return ss;
+    }
 
-		/**
-		 * Constructor called from {@link ProgressBar#onSaveInstanceState()}
-		 */
-		SavedState(Parcelable superState) {
-			super(superState);
-		}
+    @Override
+    public void onRestoreInstanceState(Parcelable state) {
+        SavedState ss = (SavedState) state;
+        super.onRestoreInstanceState(ss.getSuperState());
+        c = ss.progress;
+    }
 
-		/**
-		 * Constructor called from {@link #CREATOR}
-		 */
-		private SavedState(Parcel in) {
-			super(in);
-			progress = in.readInt();
-		}
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        // 关闭硬件加速，防止异常unsupported operation exception ？？？
+        this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+    }
 
-		@Override
-		public void writeToParcel(Parcel out, int flags) {
-			super.writeToParcel(out, flags);
-			out.writeInt(progress);
-		}
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+    }
 
-		public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
-			public SavedState createFromParcel(Parcel in) {
-				return new SavedState(in);
-			}
+    /**
+     * @category 开始波动
+     */
+    public void startWave() {
+        if (!mStarted) {
+            mStarted = true;
+            this.mHandler.sendEmptyMessage(0);
+        }
+    }
 
-			public SavedState[] newArray(int size) {
-				return new SavedState[size];
-			}
-		};
-	}
+    /**
+     * @category 停止波动
+     */
+    public void stopWave() {
+        if (mStarted) {
+            mStarted = false;
+            this.mHandler.removeMessages(0);
+        }
+    }
+
+    public boolean IsWaving() {
+        return mStarted;
+    }
+
+    /**
+     * @category 保存状态
+     */
+    static class SavedState extends BaseSavedState {
+        int progress;
+
+        /**
+         * Constructor called from {@link ProgressBar#onSaveInstanceState()}
+         */
+        SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        /**
+         * Constructor called from {@link #CREATOR}
+         */
+        private SavedState(Parcel in) {
+            super(in);
+            progress = in.readInt();
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            out.writeInt(progress);
+        }
+
+        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+    }
 
 }

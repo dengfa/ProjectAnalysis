@@ -16,36 +16,14 @@ public class RippleView extends View {
 
     private static final int MSG_LOOPER_RIPPLE = 1;
     public static final  int DEF_COLOR         = 0x49617291;
+    private static       int DEF_WIDTH         = 300;
 
     private Paint mRipplePaint;
 
     private int rippleFirstRadius  = 0;
     private int rippleSecendRadius = -33;
     private int rippleThirdRadius  = -66;
-
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            invalidate();
-            rippleFirstRadius++;
-            if (rippleFirstRadius > 100) {
-                rippleFirstRadius = 0;
-            }
-            rippleSecendRadius++;
-            if (rippleSecendRadius > 100) {
-                rippleSecendRadius = 0;
-            }
-            rippleThirdRadius++;
-            if (rippleThirdRadius > 100) {
-                rippleThirdRadius = 0;
-            }
-            sendEmptyMessageDelayed(0, 20);
-
-        }
-    };
-    private int mColor;
-    private static int DEF_WIDTH = 300;
+    private int     mColor;
     private float   mRadius;
     private Handler mLooperHandler;
     private boolean isRipple;

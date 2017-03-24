@@ -16,8 +16,7 @@
         android:id="@+id/wave_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:layout_centerInParent="true"/>
 
     <com.vincent.projectanalysis.widgets.RippleView
         android:id="@+id/ripple_view"
