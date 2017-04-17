@@ -22,7 +22,11 @@
         <activity android:name=".guideMask.demo.ShowGuideActivity"/>
         <activity android:name=".mapScene.MapSceneActivity">
         </activity>
-        <activity android:name=".widgets.RippleAndWaveActivity">
+        <activity android:name=".widgets.activity.RippleAndWaveActivity">
+        </activity>
+        <activity android:name=".widgets.activity.LevelProgressActivity">
+        </activity>
+        <activity android:name=".activity.TestActivity" android:theme="@style/CustomMaterialTheme">
         </activity>
     </application>
 

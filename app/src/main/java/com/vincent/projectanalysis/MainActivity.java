@@ -8,14 +8,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.vincent.projectanalysis.activity.TestActivity;
 import com.vincent.projectanalysis.guideMask.demo.ShowGuideActivity;
+import com.vincent.projectanalysis.java.Json;
 import com.vincent.projectanalysis.mapScene.MapSceneActivity;
-import com.vincent.projectanalysis.widgets.RippleAndWaveActivity;
+import com.vincent.projectanalysis.widgets.activity.LevelProgressActivity;
+import com.vincent.projectanalysis.widgets.activity.RippleAndWaveActivity;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
-    private String[] tabs = {"引导遮罩","地图场景","RippleView"};
+    private String[] tabs = {"引导遮罩","地图场景","RippleView","LevelProgress","other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mListView = (ListView) findViewById(R.id.lv);
         mListView.setAdapter(new ArrayAdapter<String>(this, R.layout.item_main_listview, R.id.tv_item, tabs));
         mListView.setOnItemClickListener(this);
+
+        Json.jsonArrayTest();
     }
 
     @Override
@@ -37,6 +42,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 2:
                 startActivity(new Intent(MainActivity.this, RippleAndWaveActivity.class));
+                break;
+            case 3:
+                startActivity(new Intent(MainActivity.this, LevelProgressActivity.class));
+                break;
+            case 4:
+                startActivity(new Intent(MainActivity.this, TestActivity.class));
                 break;
         }
     }

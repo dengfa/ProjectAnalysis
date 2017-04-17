@@ -1,10 +1,12 @@
-package com.vincent.projectanalysis.widgets;
+package com.vincent.projectanalysis.widgets.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.widgets.RippleView;
+import com.vincent.projectanalysis.widgets.WaterWaveView;
 
 public class RippleAndWaveActivity extends AppCompatActivity {
 
