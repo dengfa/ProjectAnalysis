@@ -24,10 +24,12 @@ import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 
 import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.module.ClipReveal.adapter.ProfileAdapter;
 import com.vincent.projectanalysis.module.ClipReveal.interfaces.DemoActivityInterface;
 import com.vincent.projectanalysis.module.ClipReveal.interfaces.ProfileAdapterListener;
 import com.vincent.projectanalysis.module.ClipReveal.interfaces.TilesRendererInterface;
 import com.vincent.projectanalysis.module.ClipReveal.model.User;
+import com.vincent.projectanalysis.widgets.ClipRevealFrame;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -58,7 +60,7 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
         @Override
         public boolean onMenuItemClick(final MenuItem item) {
             if (R.id.action_close == item.getItemId()) {
-                doBreak();
+
             }
             return false;
         }
@@ -75,7 +77,6 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
     @Override
     public void onPause() {
         super.onPause();
-        mTilesFrameLayout.onPause();
     }
 
     @Override
@@ -180,7 +181,6 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mTilesFrameLayout.setOnAnimationFinishedListener(this);
         mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecycler.setAdapter(new ProfileAdapter(getContext(), getUser(), this));
         setUpToolbar(mToolbar);
@@ -255,26 +255,11 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
         return result;
     }
 
-    public void doBreak() {
-        if (mDemoActivityInterface != null) {
-            mDemoActivityInterface.removeAllFragmentExcept(getTagString());
-        }
-        if (mTilesFrameLayout != null) {
-            mTilesFrameLayout.startAnimation();
-        }
-    }
-
-    @Override
-    public void onAnimationFinished() {
-        if (mTilesListener != null) {
-            mTilesListener.onTilesFinished();
-        }
-    }
 
     public abstract String getTagString();
 
     @OnClick(R.id.btn_save)
     void onClick() {
-        doBreak();
+
     }
 }

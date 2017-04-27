@@ -4,4 +4,9 @@
        <attr name="RvColor" format="color"/>
        <attr name="RvRadius" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="sw_StarWarsTilesFrameLayout">
+        <attr name="sw_animationDuration" format="integer" />
+        <attr name="sw_numberOfTilesX" format="integer" />
+    </declare-styleable>
 </resources>

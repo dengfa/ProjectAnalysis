@@ -2,8 +2,9 @@ package com.vincent.projectanalysis.module.ClipReveal;
 
 import android.os.Bundle;
 
-import com.yalantis.starwarsdemo.R;
-import com.yalantis.starwarsdemo.model.User;
+import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.module.ClipReveal.model.User;
+
 
 /**
  * Created by Artem Kholodnyi on 11/17/15.

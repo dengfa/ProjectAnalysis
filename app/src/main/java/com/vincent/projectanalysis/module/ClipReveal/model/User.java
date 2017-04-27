@@ -3,7 +3,8 @@ package com.vincent.projectanalysis.module.ClipReveal.model;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 
-import com.yalantis.starwarsdemo.R;
+import com.vincent.projectanalysis.R;
+
 
 /**
  * Created by Artem Kholodnyi on 11/19/15.

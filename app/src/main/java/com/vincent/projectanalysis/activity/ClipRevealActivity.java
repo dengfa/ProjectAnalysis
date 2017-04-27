@@ -5,6 +5,7 @@ import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.module.ClipReveal.BrightSideFragment;
 
 /**
  * Created by dengfa on 17/4/27.
