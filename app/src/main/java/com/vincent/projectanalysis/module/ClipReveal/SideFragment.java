@@ -16,7 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
@@ -27,7 +26,6 @@ import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.module.ClipReveal.adapter.ProfileAdapter;
 import com.vincent.projectanalysis.module.ClipReveal.interfaces.DemoActivityInterface;
 import com.vincent.projectanalysis.module.ClipReveal.interfaces.ProfileAdapterListener;
-import com.vincent.projectanalysis.module.ClipReveal.interfaces.TilesRendererInterface;
 import com.vincent.projectanalysis.module.ClipReveal.model.User;
 import com.vincent.projectanalysis.widgets.ClipRevealFrame;
 
@@ -55,29 +53,8 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     @Bind(R.id.app_bar_layout)
     AppBarLayout            mAppBarLayout;
-    private View mRootView;
-    private Toolbar.OnMenuItemClickListener onMenuItemClickListener = new Toolbar.OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(final MenuItem item) {
-            if (R.id.action_close == item.getItemId()) {
-
-            }
-            return false;
-        }
-    };
-    private TilesRendererInterface mTilesListener;
-    private DemoActivityInterface  mDemoActivityInterface;
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //        mTilesFrameLayout.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
+    private View                  mRootView;
+    private DemoActivityInterface mDemoActivityInterface;
 
     @Override
     public void onAttach(Activity activity) {
@@ -86,10 +63,6 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
             mDemoActivityInterface = (DemoActivityInterface) activity;
         }
     }
-
-    abstract
-    @StyleRes
-    int getTheme();
 
     protected Animator createCheckoutRevealAnimator(final ClipRevealFrame view, int x, int y, float startRadius, float endRadius) {
         setMenuVisibility(false);
@@ -165,45 +138,8 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
                 }
             });
         }
-
         ButterKnife.bind(this, mRootView);
         return mRootView;
-    }
-
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecycler.setAdapter(new ProfileAdapter(getContext(), getUser(), this));
-        setUpToolbar(mToolbar);
-        mHeader.setImageResource(getUser().getPhotoRes());
-        if (getArguments() != null) {
-            mAppBarLayout.setExpanded(getArguments().getBoolean(ARG_SHOULD_EXPAND), false);
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mTilesListener = null;
-        mDemoActivityInterface = null;
-    }
-
-    private void setUpToolbar(final Toolbar toolbar) {
-        toolbar.setNavigationIcon(R.drawable.ic_menu);
-        toolbar.setTitle(R.string.settings);
-        toolbar.inflateMenu(R.menu.menu_star_wars);
-        toolbar.setOnMenuItemClickListener(onMenuItemClickListener);
-    }
-
-    abstract User getUser();
-
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
     }
 
     @Override
@@ -233,6 +169,41 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
                 }
             }
         });
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecycler.setAdapter(new ProfileAdapter(getContext(), getUser(), this));
+        setUpToolbar(mToolbar);
+        mHeader.setImageResource(getUser().getPhotoRes());
+        if (getArguments() != null) {
+            mAppBarLayout.setExpanded(getArguments().getBoolean(ARG_SHOULD_EXPAND), false);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mDemoActivityInterface = null;
+    }
+
+    private void setUpToolbar(final Toolbar toolbar) {
+        toolbar.setNavigationIcon(R.drawable.ic_menu);
+        toolbar.setTitle(R.string.settings);
+        toolbar.inflateMenu(R.menu.menu_star_wars);
+    }
+
+    abstract User getUser();
+
+    @StyleRes
+    abstract int getTheme();
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
     private boolean isAppBarExpanded() {
