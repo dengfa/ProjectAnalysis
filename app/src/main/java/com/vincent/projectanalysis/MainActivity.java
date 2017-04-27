@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.vincent.projectanalysis.activity.ClipRevealActivity;
 import com.vincent.projectanalysis.activity.TestActivity;
 import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.java.Json;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(MainActivity.this, LevelProgressActivity.class));
                 break;
             case 4:
-                startActivity(new Intent(MainActivity.this, LevelProgressActivity.class));
+                startActivity(new Intent(MainActivity.this, ClipRevealActivity.class));
                 break;
             case 5:
                 startActivity(new Intent(MainActivity.this, TestActivity.class));

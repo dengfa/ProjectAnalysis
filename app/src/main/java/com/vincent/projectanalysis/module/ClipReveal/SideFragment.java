@@ -39,7 +39,7 @@ import butterknife.OnClick;
 /**
  * Created by Artem Kholodnyi on 11/19/15.
  */
-public abstract class SideFragment extends Fragment implements ProfileAdapterListener{
+public abstract class SideFragment extends Fragment implements ProfileAdapterListener {
     public static final  String ARG_CX            = "cx";
     public static final  String ARG_CY            = "cy";
     public static final  String ARG_SHOULD_EXPAND = "should expand";
@@ -71,7 +71,7 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
     @Override
     public void onResume() {
         super.onResume();
-//        mTilesFrameLayout.onResume();
+        //        mTilesFrameLayout.onResume();
     }
 
     @Override
@@ -82,17 +82,13 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (activity instanceof TilesRendererInterface) {
-            if (activity instanceof TilesRendererInterface) {
-                mTilesListener = (TilesRendererInterface) activity;
-            }
-            if (activity instanceof DemoActivityInterface) {
-                mDemoActivityInterface = (DemoActivityInterface) activity;
-            }
+        if (activity instanceof DemoActivityInterface) {
+            mDemoActivityInterface = (DemoActivityInterface) activity;
         }
     }
 
-    abstract @StyleRes
+    abstract
+    @StyleRes
     int getTheme();
 
     protected Animator createCheckoutRevealAnimator(final ClipRevealFrame view, int x, int y, float startRadius, float endRadius) {
@@ -175,9 +171,6 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
     }
 
 
-
-
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -207,7 +200,6 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
     abstract User getUser();
 
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -225,13 +217,14 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
         if (this instanceof BrightSideFragment && v.isChecked()) {
             cx = rect.right - halfThumbWidth;
             postGoToSide(cy, cx, "dark");
-        } else if (!v.isChecked()){
+        } else if (!v.isChecked()) {
             cx = rect.left + halfThumbWidth;
             postGoToSide(cy, cx, "bright");
         }
     }
 
     private void postGoToSide(final int cy, final int cx, final String side) {
+        /* 这里为什么要用handler post？？？*/
         new android.os.Handler().post(new Runnable() {
             @Override
             public void run() {

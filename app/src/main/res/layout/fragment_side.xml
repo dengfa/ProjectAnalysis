@@ -25,7 +25,7 @@
                     app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                     app:contentScrim="?attr/toolbarBackground">
 
-                    <com.yalantis.starwarsdemo.widget.CenterTopImageView
+                    <com.vincent.projectanalysis.widgets.CenterTopImageView
                         android:layout_gravity="top"
                         android:id="@+id/header"
                         android:layout_width="match_parent"
