@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.vincent.projectanalysis.mapScene.MapSceneActivity">
+    tools:context=".module.mapScene.MapSceneActivity">
 
-    <com.vincent.projectanalysis.mapScene.base.CGLView
+    <com.vincent.projectanalysis.module.mapScene.base.CGLView
         android:id="@+id/rv_game"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

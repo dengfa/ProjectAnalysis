@@ -9,16 +9,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.vincent.projectanalysis.activity.TestActivity;
-import com.vincent.projectanalysis.guideMask.demo.ShowGuideActivity;
+import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.java.Json;
-import com.vincent.projectanalysis.mapScene.MapSceneActivity;
-import com.vincent.projectanalysis.widgets.activity.LevelProgressActivity;
-import com.vincent.projectanalysis.widgets.activity.RippleAndWaveActivity;
+import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
+import com.vincent.projectanalysis.activity.LevelProgressActivity;
+import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
-    private String[] tabs = {"引导遮罩","地图场景","RippleView","LevelProgress","other"};
+    private String[] tabs = {"引导遮罩","地图场景","RippleView","LevelProgress","ClipReveal","other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(MainActivity.this, LevelProgressActivity.class));
                 break;
             case 4:
+                startActivity(new Intent(MainActivity.this, LevelProgressActivity.class));
+                break;
+            case 5:
                 startActivity(new Intent(MainActivity.this, TestActivity.class));
                 break;
         }

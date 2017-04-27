@@ -10,7 +10,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.vincent.projectanalysis.widgets.activity.LevelProgressActivity">
+    tools:context="com.vincent.projectanalysis.activity.LevelProgressActivity">
 
     <com.vincent.projectanalysis.widgets.LevelProgressView2
         android:id="@+id/levelProgressView"

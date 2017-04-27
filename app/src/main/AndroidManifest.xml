@@ -15,18 +15,17 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".guideMask.demo.ShowGuideActivity"/>
-        <activity android:name=".mapScene.MapSceneActivity">
-        </activity>
-        <activity android:name=".widgets.activity.RippleAndWaveActivity">
-        </activity>
-        <activity android:name=".widgets.activity.LevelProgressActivity">
-        </activity>
-        <activity android:name=".activity.TestActivity" android:theme="@style/CustomMaterialTheme">
+        <activity android:name=".module.guideMask.demo.ShowGuideActivity"/>
+        <activity android:name=".module.mapScene.MapSceneActivity"/>
+        <activity android:name=".activity.RippleAndWaveActivity"/>
+        <activity android:name=".activity.LevelProgressActivity"/>
+        <activity android:name=".activity.ClipRevealActivity"/>
+        <activity
+            android:name=".activity.TestActivity"
+            android:theme="@style/CustomMaterialTheme">
         </activity>
     </application>
 
