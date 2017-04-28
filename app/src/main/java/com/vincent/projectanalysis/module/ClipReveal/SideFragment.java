@@ -31,7 +31,6 @@ import com.vincent.projectanalysis.widgets.ClipRevealFrame;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 /**
@@ -65,7 +64,7 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
     }
 
     protected Animator createCheckoutRevealAnimator(final ClipRevealFrame view, int x, int y, float startRadius, float endRadius) {
-        setMenuVisibility(false);
+        setMenuVisibility(true);
         Animator retAnimator;
         mRadius = endRadius;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -74,7 +73,6 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
             view.setClipOutLines(true);
             view.setClipCenter(x, y);
             view.setClipRadius(startRadius);
-
             retAnimator = ObjectAnimator.ofFloat(view, "clipRadius", startRadius, endRadius);
         }
         retAnimator.setDuration(ANIM_DURATION);
@@ -126,11 +124,10 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
                     int cy = args.getInt("cy");
                     // get the hypothenuse so the mRadius is from one corner to the other
                     float radius = (float) Math.hypot(right, bottom);
-
                     // Hardware-supported clipPath()
                     // http://developer.android.com/guide/topics/graphics/hardware-accel.html
                     if (Build.VERSION.SDK_INT >= 18) {
-                        Animator reveal = createCheckoutRevealAnimator((ClipRevealFrame) v, cx, cy, 28f, radius);
+                        Animator reveal = createCheckoutRevealAnimator((ClipRevealFrame) v, 0, 0, 28f, radius);
                         reveal.start();
                     } else {
                         removeOldSideFragment();
@@ -219,11 +216,5 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
         return result;
     }
 
-
     public abstract String getTagString();
-
-    @OnClick(R.id.btn_save)
-    void onClick() {
-
-    }
 }
