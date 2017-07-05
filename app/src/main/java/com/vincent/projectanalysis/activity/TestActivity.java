@@ -9,7 +9,6 @@ import android.view.ViewAnimationUtils;
 
 import com.vincent.projectanalysis.R;
 
-
 public class TestActivity extends AppCompatActivity implements View.OnClickListener {
 
     private View mCardView;
