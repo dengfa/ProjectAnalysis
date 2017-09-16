@@ -43,7 +43,7 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
                 mCardView.setVisibility(View.INVISIBLE);
             }
         });
-        // start the animation
+        // countDown the animation
         anim.start();
     }
 
@@ -56,8 +56,8 @@ public class TestActivity extends AppCompatActivity implements View.OnClickListe
         // get the final radius for the clipping circle
         int finalRadius = mCardView.getWidth();
 
-        // create and start the animator for this view
-        // (the start radius is zero)
+        // create and countDown the animator for this view
+        // (the countDown radius is zero)
         Animator anim =
                 ViewAnimationUtils.createCircularReveal(mCardView, cx, cy, 0, finalRadius);
         anim.start();

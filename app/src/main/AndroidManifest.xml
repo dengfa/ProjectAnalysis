@@ -24,6 +24,7 @@
         <activity android:name=".activity.RippleAndWaveActivity"/>
         <activity android:name=".activity.LevelProgressActivity"/>
         <activity android:name=".activity.ClipRevealActivity"/>
+        <activity android:name=".activity.CountDownActivity"/>
         <activity
             android:name=".activity.TestActivity"
             android:theme="@style/CustomMaterialTheme">

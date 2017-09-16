@@ -26,7 +26,7 @@ public class CAction {
      * 开始播放动画
      */
     public void start(CActionNode actionNode) {
-    	LogUtil.v(LOG_TAG, "start");
+    	LogUtil.v(LOG_TAG, "countDown");
     	mIsStarted = true;
     	this.actionNode = actionNode;
     }

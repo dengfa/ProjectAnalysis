@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.vincent.projectanalysis.activity.ClipRevealActivity;
+import com.vincent.projectanalysis.activity.CountDownActivity;
 import com.vincent.projectanalysis.activity.TestActivity;
 import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.java.Json;
@@ -19,7 +20,7 @@ import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
-    private String[] tabs = {"引导遮罩","地图场景","RippleView","LevelProgress","ClipReveal","other"};
+    private String[] tabs = {"引导遮罩","地图场景","RippleView","LevelProgress","ClipReveal","CountDown","other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(MainActivity.this, ClipRevealActivity.class));
                 break;
             case 5:
+                startActivity(new Intent(MainActivity.this, CountDownActivity.class));
+                break;
+            case 6:
                 startActivity(new Intent(MainActivity.this, TestActivity.class));
                 break;
         }
