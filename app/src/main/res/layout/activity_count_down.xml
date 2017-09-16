@@ -7,6 +7,6 @@
 
     <com.vincent.projectanalysis.widgets.TimerCountDownView
         android:id="@+id/count_down"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="300dp"
+        android:layout_height="300dp"/>
 </LinearLayout>

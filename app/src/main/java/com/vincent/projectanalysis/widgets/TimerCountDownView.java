@@ -3,6 +3,8 @@ package com.vincent.projectanalysis.widgets;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,7 +12,10 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
+import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.utils.UIUtils;
+
+import java.util.ArrayList;
 
 /**
  * Created by dengfa on 17/9/16.
@@ -28,6 +33,10 @@ public class TimerCountDownView extends View {
     private float mDegreesInc;
     private int mCurSecond;
     private int mPreSecond;
+    private Bitmap mBpCountdown1;
+    private Bitmap mBpCountdown2;
+    private Bitmap mBpCountdown3;
+    private ArrayList<Bitmap> mBitmaps;
 
     public TimerCountDownView(Context context) {
         this(context, null);
@@ -46,6 +55,11 @@ public class TimerCountDownView extends View {
         mTextPaint = new Paint();
         mTextPaint.setColor(0xff00ffff);
         mTextPaint.setTextSize(UIUtils.dip2px(20));
+
+        mBitmaps = new ArrayList<>();
+        mBitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.count_down_1));
+        mBitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.count_down_2));
+        mBitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.count_down_3));
     }
 
 
@@ -85,19 +99,21 @@ public class TimerCountDownView extends View {
         if (mCurSecond > 0) {
             canvas.save();
             canvas.rotate(mDegrees + mDegreesInc, mWidth / 2, mHeight);
-            canvas.drawText(mCurSecond + "", mWidth / 2, mHeight - mWidth / 2 + UIUtils.dip2px(20), mTextPaint);
+            canvas.drawBitmap(mBitmaps.get(mCurSecond-1),mWidth / 2, mHeight - mWidth / 2,mBgPaint);
+            //canvas.drawText(mCurSecond + "", mWidth / 2, mHeight - mWidth / 2 + UIUtils.dip2px(20), mTextPaint);
             canvas.restore();
         }
         if (mPreSecond > 0) {
             canvas.save();
             canvas.rotate(mDegrees + 90 + mDegreesInc, mWidth / 2, mHeight);
-            canvas.drawText(mPreSecond + "", mWidth / 2, mHeight - mWidth / 2 + UIUtils.dip2px(20), mTextPaint);
+            canvas.drawBitmap(mBitmaps.get(mPreSecond-1),mWidth / 2, mHeight - mWidth / 2,mBgPaint);
+            //.drawText(mPreSecond + "", mWidth / 2, mHeight - mWidth / 2 + UIUtils.dip2px(20), mTextPaint);
             canvas.restore();
         }
     }
 
     public void countDown(int curSecond) {
-        mCurSecond = curSecond;
+        mCurSecond = curSecond % mBitmaps.size();
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 100f, 90f);
         valueAnimator.setDuration(1000);
         valueAnimator.setInterpolator(new DecelerateInterpolator());

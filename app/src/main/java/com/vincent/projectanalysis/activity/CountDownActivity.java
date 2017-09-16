@@ -17,7 +17,7 @@ import java.util.TimerTask;
 public class CountDownActivity extends Activity implements View.OnClickListener {
 
     private TimerCountDownView mCountDownView;
-    private int mCurSecond = 5;
+    private int mCurSecond = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class CountDownActivity extends Activity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.count_down:
-                mCurSecond = 5;
+                mCurSecond = 3;
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
