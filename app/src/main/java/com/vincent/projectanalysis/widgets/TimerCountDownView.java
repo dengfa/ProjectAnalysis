@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -28,15 +27,14 @@ public class TimerCountDownView extends View {
     private Paint mTextPaint;
     private int mWidth;
     private int mHeight;
-    private Paint mBgPaint;
+    private Paint mPaint;
     private float mDegrees = -90f;
     private float mDegreesInc;
-    private int mCurSecond;
+    private int mCurSecond = 3;
     private int mPreSecond;
-    private Bitmap mBpCountdown1;
-    private Bitmap mBpCountdown2;
-    private Bitmap mBpCountdown3;
     private ArrayList<Bitmap> mBitmaps;
+    private ValueAnimator mValueAnimator;
+    private int mInitSecond;
 
     public TimerCountDownView(Context context) {
         this(context, null);
@@ -48,9 +46,8 @@ public class TimerCountDownView extends View {
 
     public TimerCountDownView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mBgPaint = new Paint();
-        mBgPaint.setColor(Color.GRAY);
-        mBgPaint.setStyle(Paint.Style.STROKE);
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
 
         mTextPaint = new Paint();
         mTextPaint.setColor(0xff00ffff);
@@ -60,6 +57,39 @@ public class TimerCountDownView extends View {
         mBitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.count_down_1));
         mBitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.count_down_2));
         mBitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.count_down_3));
+
+        mValueAnimator = ValueAnimator.ofFloat(0, 100f, 90f);
+        mValueAnimator.setDuration(1000);
+        mValueAnimator.setInterpolator(new DecelerateInterpolator());
+        mValueAnimator.setRepeatCount(3);
+        mValueAnimator.setRepeatMode(ValueAnimator.RESTART);
+        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                mDegreesInc = (float) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+        mValueAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mPreSecond = 0;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                mPreSecond = mCurSecond;
+                mCurSecond--;
+            }
+        });
     }
 
 
@@ -95,56 +125,25 @@ public class TimerCountDownView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawRect(0, 0, mWidth, mHeight, mBgPaint);
         if (mCurSecond > 0) {
             canvas.save();
             canvas.rotate(mDegrees + mDegreesInc, mWidth / 2, mHeight);
-            canvas.drawBitmap(mBitmaps.get(mCurSecond-1),mWidth / 2, mHeight - mWidth / 2,mBgPaint);
-            //canvas.drawText(mCurSecond + "", mWidth / 2, mHeight - mWidth / 2 + UIUtils.dip2px(20), mTextPaint);
+            Bitmap bpCur = mBitmaps.get(mCurSecond - 1);
+            canvas.drawBitmap(bpCur, mWidth / 2 - bpCur.getWidth() / 2, mHeight - mWidth / 2, mPaint);
             canvas.restore();
         }
         if (mPreSecond > 0) {
             canvas.save();
-            canvas.rotate(mDegrees + 90 + mDegreesInc, mWidth / 2, mHeight);
-            canvas.drawBitmap(mBitmaps.get(mPreSecond-1),mWidth / 2, mHeight - mWidth / 2,mBgPaint);
-            //.drawText(mPreSecond + "", mWidth / 2, mHeight - mWidth / 2 + UIUtils.dip2px(20), mTextPaint);
+            canvas.rotate(mDegrees + 90 + 20 + mDegreesInc, mWidth / 2, mHeight);
+            Bitmap bpPre = mBitmaps.get(mPreSecond - 1);
+            canvas.drawBitmap(bpPre, mWidth / 2 - bpPre.getWidth() / 2, mHeight - mWidth / 2, mPaint);
             canvas.restore();
         }
     }
 
     public void countDown(int curSecond) {
-        mCurSecond = curSecond % mBitmaps.size();
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 100f, 90f);
-        valueAnimator.setDuration(1000);
-        valueAnimator.setInterpolator(new DecelerateInterpolator());
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                mDegreesInc = (float) animation.getAnimatedValue();
-                invalidate();
-            }
-        });
-        valueAnimator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mPreSecond = mCurSecond + 1;
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
-        valueAnimator.start();
+        mInitSecond = curSecond;
+        mCurSecond = curSecond;
+        mValueAnimator.start();
     }
 }
