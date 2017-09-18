@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import com.vincent.projectanalysis.R;
-import com.vincent.projectanalysis.utils.UIUtils;
 
 import java.util.ArrayList;
 
@@ -24,7 +23,6 @@ public class TimerCountDownView extends View {
 
     public static final int DEFAULT_WIDTH = 400;
     public static final int DEFAULT_HEIGHT = 400;
-    private Paint mTextPaint;
     private int mWidth;
     private int mHeight;
     private Paint mPaint;
@@ -34,7 +32,6 @@ public class TimerCountDownView extends View {
     private int mPreSecond;
     private ArrayList<Bitmap> mBitmaps;
     private ValueAnimator mValueAnimator;
-    private int mInitSecond;
 
     public TimerCountDownView(Context context) {
         this(context, null);
@@ -48,10 +45,6 @@ public class TimerCountDownView extends View {
         super(context, attrs, defStyleAttr);
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-
-        mTextPaint = new Paint();
-        mTextPaint.setColor(0xff00ffff);
-        mTextPaint.setTextSize(UIUtils.dip2px(20));
 
         mBitmaps = new ArrayList<>();
         mBitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.count_down_1));
@@ -142,7 +135,6 @@ public class TimerCountDownView extends View {
     }
 
     public void countDown(int curSecond) {
-        mInitSecond = curSecond;
         mCurSecond = curSecond;
         mValueAnimator.start();
     }
