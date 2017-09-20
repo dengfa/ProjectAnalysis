@@ -7,11 +7,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.utils.UIUtils;
 
 import java.util.ArrayList;
 
@@ -21,17 +23,21 @@ import java.util.ArrayList;
 
 public class TimerCountDownView extends View {
 
-    public static final int DEFAULT_WIDTH = 400;
-    public static final int DEFAULT_HEIGHT = 400;
+    public static final int DEFAULT_WIDTH = UIUtils.dip2px(130);
+    public static final int DST_WIDTH = UIUtils.dip2px(105 / 3);
+    public static final int DST_HEIGHT = UIUtils.dip2px(150 / 3);
+    public static final int ANGLE = 140;
     private int mWidth;
     private int mHeight;
     private Paint mPaint;
-    private float mDegrees = -90f;
+    private float mDegrees = -ANGLE;
     private float mDegreesInc;
     private int mCurSecond = 3;
     private int mPreSecond;
     private ArrayList<Bitmap> mBitmaps;
     private ValueAnimator mValueAnimator;
+    private Rect mSrc;
+    private Rect mDst;
 
     public TimerCountDownView(Context context) {
         this(context, null);
@@ -51,7 +57,7 @@ public class TimerCountDownView extends View {
         mBitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.count_down_2));
         mBitmaps.add(BitmapFactory.decodeResource(getResources(), R.drawable.count_down_3));
 
-        mValueAnimator = ValueAnimator.ofFloat(0, 100f, 90f);
+        mValueAnimator = ValueAnimator.ofFloat(0, ANGLE + 20, ANGLE);
         mValueAnimator.setDuration(1000);
         mValueAnimator.setInterpolator(new DecelerateInterpolator());
         mValueAnimator.setRepeatCount(3);
@@ -71,6 +77,9 @@ public class TimerCountDownView extends View {
             @Override
             public void onAnimationEnd(Animator animation) {
                 mPreSecond = 0;
+                if (mOnCountDownListener != null){
+                    mOnCountDownListener.onCountDownFinished();
+                }
             }
 
             @Override
@@ -83,6 +92,9 @@ public class TimerCountDownView extends View {
                 mCurSecond--;
             }
         });
+
+        mSrc = new Rect();
+        mDst = new Rect();
     }
 
 
@@ -90,21 +102,13 @@ public class TimerCountDownView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
         int width;
-        int height;
         if (widthMode == MeasureSpec.EXACTLY) {
             width = widthSize;
         } else {
             width = DEFAULT_WIDTH;
         }
-        if (heightMode == MeasureSpec.EXACTLY) {
-            height = heightSize;
-        } else {
-            height = DEFAULT_HEIGHT;
-        }
-        setMeasuredDimension(width, height);
+        setMeasuredDimension(width, width / 2);
     }
 
 
@@ -122,20 +126,57 @@ public class TimerCountDownView extends View {
             canvas.save();
             canvas.rotate(mDegrees + mDegreesInc, mWidth / 2, mHeight);
             Bitmap bpCur = mBitmaps.get(mCurSecond - 1);
-            canvas.drawBitmap(bpCur, mWidth / 2 - bpCur.getWidth() / 2, mHeight - mWidth / 2, mPaint);
+
+            mSrc.left = 0;
+            mSrc.top = 0;
+            mSrc.right = bpCur.getWidth();
+            mSrc.bottom = bpCur.getHeight();
+
+            mDst.left = mWidth / 2 - DST_WIDTH / 2;
+            mDst.top = 0;
+            mDst.right = mWidth / 2 + DST_WIDTH / 2;
+            mDst.bottom = DST_HEIGHT;
+
+            canvas.drawBitmap(bpCur, mSrc, mDst, mPaint);
             canvas.restore();
         }
         if (mPreSecond > 0) {
             canvas.save();
-            canvas.rotate(mDegrees + 90 + 20 + mDegreesInc, mWidth / 2, mHeight);
+            canvas.rotate(mDegrees + ANGLE + mDegreesInc, mWidth / 2, mHeight);
             Bitmap bpPre = mBitmaps.get(mPreSecond - 1);
-            canvas.drawBitmap(bpPre, mWidth / 2 - bpPre.getWidth() / 2, mHeight - mWidth / 2, mPaint);
+
+            mSrc.left = 0;
+            mSrc.top = 0;
+            mSrc.right = bpPre.getWidth();
+            mSrc.bottom = bpPre.getHeight();
+
+            mDst.left = mWidth / 2 - DST_WIDTH / 2;
+            mDst.top = 0;
+            mDst.right = mWidth / 2 + DST_WIDTH / 2;
+            mDst.bottom = DST_HEIGHT;
+
+            canvas.drawBitmap(bpPre, mSrc, mDst, mPaint);
             canvas.restore();
         }
     }
 
-    public void countDown(int curSecond) {
-        mCurSecond = curSecond;
+    public void countDown() {
+        mCurSecond = mBitmaps.size();
+        mPreSecond = 0;
         mValueAnimator.start();
+    }
+
+    private OnCountDownListener mOnCountDownListener;
+
+    public interface OnCountDownListener{
+        void onCountDownFinished();
+    }
+
+    public void setOnCountDownListener(OnCountDownListener onCountDownListener){
+        mOnCountDownListener = onCountDownListener;
+    }
+
+    public void cancle(){
+        mValueAnimator.cancel();
     }
 }

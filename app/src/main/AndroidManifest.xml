@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.vincent.projectanalysis"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.vincent.projectanalysis">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -24,7 +24,9 @@
         <activity android:name=".activity.RippleAndWaveActivity"/>
         <activity android:name=".activity.LevelProgressActivity"/>
         <activity android:name=".activity.ClipRevealActivity"/>
-        <activity android:name=".activity.CountDownActivity"/>
+        <activity
+            android:name=".activity.CountDownActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".activity.TestActivity"
             android:theme="@style/CustomMaterialTheme">
