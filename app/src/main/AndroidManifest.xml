@@ -33,6 +33,8 @@
         </activity>
         <activity android:name=".activity.DemoActivity">
         </activity>
+        <activity android:name=".activity.HomeworkCheckActivity">
+        </activity>
     </application>
 
 </manifest>
