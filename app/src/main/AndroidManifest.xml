@@ -35,6 +35,8 @@
         </activity>
         <activity android:name=".activity.HomeworkCheckActivity">
         </activity>
+        <activity android:name=".activity.scan">
+        </activity>
     </application>
 
 </manifest>

@@ -11,12 +11,13 @@ import android.widget.ListView;
 import com.vincent.projectanalysis.activity.ClipRevealActivity;
 import com.vincent.projectanalysis.activity.CountDownActivity;
 import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
-import com.vincent.projectanalysis.activity.TestActivity;
-import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
-import com.vincent.projectanalysis.java.Json;
-import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
+import com.vincent.projectanalysis.activity.TestActivity;
+import com.vincent.projectanalysis.activity.scan;
+import com.vincent.projectanalysis.java.Json;
+import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
+import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "ClipReveal",
             "CountDown",
             "HomeworkCheckActivity",
+            "scan",
             "other"};
 
     @Override
@@ -67,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(MainActivity.this, HomeworkCheckActivity.class));
                 break;
             case 7:
+                startActivity(new Intent(MainActivity.this, scan.class));
+                break;
+            case 8:
                 startActivity(new Intent(MainActivity.this, TestActivity.class));
                 break;
         }
