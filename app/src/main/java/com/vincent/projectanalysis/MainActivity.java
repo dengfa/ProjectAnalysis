@@ -13,8 +13,8 @@ import com.vincent.projectanalysis.activity.CountDownActivity;
 import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
-import com.vincent.projectanalysis.activity.TestActivity;
-import com.vincent.projectanalysis.activity.scan;
+import com.vincent.projectanalysis.activity.ScanActivity;
+import com.vincent.projectanalysis.activity.ListViewActivity;
 import com.vincent.projectanalysis.java.Json;
 import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "ClipReveal",
             "CountDown",
             "HomeworkCheckActivity",
-            "scan",
+            "ScanActivity",
             "other"};
 
     @Override
@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(MainActivity.this, HomeworkCheckActivity.class));
                 break;
             case 7:
-                startActivity(new Intent(MainActivity.this, scan.class));
+                startActivity(new Intent(MainActivity.this, ScanActivity.class));
                 break;
             case 8:
-                startActivity(new Intent(MainActivity.this, TestActivity.class));
+                startActivity(new Intent(MainActivity.this, ListViewActivity.class));
                 break;
         }
     }

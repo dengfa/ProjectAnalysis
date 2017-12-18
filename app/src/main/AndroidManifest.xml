@@ -28,14 +28,14 @@
             android:name=".activity.CountDownActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".activity.TestActivity"
+            android:name=".activity.ListViewActivity"
             android:theme="@style/CustomMaterialTheme">
         </activity>
         <activity android:name=".activity.DemoActivity">
         </activity>
         <activity android:name=".activity.HomeworkCheckActivity">
         </activity>
-        <activity android:name=".activity.scan">
+        <activity android:name=".activity.ScanActivity">
         </activity>
     </application>
 

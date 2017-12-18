@@ -13,7 +13,7 @@ import android.widget.EditText;
 
 import com.vincent.projectanalysis.R;
 
-public class scan extends AppCompatActivity {
+public class ScanActivity extends AppCompatActivity {
 
     private View mScan;
     public boolean mPalyAnimation = true;
