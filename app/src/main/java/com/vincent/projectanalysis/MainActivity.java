@@ -15,6 +15,7 @@ import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
 import com.vincent.projectanalysis.activity.ScanActivity;
 import com.vincent.projectanalysis.activity.ListViewActivity;
+import com.vincent.projectanalysis.activity.TagViewActivity;
 import com.vincent.projectanalysis.java.Json;
 import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "CountDown",
             "HomeworkCheckActivity",
             "ScanActivity",
+            "TagView",
             "other"};
 
     @Override
@@ -72,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(MainActivity.this, ScanActivity.class));
                 break;
             case 8:
+                startActivity(new Intent(MainActivity.this, TagViewActivity.class));
+                break;
+            case 9:
                 startActivity(new Intent(MainActivity.this, ListViewActivity.class));
                 break;
         }
