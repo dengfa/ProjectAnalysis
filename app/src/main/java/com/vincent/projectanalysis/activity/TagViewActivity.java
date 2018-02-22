@@ -21,6 +21,8 @@ public class TagViewActivity extends AppCompatActivity {
         tags.add("点击防守");
         tags.add("电风扇");
         tags.add("斯蒂芬斯蒂");
+        tags.add("电风扇");
+        tags.add("斯蒂芬斯蒂");
         tagView.setTags(tags);
     }
 }

@@ -8,8 +8,8 @@
 
     <com.vincent.projectanalysis.widgets.TagView
         android:id="@+id/tag_view"
-        android:layout_width="300dp"
-        android:layout_height="20dp"
-        android:background="@color/blue"/>
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"/>
 
 </android.support.constraint.ConstraintLayout>
