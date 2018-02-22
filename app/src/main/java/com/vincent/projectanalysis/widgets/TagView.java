@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -62,7 +63,7 @@ public class TagView extends View {
         mBackgroundPaint = new Paint();
         mBackgroundPaint.setStyle(Paint.Style.FILL);
         mBackgroundPaint.setAntiAlias(true);
-        mBackgroundPaint.setColor(getResources().getColor(R.color.color_f4f4f4));
+        mBackgroundPaint.setColor(getResources().getColor(R.color.color_f5f7f9));
 
         mTextPaddingHorizontal = UIUtils.dip2px(context, 10);
         mTextPaddingVertical = UIUtils.dip2px(context, 5);
@@ -104,10 +105,12 @@ public class TagView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if (mTags.isEmpty()) return;
 
         int currentWidth;
         int tempHorizontalPosition = 0;
         int maxIndex = 0;
+        int maxHeight = 0;
         int length = (int) mTextPaint.measureText("...");
         for (int i = 0; i < mTags.size(); i++) {
             String str = mTags.get(i);
@@ -116,6 +119,7 @@ public class TagView extends View {
             int width = rect.width();
             currentWidth = width + 2 * mTextPaddingHorizontal + mTextMargin;
             if (mWidth - tempHorizontalPosition - currentWidth - length >= 0) {
+                maxHeight = maxHeight <= rect.height() ? rect.height() : maxHeight;
                 maxIndex = i;
                 tempHorizontalPosition += currentWidth;
             } else {
@@ -136,13 +140,13 @@ public class TagView extends View {
             Log.d(TAG, "textWidth: " + width);
             Log.d(TAG, "currentHorizontalPosition: " + currentWidth);
             currentWidth = width + 2 * mTextPaddingHorizontal + mTextMargin;
-            canvas.drawRoundRect(tempHorizontalPosition,
-                    mHeight / 2 - height / 2 - mTextPaddingVertical,
+            RectF rectF = new RectF(tempHorizontalPosition,
+                    mHeight / 2 - maxHeight / 2 - mTextPaddingVertical,
                     tempHorizontalPosition + mTextPaddingHorizontal * 2 + width
-                    , mHeight / 2 + height / 2 + mTextPaddingVertical,
-                    mBgRadius, mBgRadius, mBackgroundPaint);
+                    , mHeight / 2 + maxHeight / 2 + mTextPaddingVertical);
+            canvas.drawRoundRect(rectF, mBgRadius, mBgRadius, mBackgroundPaint);
             canvas.drawText(str, tempHorizontalPosition + mTextPaddingHorizontal,
-                    mHeight / 2 + height / 2, mTextPaint);
+                    mHeight / 2 - rect.centerY(), mTextPaint);
             tempHorizontalPosition += currentWidth;
             if (i == maxIndex && maxIndex < mTags.size() - 1) {
                 canvas.drawText("...", tempHorizontalPosition, mHeight / 2 + height / 2, mTextPaint);
@@ -151,8 +155,24 @@ public class TagView extends View {
     }
 
     public void setTags(List<String> tags) {
+        if (tags == null) return;
         mTags.clear();
-        mTags.addAll(tags);
+        //按长度排序
+        mTags.add(tags.get(0));
+        for (int i = 1; i < tags.size(); i++) {
+            for (int j = 0; j < mTags.size(); j++) {
+                if (mTextPaint.measureText(mTags.get(j)) >= mTextPaint.measureText(tags.get(i))) {
+                    mTags.add(j, tags.get(i));
+                    break;
+                } else {
+                    if (j == mTags.size() - 1) {
+                        mTags.add(j + 1, tags.get(i));
+                        break;
+                    }
+                }
+            }
+        }
         invalidate();
     }
 }
+
