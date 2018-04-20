@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.vincent.projectanalysis.activity.ClipRevealActivity;
 import com.vincent.projectanalysis.activity.CountDownActivity;
+import com.vincent.projectanalysis.activity.GuideActivity;
 import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "HomeworkCheckActivity",
             "ScanActivity",
             "TagView",
-            "other"};
+            "other", "Guide"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mListView = (ListView) findViewById(R.id.lv);
         mListView.setAdapter(new ArrayAdapter<String>(this, R.layout.item_main_listview, R.id.tv_item, tabs));
         mListView.setOnItemClickListener(this);
-
         Json.jsonArrayTest();
     }
 
@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 9:
                 startActivity(new Intent(MainActivity.this, ListViewActivity.class));
+                break;
+            case 10:
+                startActivity(new Intent(MainActivity.this, GuideActivity.class));
                 break;
         }
     }
