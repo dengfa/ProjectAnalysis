@@ -28,7 +28,7 @@
             android:name=".activity.CountDownActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".activity.ListViewActivity"
+            android:name=".activity.BlinkTagActivity"
             android:theme="@style/CustomMaterialTheme">
         </activity>
         <activity android:name=".activity.DemoActivity">

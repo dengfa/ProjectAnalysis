@@ -15,7 +15,7 @@ import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
 import com.vincent.projectanalysis.activity.ScanActivity;
-import com.vincent.projectanalysis.activity.ListViewActivity;
+import com.vincent.projectanalysis.activity.BlinkTagActivity;
 import com.vincent.projectanalysis.activity.TagViewActivity;
 import com.vincent.projectanalysis.java.Json;
 import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "HomeworkCheckActivity",
             "ScanActivity",
             "TagView",
-            "other", "Guide"};
+            "BlinkTag", "Guide"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(MainActivity.this, TagViewActivity.class));
                 break;
             case 9:
-                startActivity(new Intent(MainActivity.this, ListViewActivity.class));
+                startActivity(new Intent(MainActivity.this, BlinkTagActivity.class));
                 break;
             case 10:
                 startActivity(new Intent(MainActivity.this, GuideActivity.class));

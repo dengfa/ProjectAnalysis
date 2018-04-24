@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.vincent.projectanalysis.R;
 
-public class ListViewActivity extends AppCompatActivity{
+public class BlinkTagActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_blink_tag);
     }
 }
