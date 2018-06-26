@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.vincent.projectanalysis"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.vincent.projectanalysis">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -8,7 +8,7 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -25,10 +25,21 @@
         <activity android:name=".activity.LevelProgressActivity"/>
         <activity android:name=".activity.ClipRevealActivity"/>
         <activity
-            android:name=".activity.TestActivity"
+            android:name=".activity.CountDownActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".activity.BlinkTagActivity"
             android:theme="@style/CustomMaterialTheme">
         </activity>
         <activity android:name=".activity.DemoActivity">
+        </activity>
+        <activity android:name=".activity.HomeworkCheckActivity">
+        </activity>
+        <activity android:name=".activity.ScanActivity">
+        </activity>
+        <activity android:name=".activity.WidgetsCollectionsActivity">
+        </activity>
+        <activity android:name=".activity.GuideActivity">
         </activity>
     </application>
 

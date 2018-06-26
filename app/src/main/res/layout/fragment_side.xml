@@ -22,7 +22,7 @@
                     android:layout_height="match_parent"
                     app:expandedTitleTextAppearance="@style/TransparentTextAppearance"
                     app:collapsedTitleTextAppearance="?attr/toolbarStyle"
-                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed"
                     app:contentScrim="?attr/toolbarBackground">
 
                     <com.vincent.projectanalysis.widgets.CenterTopImageView

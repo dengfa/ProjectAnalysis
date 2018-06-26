@@ -14,11 +14,11 @@ import com.vincent.projectanalysis.utils.UiThreadHandler;
  */
 public class ShowGuideActivity extends Activity {
 
-    private static final String SP_IS_ABILITY_GUIDE_START         = "sp_is_ability_guide_start";
-    private static final String SP_IS_ABILITY_GUIDE_END           = "sp_is_ability_guide_end";
+    private static final String SP_IS_ABILITY_GUIDE_START = "sp_is_ability_guide_start";
+    private static final String SP_IS_ABILITY_GUIDE_END = "sp_is_ability_guide_end";
     private static final String SP_IS_ABILITY_GUIDE_ABILITY_VALUE = "sp_is_ability_guide_ability_value";
-    private static final String SP_IS_ABILITY_GUIDE_CARD          = "sp_is_ability_guide_card";
-    private static final String SP_IS_ABILITY_GUIDE_CRYSTAL       = "sp_is_ability_guide_crystal";
+    private static final String SP_IS_ABILITY_GUIDE_CARD = "sp_is_ability_guide_card";
+    private static final String SP_IS_ABILITY_GUIDE_CRYSTAL = "sp_is_ability_guide_crystal";
     private Activity mActivity;
     private TextView mTvA;
     private TextView mTvB;
@@ -70,7 +70,10 @@ public class ShowGuideActivity extends Activity {
                     AppPreferences.setBoolean(SP_IS_ABILITY_GUIDE_START, false);
                     if (AppPreferences.getBoolean(SP_IS_ABILITY_GUIDE_CRYSTAL, true)) {
                         GuideBuilder builder = new GuideBuilder(mActivity);
-                        builder.setTargetView(mTvB)
+                        int[] loc = new int[2];
+                        mTvB.getLocationInWindow(loc);
+                        //自己指定位置
+                        builder.setTargetParams(loc[0], loc[1], mTvB.getMeasuredWidth(), mTvB.getMeasuredHeight() * 2)
                                 .setAlpha(180)
                                 .setHighTargetCorner(10)
                                 .addComponent(new AbilityCrystalGuideComponent())

@@ -8,18 +8,36 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.vincent.projectanalysis.activity.BlinkTagActivity;
 import com.vincent.projectanalysis.activity.ClipRevealActivity;
-import com.vincent.projectanalysis.activity.TestActivity;
-import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
-import com.vincent.projectanalysis.java.Json;
-import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
+import com.vincent.projectanalysis.activity.CountDownActivity;
+import com.vincent.projectanalysis.activity.GuideActivity;
+import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
+import com.vincent.projectanalysis.activity.ScanActivity;
+import com.vincent.projectanalysis.activity.WidgetsCollectionsActivity;
+import com.vincent.projectanalysis.java.Json;
+import com.vincent.projectanalysis.java.Test;
+import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
+import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
+import com.vincent.projectanalysis.utils.LogUtil;
+import com.vincent.projectanalysis.utils.MD5Util;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
-    private String[] tabs = {"引导遮罩","地图场景","RippleView","LevelProgress","ClipReveal","other"};
+    private String[] tabs = {
+            "引导遮罩",
+            "地图场景",
+            "RippleView",
+            "LevelProgress",
+            "ClipReveal",
+            "CountDown",
+            "HomeworkCheckActivity",
+            "ScanActivity",
+            "控件集合",
+            "BlinkTag", "Guide"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,8 +46,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mListView = (ListView) findViewById(R.id.lv);
         mListView.setAdapter(new ArrayAdapter<String>(this, R.layout.item_main_listview, R.id.tv_item, tabs));
         mListView.setOnItemClickListener(this);
-
         Json.jsonArrayTest();
+
+        String packageMd5 = MD5Util.encode("com.alibaba.android.rimet" + ".box");
+        LogUtil.d("vincent", "packageMd5 - " + packageMd5);
+
+        Test.test();
     }
 
     @Override
@@ -51,7 +73,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(new Intent(MainActivity.this, ClipRevealActivity.class));
                 break;
             case 5:
-                startActivity(new Intent(MainActivity.this, TestActivity.class));
+                startActivity(new Intent(MainActivity.this, CountDownActivity.class));
+                break;
+            case 6:
+                startActivity(new Intent(MainActivity.this, HomeworkCheckActivity.class));
+                break;
+            case 7:
+                startActivity(new Intent(MainActivity.this, ScanActivity.class));
+                break;
+            case 8:
+                startActivity(new Intent(MainActivity.this, WidgetsCollectionsActivity.class));
+                break;
+            case 9:
+                startActivity(new Intent(MainActivity.this, BlinkTagActivity.class));
+                break;
+            case 10:
+                startActivity(new Intent(MainActivity.this, GuideActivity.class));
                 break;
         }
     }
