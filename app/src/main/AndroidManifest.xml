@@ -37,7 +37,7 @@
         </activity>
         <activity android:name=".activity.ScanActivity">
         </activity>
-        <activity android:name=".activity.TagViewActivity">
+        <activity android:name=".activity.WidgetsCollectionsActivity">
         </activity>
         <activity android:name=".activity.GuideActivity">
         </activity>

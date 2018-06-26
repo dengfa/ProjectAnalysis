@@ -8,7 +8,7 @@ import com.vincent.projectanalysis.widgets.TagView;
 
 import java.util.ArrayList;
 
-public class TagViewActivity extends AppCompatActivity {
+public class WidgetsCollectionsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
