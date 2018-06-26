@@ -14,6 +14,7 @@ import com.vincent.projectanalysis.activity.CountDownActivity;
 import com.vincent.projectanalysis.activity.GuideActivity;
 import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
+import com.vincent.projectanalysis.activity.LottieActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
 import com.vincent.projectanalysis.activity.ScanActivity;
 import com.vincent.projectanalysis.activity.WidgetsCollectionsActivity;
@@ -37,14 +38,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "HomeworkCheckActivity",
             "ScanActivity",
             "控件集合",
-            "BlinkTag", "Guide"};
+            "BlinkTag",
+            "Guide",
+            "LottieAnimation"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mListView = (ListView) findViewById(R.id.lv);
-        mListView.setAdapter(new ArrayAdapter<String>(this, R.layout.item_main_listview, R.id.tv_item, tabs));
+        mListView.setAdapter(new ArrayAdapter<>(this, R.layout.item_main_listview, R.id.tv_item, tabs));
         mListView.setOnItemClickListener(this);
         Json.jsonArrayTest();
 
@@ -89,6 +92,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 10:
                 startActivity(new Intent(MainActivity.this, GuideActivity.class));
+                break;
+            case 11:
+                startActivity(new Intent(MainActivity.this, LottieActivity.class));
                 break;
         }
     }

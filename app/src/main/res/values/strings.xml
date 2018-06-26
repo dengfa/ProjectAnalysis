@@ -25,4 +25,6 @@
     <string name="label_birthday" type="id">Birthday</string>
     <string name="label_gender" type="id">Gender</string>
     <string name="save">Save</string>
+    <string name="title_activity_lottie_animation">LottieAnimationActivity</string>
+    <string name="hello_world">Hello World!</string>
 </resources>

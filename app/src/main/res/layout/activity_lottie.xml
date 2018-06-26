@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.vincent.projectanalysis.activity.LottieActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottie_splash_ani"
+        android:layout_width="368dp"
+        android:layout_height="551dp"
+        android:layout_centerInParent="true"
+        android:scaleType="centerInside"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="splash/qidongye.json"
+        app:lottie_imageAssetsFolder="splash/images"
+        app:lottie_loop="false"/>
+
+</RelativeLayout>

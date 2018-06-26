@@ -15,7 +15,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
 
+import com.vincent.projectanalysis.module.coretext.base.CYPageView;
 import com.vincent.projectanalysis.module.coretext.base.TextEnv;
+import com.vincent.projectanalysis.module.coretext.base.TextEnv.Align;
 import com.vincent.projectanalysis.module.coretext.base.utils.EditableValue;
 import com.vincent.projectanalysis.utils.UIUtils;
 

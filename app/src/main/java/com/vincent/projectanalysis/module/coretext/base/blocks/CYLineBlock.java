@@ -8,6 +8,7 @@ package com.vincent.projectanalysis.module.coretext.base.blocks;
 import android.graphics.Canvas;
 
 import com.vincent.projectanalysis.module.coretext.base.TextEnv;
+import com.vincent.projectanalysis.module.coretext.base.blocks.CYPlaceHolderBlock.AlignStyle;
 import com.vincent.projectanalysis.utils.UIUtils;
 
 import java.util.List;
