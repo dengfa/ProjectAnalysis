@@ -26,9 +26,6 @@ import com.vincent.projectanalysis.widgets.photoviewextend.PhotoViewAttacher.OnM
 import com.vincent.projectanalysis.widgets.photoviewextend.PhotoViewAttacher.OnPhotoTapListener;
 import com.vincent.projectanalysis.widgets.photoviewextend.PhotoViewAttacher.OnViewTapListener;
 
-/***
- * 扩展成ViewGroup
- */
 public class PhotoView extends ImageView implements IPhotoView {
 
 	private final PhotoViewAttacher mAttacher;

@@ -9,4 +9,9 @@
         <attr name="sw_animationDuration" format="integer" />
         <attr name="sw_numberOfTilesX" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="inputAttrs">
+        <attr name="closeTogDrawable" format="reference|color"/>
+        <attr name="closeTogEnabled" format="boolean"/>
+    </declare-styleable>
 </resources>
