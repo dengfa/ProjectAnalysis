@@ -12,6 +12,9 @@
 
     <declare-styleable name="inputAttrs">
         <attr name="closeTogDrawable" format="reference|color"/>
+        <attr name="pswTogDrawableOpen" format="reference|color"/>
+        <attr name="pswTogDrawableClose" format="reference|color"/>
         <attr name="closeTogEnabled" format="boolean"/>
+        <attr name="pswTogEnabled" format="boolean"/>
     </declare-styleable>
 </resources>

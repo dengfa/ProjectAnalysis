@@ -46,25 +46,26 @@
         android:text="替换密码图标，添加清除按钮:"/>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_marginTop="10dp"
         android:id="@+id/til_psw"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:hint="密码6-20位"
-        app:passwordToggleDrawable="@drawable/icon_edittext_psw_eye_selector"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="false">
 
-        <com.vincent.projectanalysis.widgets.ClearableEditext
+        <com.vincent.projectanalysis.widgets.ClearAndPswEditText
             android:id="@+id/et_psw"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/color_white_10"
             android:inputType="textPassword"
-            android:longClickable="false"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"
             android:textSize="15dp"
             app:closeTogDrawable="@drawable/icon_edittext_clear"
-            app:closeTogEnabled="true"/>
+            app:closeTogEnabled="true"
+            app:pswTogDrawableClose="@drawable/icon_psw_hide"
+            app:pswTogDrawableOpen="@drawable/icon_psw_show"
+            app:pswTogEnabled="true"/>
     </android.support.design.widget.TextInputLayout>
 </LinearLayout>
