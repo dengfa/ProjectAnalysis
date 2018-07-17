@@ -21,7 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vincent.projectanalysis.R;
-import com.vincent.projectanalysis.utils.UIUtils;
+import com.vincent.projectanalysis.utils.UiThreadHandler;
 
 /**
  * description: 自定义view 注册验证码 输入框
@@ -69,7 +69,7 @@ public class VerifyCode2View extends RelativeLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CodeView, defStyleAttr, 0);
         mEtNumber = typedArray.getInteger(R.styleable.CodeView_icv_et_number, 1);
         mEtWidth = typedArray.getDimensionPixelSize(R.styleable.CodeView_icv_et_width, 42);
-        mEtDividerWidth = typedArray.getDimensionPixelSize(R.styleable.CodeView_icv_et_divider_width, UIUtils.dip2px(8));
+        mEtDividerWidth = typedArray.getDimensionPixelSize(R.styleable.CodeView_icv_et_divider_width, 32);
         mEtDividerDrawable = typedArray.getDrawable(R.styleable.CodeView_icv_et_divider_drawable);
         mEtTextSize = typedArray.getDimensionPixelSize(R.styleable.CodeView_icv_et_text_size, 16);
         mEtTextColor = typedArray.getColor(R.styleable.CodeView_icv_et_text_color, Color.WHITE);
@@ -89,7 +89,7 @@ public class VerifyCode2View extends RelativeLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        initTextViews(getContext(), mEtNumber, mEtWidth, mEtTextColor);
+        initTextViews(getContext(), mEtNumber, mEtTextSize, mEtTextColor);
         initEtContainer(mCodeEts);
         setOnKeyListener(onKeyListener);
     }
@@ -206,15 +206,14 @@ public class VerifyCode2View extends RelativeLayout {
                 preEt.setBackgroundDrawable(mEtBackgroundDrawableFill);
                 preEt.setEnabled(false);
             }
-
-            // 添加输入完成的监听
-            if (inputCompleteListener != null) {
-                inputCompleteListener.inputComplete();
-            }
         } else {
             //最后一位填完隐藏光标
             mCodeEts[mCodeEts.length - 1].setCursorVisible(false);
             mCodeEts[mCodeEts.length - 1].setBackgroundDrawable(mEtBackgroundDrawableFill);
+        }
+        // 添加输入完成的监听
+        if (inputCompleteListener != null) {
+            inputCompleteListener.inputComplete();
         }
     }
 
@@ -278,10 +277,22 @@ public class VerifyCode2View extends RelativeLayout {
      * 删除所有内容
      */
     public void clearAllText() {
-        for (int i = 0; i < mCodeEts.length; i++) {
-            mCodeEts[i].setText("");
-            mCodeEts[i].setBackgroundDrawable(mEtBackgroundDrawableEmpty);
-        }
+        UiThreadHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < mCodeEts.length; i++) {
+                    mCodeEts[i].setText("");
+                    mCodeEts[i].setBackgroundDrawable(mEtBackgroundDrawableEmpty);
+                    if (i == 0) {
+                        mCodeEts[i].setEnabled(true);
+                        mCodeEts[i].requestFocus();
+                    } else {
+                        mCodeEts[i].setEnabled(false);
+                        mCodeEts[i].setCursorVisible(true);
+                    }
+                }
+            }
+        }, 500);
     }
 
     /**

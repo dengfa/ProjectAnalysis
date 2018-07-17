@@ -24,6 +24,7 @@
             app:icv_et_text_size="10dp"/>
 
         <com.vincent.projectanalysis.widgets.VerifyCode2View
+            android:id="@+id/code_view"
             android:layout_width="wrap_content"
             android:layout_height="66dp"
             android:layout_gravity="center_horizontal"
@@ -32,7 +33,6 @@
             app:icv_et_bg_focus="@drawable/v_code_focus"
             app:icv_et_bg_normal="@drawable/v_code_normal"
             app:icv_et_divider_width="15dp"
-            app:icv_et_hint="请输入验证码"
             app:icv_et_number="4"
             app:icv_et_text_color="#000000"
             app:icv_et_text_size="10dp"/>
