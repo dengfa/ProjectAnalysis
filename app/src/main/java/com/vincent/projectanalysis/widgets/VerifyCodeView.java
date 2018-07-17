@@ -81,15 +81,15 @@ public class VerifyCodeView extends RelativeLayout {
         et.setLayoutParams(editLp);
         addView(et);
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.AnthenticationCodeView, defStyleAttr, 0);
-        mEtNumber = typedArray.getInteger(R.styleable.AnthenticationCodeView_icv_et_number, 1);
-        mEtWidth = typedArray.getDimensionPixelSize(R.styleable.AnthenticationCodeView_icv_et_width, 42);
-        mEtDividerWidth = typedArray.getDimensionPixelSize(R.styleable.AnthenticationCodeView_icv_et_divider_width, UIUtils.dip2px(8));
-        mEtDividerDrawable = typedArray.getDrawable(R.styleable.AnthenticationCodeView_icv_et_divider_drawable);
-        mEtTextSize = typedArray.getDimensionPixelSize(R.styleable.AnthenticationCodeView_icv_et_text_size, 16);
-        mEtTextColor = typedArray.getColor(R.styleable.AnthenticationCodeView_icv_et_text_color, Color.WHITE);
-        mEtBackgroundDrawableFocus = typedArray.getDrawable(R.styleable.AnthenticationCodeView_icv_et_bg_focus);
-        mEtBackgroundDrawableNormal = typedArray.getDrawable(R.styleable.AnthenticationCodeView_icv_et_bg_normal);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CodeView, defStyleAttr, 0);
+        mEtNumber = typedArray.getInteger(R.styleable.CodeView_icv_et_number, 1);
+        mEtWidth = typedArray.getDimensionPixelSize(R.styleable.CodeView_icv_et_width, 42);
+        mEtDividerWidth = typedArray.getDimensionPixelSize(R.styleable.CodeView_icv_et_divider_width, UIUtils.dip2px(8));
+        mEtDividerDrawable = typedArray.getDrawable(R.styleable.CodeView_icv_et_divider_drawable);
+        mEtTextSize = typedArray.getDimensionPixelSize(R.styleable.CodeView_icv_et_text_size, 16);
+        mEtTextColor = typedArray.getColor(R.styleable.CodeView_icv_et_text_color, Color.WHITE);
+        mEtBackgroundDrawableFocus = typedArray.getDrawable(R.styleable.CodeView_icv_et_bg_focus);
+        mEtBackgroundDrawableNormal = typedArray.getDrawable(R.styleable.CodeView_icv_et_bg_normal);
         //释放资源
         typedArray.recycle();
     }
