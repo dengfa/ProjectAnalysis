@@ -222,4 +222,15 @@ public class VerticalChartView extends View {
                     mRecHeight * percent / 2 + textBounds.height() / 2f, mTextPaint);
         }
     }
+
+    public void setData(float aAnasignedPercent, float aAsignedpercent, float aDelayAsignedPercent,
+                        float bUnasignedPercent, float bAsignedpercent, float bDelayAsignedPercent) {
+        mAUnasignedPercent = aAnasignedPercent;
+        mAAsignedpercent = aAsignedpercent;
+        mADelayAsignedPercent = aDelayAsignedPercent;
+        mBUnasignedPercent = bUnasignedPercent;
+        mBAsignedpercent = bAsignedpercent;
+        mBDelayAsignedPercent = bDelayAsignedPercent;
+        invalidate();
+    }
 }
