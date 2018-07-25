@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.vincent.projectanalysis.activity.BlinkTagActivity;
+import com.vincent.projectanalysis.activity.ChartActivity;
 import com.vincent.projectanalysis.activity.ClipRevealActivity;
 import com.vincent.projectanalysis.activity.CountDownActivity;
 import com.vincent.projectanalysis.activity.GuideActivity;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "控件集合",
             "BlinkTag",
             "Guide",
-            "LottieAnimation"};
+            "LottieAnimation","Chart"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 11:
                 startActivity(new Intent(MainActivity.this, LottieActivity.class));
+                break;
+            case 12:
+                startActivity(new Intent(MainActivity.this, ChartActivity.class));
                 break;
         }
     }

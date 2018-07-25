@@ -44,6 +44,9 @@
         </activity>
         <activity android:name=".activity.LottieActivity">
         </activity>
+        <activity android:name=".activity.ChartActivity">
+        </activity>
+        <activity android:name=".module.chart.PieChartActivity"/>
     </application>
 
 </manifest>
