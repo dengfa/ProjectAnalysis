@@ -9,13 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.module.chart.HorizontalBarChartActivity;
 import com.vincent.projectanalysis.module.chart.PieChartActivity;
 
 public class ChartActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
     private String[] tabs = {
-            "pie chart"};
+            "pie chart", "HorizontalBarChartActivity"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,9 @@ public class ChartActivity extends AppCompatActivity implements AdapterView.OnIt
         switch (position) {
             case 0:
                 startActivity(new Intent(ChartActivity.this, PieChartActivity.class));
+                break;
+            case 1:
+                startActivity(new Intent(ChartActivity.this, HorizontalBarChartActivity.class));
                 break;
         }
     }

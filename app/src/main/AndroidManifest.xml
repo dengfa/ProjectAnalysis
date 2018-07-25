@@ -47,6 +47,7 @@
         <activity android:name=".activity.ChartActivity">
         </activity>
         <activity android:name=".module.chart.PieChartActivity"/>
+        <activity android:name=".module.chart.HorizontalBarChartActivity"/>
     </application>
 
 </manifest>
