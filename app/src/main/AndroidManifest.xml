@@ -48,6 +48,8 @@
         </activity>
         <activity android:name=".module.chart.PieChartActivity"/>
         <activity android:name=".module.chart.HorizontalBarChartActivity"/>
+        <activity android:name=".module.chart.MyCustomChartActivity">
+        </activity>
     </application>
 
 </manifest>
