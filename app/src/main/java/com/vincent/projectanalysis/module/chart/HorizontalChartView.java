@@ -2,9 +2,13 @@ package com.vincent.projectanalysis.module.chart;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
@@ -29,14 +33,16 @@ public class HorizontalChartView extends View {
     private int mRadius;
     private int mBarRadius;
 
-    String[] steps = {"问题解决", "阅读理解", "推理分析", "列式运算"};
-    String[] group = {"您的", "当地"};
-    float[] datasA = {0.99f, 0.5f, 0.3f, 0.2f};
-    float[] datasB = {0.9f, 0.6f, 0.4f, 0.2f};
+    String[] mSteps = {"问题解决", "阅读理解", "推理分析", "列式运算"};
+    String[] mGroup = {"您的", "当地"};
+    float[] mDatasA = {0.99f, 0.5f, 0.3f, 0.2f};
+    float[] mDatasB = {0.9f, 0.6f, 0.4f, 0.2f};
     private int mRightPadding;
     private int mBarWidth;
     private int mBarHeight;
-    int perHeight;
+    int mPerHeight;
+    private Bitmap mPassPercentBitmap;
+    PorterDuffXfermode mXfermode;
 
     /**
      * @param context
@@ -83,6 +89,9 @@ public class HorizontalChartView extends View {
         mRadius = UIUtils.dip2px(3);
         mBarHeight = UIUtils.dip2px(16);
         mBarRadius = mBarHeight / 2;
+
+        mPassPercentBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon_pass_percent);
+        mXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
     }
 
     @Override
@@ -91,7 +100,7 @@ public class HorizontalChartView extends View {
         mLeft = UIUtils.dip2px(50);
         mRightPadding = UIUtils.dip2px(25);
         mBarWidth = (getWidth() - mLeft - mRightPadding) / 2;
-        perHeight = getHeight() / steps.length;
+        mPerHeight = getHeight() / mSteps.length;
     }
 
     @Override
@@ -122,45 +131,86 @@ public class HorizontalChartView extends View {
 
         //draw value
         mTextPaint.setColor(0xff999999);
-        for (int i = 1; i <= steps.length; i++) {
+        for (int i = 1; i <= mSteps.length; i++) {
             canvas.save();
             Rect textBounds = new Rect();
-            mTextPaint.getTextBounds(steps[i - 1], 0, steps[i - 1].length(), textBounds);
-            canvas.translate(0, getHeight() / steps.length * (i - 0.5f));
-            canvas.drawText(steps[i - 1], textBounds.centerX(), textBounds.centerY(), mTextPaint);
+            mTextPaint.getTextBounds(mSteps[i - 1], 0, mSteps[i - 1].length(), textBounds);
+            canvas.translate(0, getHeight() / mSteps.length * (i - 0.5f));
+            canvas.drawText(mSteps[i - 1], textBounds.centerX(), textBounds.height() / 2, mTextPaint);
             canvas.restore();
         }
 
         //draw bar
         drawGroupABar(canvas);
         drawGroupBBar(canvas);
-
+        drawGroupAPassPercent(canvas);
+        drawGroupBPassPercent(canvas);
 
         //drawtext
         int padding = UIUtils.dip2px(25);
         mTextPaint.setColor(0xff333333);
         float textY = getHeight();
         Rect textBounds = new Rect();
-        mTextPaint.getTextBounds(group[1], 0, group[1].length(), textBounds);
-        canvas.drawText(group[1], getWidth() - textBounds.width() / 2, textY - textBounds.height(), mTextPaint);
+        mTextPaint.getTextBounds(mGroup[1], 0, mGroup[1].length(), textBounds);
+        canvas.drawText(mGroup[1], getWidth() - textBounds.width() / 2, textY - textBounds.height(), mTextPaint);
         mBarPaint.setColor(mGroupBColor);
-        canvas.drawCircle(getWidth() - textBounds.width() - padding / 2, textY - textBounds.height(), mRadius, mBarPaint);
-
+        canvas.drawCircle(getWidth() - textBounds.width() - padding / 2, textY - textBounds.height() * 1.5f,
+                mRadius, mBarPaint);
         float bRight = getWidth() - textBounds.width() - padding;
-        mTextPaint.getTextBounds(group[0], 0, group[0].length(), textBounds);
-        canvas.drawText(group[0], bRight - textBounds.width() / 2, textY - textBounds.height(), mTextPaint);
+        mTextPaint.getTextBounds(mGroup[0], 0, mGroup[0].length(), textBounds);
+        canvas.drawText(mGroup[0], bRight - textBounds.width() / 2, textY - textBounds.height(), mTextPaint);
         mBarPaint.setColor(mGroupAColor);
-        canvas.drawCircle(bRight - textBounds.width() - padding / 2, textY - textBounds.height(), mRadius, mBarPaint);
+        canvas.drawCircle(bRight - textBounds.width() - padding / 2, textY - textBounds.height() * 1.5f,
+                mRadius, mBarPaint);
+    }
+
+    private void drawGroupAPassPercent(Canvas canvas) {
+        for (int i = 1; i < mDatasA.length; i++) {
+            int top = mPerHeight * i - mPassPercentBitmap.getHeight() / 2;
+            int bottom = mPerHeight * i + mPassPercentBitmap.getHeight() / 2;
+            int left = mLeft + mBarWidth / 2 - mPassPercentBitmap.getWidth() / 2;
+            int right = mLeft + mBarWidth / 2 + mPassPercentBitmap.getWidth() / 2;
+            int saveLayer = canvas.saveLayer(left, top, right, bottom, null);
+            canvas.drawColor(mDatasA[i] <= mDatasB[i] ? 0xfff7bcbc : 0xffcaeeff);
+            mBarPaint.setXfermode(mXfermode);
+            canvas.drawBitmap(mPassPercentBitmap, left, top, mBarPaint);
+            mBarPaint.setXfermode(null);
+            String percentStr = (int) (mDatasA[i] * 100) + "%";
+            Rect textBounds = new Rect();
+            mTextPaint.getTextBounds(percentStr, 0, percentStr.length(), textBounds);
+            canvas.drawText(percentStr, (left + right) / 2, (top + bottom) / 2, mTextPaint);
+            canvas.restoreToCount(saveLayer);
+        }
+    }
+
+    private void drawGroupBPassPercent(Canvas canvas) {
+        for (int i = 1; i < mDatasB.length; i++) {
+            int top = mPerHeight * i - mPassPercentBitmap.getHeight() / 2;
+            int bottom = mPerHeight * i + mPassPercentBitmap.getHeight() / 2;
+            int left = mLeft + mBarWidth * 3 / 2 - mPassPercentBitmap.getWidth() / 2;
+            int right = mLeft + mBarWidth * 3 / 2 + mPassPercentBitmap.getWidth() / 2;
+            int saveLayer = canvas.saveLayer(left, top, right, bottom, null);
+            canvas.drawColor(0xffdef6c4);
+            mBarPaint.setXfermode(mXfermode);
+            canvas.drawBitmap(mPassPercentBitmap, left, top, mBarPaint);
+            mBarPaint.setXfermode(null);
+            String percentStr = (int) (mDatasB[i] * 100) + "%";
+            Rect textBounds = new Rect();
+            mTextPaint.getTextBounds(percentStr, 0, percentStr.length(), textBounds);
+            canvas.drawText(percentStr, (left + right) / 2, (top + bottom) / 2, mTextPaint);
+            canvas.restoreToCount(saveLayer);
+        }
     }
 
     private void drawGroupABar(Canvas canvas) {
         mBarPaint.setColor(mGroupAColor);
-        for (int i = 0; i < datasA.length; i++) {
+        for (int i = 0; i < mDatasA.length; i++) {
             canvas.save();
-            canvas.translate(mLeft + mBarWidth, perHeight * (i + 0.5f));
+            canvas.translate(mLeft + mBarWidth, mPerHeight * (i + 0.5f));
             Path path = new Path();
             float[] radii = {mBarRadius, mBarRadius, 0f, 0f, 0f, 0f, mBarRadius, mBarRadius};
-            path.addRoundRect(new RectF(-mBarWidth * datasA[i], -mBarHeight, 0, 0), radii, Path.Direction.CW);
+            path.addRoundRect(new RectF(-mBarWidth * mDatasA[i], -mBarHeight / 2, 0, mBarHeight / 2),
+                    radii, Path.Direction.CW);
             canvas.drawPath(path, mBarPaint);
             canvas.restore();
         }
@@ -168,18 +218,21 @@ public class HorizontalChartView extends View {
 
     private void drawGroupBBar(Canvas canvas) {
         mBarPaint.setColor(mGroupBColor);
-        for (int i = 0; i < datasB.length; i++) {
+        for (int i = 0; i < mDatasB.length; i++) {
             canvas.save();
-            canvas.translate(mLeft + mBarWidth, perHeight * (i + 0.5f));
+            canvas.translate(mLeft + mBarWidth, mPerHeight * (i + 0.5f));
             Path path = new Path();
             float[] radii = {0, 0, mBarRadius, mBarRadius, mBarRadius, mBarRadius, 0, 0};
-            path.addRoundRect(new RectF(0, 0, mBarWidth * datasB[i], -mBarHeight), radii, Path.Direction.CW);
+            path.addRoundRect(new RectF(0, -mBarHeight / 2, mBarWidth * mDatasB[i], mBarHeight / 2),
+                    radii, Path.Direction.CW);
             canvas.drawPath(path, mBarPaint);
             canvas.restore();
         }
     }
 
-    public void setData() {
+    public void setData(float[] datasA, float[] datasB) {
+        mDatasA = datasA;
+        mDatasB = datasB;
         invalidate();
     }
 }
