@@ -13,9 +13,9 @@ import com.vincent.projectanalysis.utils.UIUtils;
 
 public class VerticalChartView extends View {
 
-    public static final int DEF_COLOR = 0x49617291;
-    private static int DEF_WIDTH = 300;
-    private static int DEF_HEIGHT = 300;
+    private static final int DEF_COLOR = 0x49617291;
+    private static final int DEF_WIDTH = 300;
+    private static final int DEF_HEIGHT = 300;
 
     private int mUnasignedColor = 0xffff706f;
     private int mAsignedColor = 0xffffb800;

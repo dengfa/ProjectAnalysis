@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.vincent.projectanalysis.module.chart.MyCustomChartActivity">
 
-    <com.vincent.projectanalysis.module.chart.VerticalChartView
-        android:id="@+id/chart"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+        <com.vincent.projectanalysis.module.chart.VerticalChartView
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"/>
+
+        <com.vincent.projectanalysis.module.chart.HorizontalChartView
+            android:id="@+id/chart2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_black_10"/>
+
+    </LinearLayout>
+</ScrollView>
