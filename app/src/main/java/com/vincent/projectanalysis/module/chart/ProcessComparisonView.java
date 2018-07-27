@@ -24,27 +24,22 @@ public class ProcessComparisonView extends View {
     private static final int DEF_WIDTH = 300;
     private static final int DEF_HEIGHT = DEF_MIN_HEIGHT;
 
-    private int mGroupAColor = 0xff17abf2;
-    private int mGroupBColor = 0xffbae48c;
-
     private Paint mBarPaint;
     private Paint mTextPaint;
+    private Paint mValuePaint;
 
     private int mLeft;
-    private int mRadius;
     private int mBarRadius;
 
     String[] mSteps = {"不足", "正常", "良好"};
     int[] mStepColors = {0xffff706f, 0xffffb800, 0xff7ed321};
     float[] mStepValues = {10, 20, 30};
-    String[] mGroup = {"您5%", "北京市平均 22%"};
-    float[] mGroupValus = {5, 22};
 
-    private int mRightPadding;
+    String[] mGroup = {"您5%", "北京市平均 22%"};
+    float[] mGroupValus = {5, 2};
+
     private int mBarWidth;
     private int mBarHeight;
-    int mPerHeight;
-    private Bitmap mPassPercentBitmap;
     PorterDuffXfermode mXfermode;
     private Bitmap mPointYouBitmap;
     private Bitmap mPointLocalBitmap;
@@ -97,9 +92,15 @@ public class ProcessComparisonView extends View {
 
         mTextPaint = new Paint();
         mTextPaint.setAntiAlias(true);
-        mTextPaint.setTextSize(UIUtils.dip2px(10));
-        mTextPaint.setColor(0xff999999);
+        mTextPaint.setTextSize(UIUtils.dip2px(12));
+        mTextPaint.setColor(0xff333333);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
+
+        mValuePaint = new Paint();
+        mValuePaint.setAntiAlias(true);
+        mValuePaint.setTextSize(UIUtils.dip2px(10));
+        mValuePaint.setColor(0xff999999);
+        mValuePaint.setTextAlign(Paint.Align.CENTER);
 
         mBarHeight = UIUtils.dip2px(5);
         mBarRadius = mBarHeight / 2;
@@ -123,7 +124,6 @@ public class ProcessComparisonView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-
         mBarWidth = getWidth() - mBarLeftPadding - mBarRightPadding;
     }
 
@@ -153,7 +153,6 @@ public class ProcessComparisonView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawBar(canvas);
-
         drawLocalPoint(canvas);
         drawYourPoint(canvas);
     }
@@ -179,7 +178,16 @@ public class ProcessComparisonView extends View {
         canvas.restoreToCount(saveLayer);
         String groupStr = mGroup[1];
         mTextPaint.getTextBounds(groupStr, 0, groupStr.length(), mTextBounds);
-        canvas.drawText(groupStr, (left + right) / 2, bottom + UIUtils.dip2px(5) + mTextBounds.height(), mTextPaint);
+        int textX;
+        int pointX = (left + right) / 2;
+        if (pointX < mTextBounds.width() / 2) {
+            textX = mBarLeftPadding + mTextBounds.width() / 2;
+        } else if (getWidth() - pointX < mTextBounds.width() / 2) {
+            textX = getWidth() - mTextBounds.width() / 2;
+        } else {
+            textX = pointX;
+        }
+        canvas.drawText(groupStr, textX, bottom + UIUtils.dip2px(5) + mTextBounds.height(), mTextPaint);
     }
 
     private void drawYourPoint(Canvas canvas) {
@@ -203,11 +211,21 @@ public class ProcessComparisonView extends View {
         canvas.restoreToCount(saveLayer);
         String groupStr = mGroup[0];
         mTextPaint.getTextBounds(groupStr, 0, groupStr.length(), mTextBounds);
-        canvas.drawText(groupStr, (left + right) / 2, top - UIUtils.dip2px(5), mTextPaint);
+        int textX;
+        int pointX = (left + right) / 2;
+        if (pointX < mTextBounds.width() / 2) {
+            textX = mBarLeftPadding + mTextBounds.width() / 2;
+        } else if (getWidth() - pointX < mTextBounds.width() / 2) {
+            textX = getWidth() - mTextBounds.width() / 2;
+        } else {
+            textX = pointX;
+        }
+        canvas.drawText(groupStr, textX, top - UIUtils.dip2px(5), mTextPaint);
     }
 
     private void drawBar(Canvas canvas) {
         mLeft = mBarLeftPadding;
+        canvas.drawText("0", mBarLeftPadding, getHeight() - mBarBottomPadding / 2, mValuePaint);
         for (int i = 0; i < mSteps.length; i++) {
             float[] radii;
             if (i == 0) {
@@ -228,10 +246,31 @@ public class ProcessComparisonView extends View {
             mBarPaint.setColor(mStepColors[i]);
             canvas.drawPath(mPath, mBarPaint);
             mLeft += stepWidth;
+            canvas.drawText(mSteps[i] + "", mLeft - stepWidth / 2,
+                    getHeight() - mBarBottomPadding - mBarHeight - UIUtils.dip2px(2), mValuePaint);
+            canvas.drawText((int) mStepValues[i] + "", mLeft,
+                    getHeight() - mBarBottomPadding + UIUtils.dip2px(12), mValuePaint);
         }
     }
 
-    public void setData() {
+    public void setStepConfig(String[] steps, int[] stepColors, float[] stepValues) {
+        if (steps == null || stepColors == null || stepValues == null
+                || stepColors.length != steps.length
+                || stepColors.length != stepValues.length) {
+            return;
+        }
+        mSteps = steps;
+        mStepValues = stepValues;
+        mStepColors = stepColors;
+        invalidate();
+    }
+
+    public void setData(String[] group, float[] groupValus) {
+        if (group == null || groupValus == null || group.length != groupValus.length) {
+            return;
+        }
+        mGroup = group;
+        mGroupValus = groupValus;
         invalidate();
     }
 }
