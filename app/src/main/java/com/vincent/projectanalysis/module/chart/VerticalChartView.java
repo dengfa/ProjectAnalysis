@@ -1,19 +1,16 @@
 package com.vincent.projectanalysis.module.chart;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.utils.UIUtils;
 
 public class VerticalChartView extends View {
 
-    private static final int DEF_COLOR = 0x49617291;
     private static final int DEF_WIDTH = 300;
     private static final int DEF_HEIGHT = 300;
 
@@ -69,12 +66,6 @@ public class VerticalChartView extends View {
      */
     public VerticalChartView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RippleView);
-
-        // TODO: 2018/7/25
-        //mColor = typedArray.getColor(R.styleable.RippleView_RvColor, DEF_COLOR);
-        typedArray.recycle();
         init();
     }
 
@@ -131,27 +122,38 @@ public class VerticalChartView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        drawLine(canvas);
+        drawValue(canvas);
+        drawBar(canvas);
+        drawBottomHint(canvas);
+    }
 
-        //draw line
-        float[] pts = {
-                mLeft, getHeight() / 7f, getWidth(), getHeight() / 7f,
-                mLeft, getHeight() / 7f * 2, getWidth(), getHeight() / 7f * 2,
-                mLeft, getHeight() / 7f * 3, getWidth(), getHeight() / 7f * 3,
-                mLeft, getHeight() / 7f * 4, getWidth(), getHeight() / 7f * 4,
-                mLeft, getHeight() / 7f * 5, getWidth(), getHeight() / 7f * 5,
-                mLeft, getHeight() / 7f * 6, getWidth(), getHeight() / 7f * 6};
-        canvas.drawLines(pts, mLinePaint);
+    private void drawBottomHint(Canvas canvas) {
+        int padding = UIUtils.dip2px(25);
+        mTextPaint.setColor(0xff333333);
+        canvas.drawText(strGroupA, mLeft + mPerWidth * 1.5f, mPerHeight / 2, mTextPaint);
+        canvas.drawText(strGroupB, mLeft + mPerWidth * 3.5f, mPerHeight / 2, mTextPaint);
+        float textY = getHeight() - mPerHeight * 0.3f;
+        Rect textBounds = new Rect();
+        mTextPaint.getTextBounds(strA, 0, strA.length(), textBounds);
+        canvas.drawText(strA, getWidth() - textBounds.width() / 2, textY, mTextPaint);
+        mBarPaint.setColor(mAsignedColor);
+        canvas.drawCircle(getWidth() - textBounds.width() - padding / 2, textY - mRadius, mRadius, mBarPaint);
 
-        //draw value
-        mTextPaint.setColor(0xff999999);
-        for (int i = 1; i < 7; i++) {
-            canvas.save();
-            canvas.translate(UIUtils.dip2px(10), getHeight() / 7f * i);
-            canvas.drawText(100 - (i - 1) * 20 + "", 0, UIUtils.dip2px(4), mTextPaint);
-            canvas.restore();
-        }
+        float bRight = getWidth() - textBounds.width() - padding;
+        mTextPaint.getTextBounds(strB, 0, strB.length(), textBounds);
+        canvas.drawText(strB, bRight - textBounds.width() / 2, textY, mTextPaint);
+        mBarPaint.setColor(mDelayAsignedColor);
+        canvas.drawCircle(bRight - textBounds.width() - padding / 2, textY - mRadius, mRadius, mBarPaint);
 
-        //draw bar
+        float cRight = bRight - textBounds.width() - padding;
+        mTextPaint.getTextBounds(strC, 0, strC.length(), textBounds);
+        canvas.drawText(strC, cRight - textBounds.width() / 2, textY, mTextPaint);
+        mBarPaint.setColor(mUnasignedColor);
+        canvas.drawCircle(cRight - textBounds.width() - padding / 2, textY - mRadius, mRadius, mBarPaint);
+    }
+
+    private void drawBar(Canvas canvas) {
         mTextPaint.setColor(0xffffffff);
         mBarPaint.setColor(mUnasignedColor);
         canvas.save();
@@ -185,30 +187,27 @@ public class VerticalChartView extends View {
         canvas.translate(mLeft + mPerWidth * 3, mPerHeight + mRecHeight * (mBUnasignedPercent + mBDelayAsignedPercent));
         drawBar(canvas, mBAsignedpercent);
         canvas.restore();
+    }
 
-        //drawtext
-        int padding = UIUtils.dip2px(25);
-        mTextPaint.setColor(0xff333333);
-        canvas.drawText(strGroupA, mLeft + mPerWidth * 1.5f, mPerHeight / 2, mTextPaint);
-        canvas.drawText(strGroupB, mLeft + mPerWidth * 3.5f, mPerHeight / 2, mTextPaint);
-        float textY = getHeight() - mPerHeight * 0.3f;
-        Rect textBounds = new Rect();
-        mTextPaint.getTextBounds(strA, 0, strA.length(), textBounds);
-        canvas.drawText(strA, getWidth() - textBounds.width() / 2, textY, mTextPaint);
-        mBarPaint.setColor(mAsignedColor);
-        canvas.drawCircle(getWidth() - textBounds.width() - padding / 2, textY - mRadius, mRadius, mBarPaint);
+    private void drawValue(Canvas canvas) {
+        mTextPaint.setColor(0xff999999);
+        for (int i = 1; i < 7; i++) {
+            canvas.save();
+            canvas.translate(UIUtils.dip2px(10), getHeight() / 7f * i);
+            canvas.drawText(100 - (i - 1) * 20 + "", 0, UIUtils.dip2px(4), mTextPaint);
+            canvas.restore();
+        }
+    }
 
-        float bRight = getWidth() - textBounds.width() - padding;
-        mTextPaint.getTextBounds(strB, 0, strB.length(), textBounds);
-        canvas.drawText(strB, bRight - textBounds.width() / 2, textY, mTextPaint);
-        mBarPaint.setColor(mDelayAsignedColor);
-        canvas.drawCircle(bRight - textBounds.width() - padding / 2, textY - mRadius, mRadius, mBarPaint);
-
-        float cRight = bRight - textBounds.width() - padding;
-        mTextPaint.getTextBounds(strC, 0, strC.length(), textBounds);
-        canvas.drawText(strC, cRight - textBounds.width() / 2, textY, mTextPaint);
-        mBarPaint.setColor(mUnasignedColor);
-        canvas.drawCircle(cRight - textBounds.width() - padding / 2, textY - mRadius, mRadius, mBarPaint);
+    private void drawLine(Canvas canvas) {
+        float[] pts = {
+                mLeft, getHeight() / 7f, getWidth(), getHeight() / 7f,
+                mLeft, getHeight() / 7f * 2, getWidth(), getHeight() / 7f * 2,
+                mLeft, getHeight() / 7f * 3, getWidth(), getHeight() / 7f * 3,
+                mLeft, getHeight() / 7f * 4, getWidth(), getHeight() / 7f * 4,
+                mLeft, getHeight() / 7f * 5, getWidth(), getHeight() / 7f * 5,
+                mLeft, getHeight() / 7f * 6, getWidth(), getHeight() / 7f * 6};
+        canvas.drawLines(pts, mLinePaint);
     }
 
     private void drawBar(Canvas canvas, float percent) {

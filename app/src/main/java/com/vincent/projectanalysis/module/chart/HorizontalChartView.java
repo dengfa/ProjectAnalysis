@@ -1,7 +1,6 @@
 package com.vincent.projectanalysis.module.chart;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -19,7 +18,6 @@ import com.vincent.projectanalysis.utils.UIUtils;
 
 public class HorizontalChartView extends View {
 
-    private static final int DEF_COLOR = 0x49617291;
     private static final int DEF_WIDTH = 300;
     private static final int DEF_HEIGHT = 300;
 
@@ -66,12 +64,6 @@ public class HorizontalChartView extends View {
      */
     public HorizontalChartView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RippleView);
-
-        // TODO: 2018/7/25
-        //mColor = typedArray.getColor(R.styleable.RippleView_RvColor, DEF_COLOR);
-        typedArray.recycle();
         init();
     }
 
@@ -128,25 +120,15 @@ public class HorizontalChartView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        //draw value
-        mTextPaint.setColor(0xff999999);
-        for (int i = 1; i <= mSteps.length; i++) {
-            canvas.save();
-            Rect textBounds = new Rect();
-            mTextPaint.getTextBounds(mSteps[i - 1], 0, mSteps[i - 1].length(), textBounds);
-            canvas.translate(0, getHeight() / mSteps.length * (i - 0.5f));
-            canvas.drawText(mSteps[i - 1], textBounds.centerX(), textBounds.height() / 2, mTextPaint);
-            canvas.restore();
-        }
-
-        //draw bar
+        drawValue(canvas);
         drawGroupABar(canvas);
         drawGroupBBar(canvas);
         drawGroupAPassPercent(canvas);
         drawGroupBPassPercent(canvas);
+        drawBottomHint(canvas);
+    }
 
-        //drawtext
+    private void drawBottomHint(Canvas canvas) {
         int padding = UIUtils.dip2px(25);
         mTextPaint.setColor(0xff333333);
         float textY = getHeight();
@@ -162,6 +144,18 @@ public class HorizontalChartView extends View {
         mBarPaint.setColor(mGroupAColor);
         canvas.drawCircle(bRight - textBounds.width() - padding / 2, textY - textBounds.height() * 1.5f,
                 mRadius, mBarPaint);
+    }
+
+    private void drawValue(Canvas canvas) {
+        mTextPaint.setColor(0xff999999);
+        for (int i = 1; i <= mSteps.length; i++) {
+            canvas.save();
+            Rect textBounds = new Rect();
+            mTextPaint.getTextBounds(mSteps[i - 1], 0, mSteps[i - 1].length(), textBounds);
+            canvas.translate(0, getHeight() / mSteps.length * (i - 0.5f));
+            canvas.drawText(mSteps[i - 1], textBounds.centerX(), textBounds.height() / 2, mTextPaint);
+            canvas.restore();
+        }
     }
 
     private void drawGroupAPassPercent(Canvas canvas) {

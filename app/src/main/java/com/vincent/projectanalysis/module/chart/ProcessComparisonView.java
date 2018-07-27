@@ -1,7 +1,6 @@
 package com.vincent.projectanalysis.module.chart;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -19,7 +18,6 @@ import com.vincent.projectanalysis.utils.UIUtils;
 
 public class ProcessComparisonView extends View {
 
-    private static final int DEF_COLOR = 0x49617291;
     private static final int DEF_MIN_HEIGHT = UIUtils.dip2px(110);
     private static final int DEF_WIDTH = 300;
     private static final int DEF_HEIGHT = DEF_MIN_HEIGHT;
@@ -76,12 +74,6 @@ public class ProcessComparisonView extends View {
      */
     public ProcessComparisonView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RippleView);
-
-        // TODO: 2018/7/25
-        //mColor = typedArray.getColor(R.styleable.RippleView_RvColor, DEF_COLOR);
-        typedArray.recycle();
         init();
     }
 
