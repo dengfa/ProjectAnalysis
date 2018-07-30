@@ -16,6 +16,7 @@ import com.vincent.projectanalysis.activity.GuideActivity;
 import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.LottieActivity;
+import com.vincent.projectanalysis.activity.OrderHomeworkActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
 import com.vincent.projectanalysis.activity.ScanActivity;
 import com.vincent.projectanalysis.activity.WidgetsCollectionsActivity;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "控件集合",
             "BlinkTag",
             "Guide",
-            "LottieAnimation","Chart"};
+            "LottieAnimation","Chart","Order Homework"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 12:
                 startActivity(new Intent(MainActivity.this, ChartActivity.class));
+                break;
+            case 13:
+                startActivity(new Intent(MainActivity.this, OrderHomeworkActivity.class));
                 break;
         }
     }

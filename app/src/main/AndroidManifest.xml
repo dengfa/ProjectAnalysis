@@ -50,6 +50,7 @@
         <activity android:name=".module.chart.HorizontalBarChartActivity"/>
         <activity android:name=".module.chart.MyCustomChartActivity">
         </activity>
+        <activity android:name=".activity.OrderHomeworkActivity"/>
     </application>
 
 </manifest>
