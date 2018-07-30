@@ -155,7 +155,7 @@ public class ProcessComparisonView extends View {
         int top = getHeight() - mBarBottomPadding;
         int right = left + mPointLocalBitmap.getWidth();
         int bottom = top + mPointLocalBitmap.getHeight();
-        int saveLayer = canvas.saveLayer(left, top, right, bottom, null);
+        int saveLayer = canvas.saveLayer(left, top, right, bottom, null, Canvas.ALL_SAVE_FLAG);
         int localStep = 0;
         for (int i = 0; i < mStepValues.length; i++) {
             if (mGroupValus[1] <= mStepValues[i]) {
@@ -188,7 +188,7 @@ public class ProcessComparisonView extends View {
         int top = getHeight() - mBarBottomPadding - mBarHeight - mPointYouBitmap.getHeight();
         int right = left + mPointYouBitmap.getWidth();
         int bottom = top + mPointYouBitmap.getHeight();
-        int saveLayer = canvas.saveLayer(left, top, right, bottom, null);
+        int saveLayer = canvas.saveLayer(left, top, right, bottom, null, Canvas.ALL_SAVE_FLAG);
         int localStep = 0;
         for (int i = 0; i < mStepValues.length; i++) {
             if (mGroupValus[0] <= mStepValues[i]) {

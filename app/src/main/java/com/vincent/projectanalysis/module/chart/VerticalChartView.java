@@ -214,9 +214,9 @@ public class VerticalChartView extends View {
         canvas.drawRect(0, 0, mPerWidth, mRecHeight * percent, mBarPaint);
         String valueText = (int) (percent * 100) + "%";
         Rect textBounds = new Rect();
+        mTextPaint.getTextBounds(valueText, 0, valueText.length(), textBounds);
         //防止空间太小无法绘制文本
         if (mRecHeight * percent >= textBounds.height()) {
-            mTextPaint.getTextBounds(valueText, 0, valueText.length(), textBounds);
             canvas.drawText(valueText, mPerWidth / 2,
                     mRecHeight * percent / 2 + textBounds.height() / 2f, mTextPaint);
         }
