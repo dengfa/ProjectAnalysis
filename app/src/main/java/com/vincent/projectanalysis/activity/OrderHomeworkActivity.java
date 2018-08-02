@@ -90,4 +90,62 @@ public class OrderHomeworkActivity extends AppCompatActivity {
             }
         }, 1000);
     }
+
+
+    /*private void animatorResult() {
+        ObjectAnimator colorAnimator = ObjectAnimator.ofInt(mTxtAnimatorResult, "textColor", 0xff666666, 0xffc1c4c8);
+        colorAnimator.setEvaluator(new ArgbEvaluator());
+        colorAnimator.setDuration(500);
+
+        ObjectAnimator objectAnimator1 = ObjectAnimator.ofFloat(mLayoutAnimatorResult, "translationY",
+                UIUtils.dip2px(41), 2 * UIUtils.dip2px(41));
+        objectAnimator1.setDuration(500);
+        objectAnimator1.setStartDelay(300);
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
+        valueAnimator.setDuration(500);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float value = (float) valueAnimator.getAnimatedValue();
+                mImgAnimatorResult.setScaleX(value);
+                mImgAnimatorResult.setScaleY(value);
+                mTxtAnimatorResult.setTextSize(22 * (1.0f - value / 3));
+                mLayoutAnimatorResult.setTranslationY(UIUtils.dip2px(41) * value);
+            }
+        });
+        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(mLayoutAnimatorPoint, "alpha", 0, 1);
+        alphaAnimator.setDuration(500);
+        alphaAnimator.start();
+        AnimatorSet bouncer = new AnimatorSet();
+        bouncer.play(colorAnimator).with(valueAnimator).with(alphaAnimator).before(objectAnimator1);
+        bouncer.start();
+    }*/
+
+    /*private void animatorPoint() {
+        ObjectAnimator colorAnimator = ObjectAnimator.ofInt(mTxtAnimatorPoint, "textColor", 0xff666666, 0xffc1c4c8);
+
+        colorAnimator.setEvaluator(new ArgbEvaluator());
+        colorAnimator.setDuration(500);
+
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0, 1);
+        valueAnimator.setDuration(500);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float value = (float) valueAnimator.getAnimatedValue();
+                mImgAnimatorPoint.setScaleX(value);
+                mImgAnimatorPoint.setScaleY(value);
+                mTxtAnimatorPoint.setTextSize(22 * (1.0f - value / 3));
+                mLayoutAnimatorPoint.setTranslationY(UIUtils.dip2px(41) * 41 * value);
+            }
+        });
+        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(mTxtAnimatorHomeWork, "alpha", 0, 1);
+        alphaAnimator.setDuration(500);
+        alphaAnimator.start();
+        AnimatorSet bouncer = new AnimatorSet();
+
+        bouncer.play(colorAnimator).with(alphaAnimator).with(valueAnimator);
+        bouncer.start();
+    }*/
 }
