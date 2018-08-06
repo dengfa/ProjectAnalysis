@@ -41,6 +41,7 @@ public class HorizontalChartView extends View {
     int mPerHeight;
     private Bitmap mPassPercentBitmap;
     PorterDuffXfermode mXfermode;
+    private int mBottomPadding;
 
     /**
      * @param context
@@ -81,6 +82,9 @@ public class HorizontalChartView extends View {
         mRadius = UIUtils.dip2px(3);
         mBarHeight = UIUtils.dip2px(16);
         mBarRadius = mBarHeight / 2;
+        mLeft = UIUtils.dip2px(60);
+        mRightPadding = UIUtils.dip2px(25);
+        mBottomPadding = UIUtils.dip2px(15);
 
         mPassPercentBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.icon_pass_percent);
         mXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_IN);
@@ -89,10 +93,8 @@ public class HorizontalChartView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mLeft = UIUtils.dip2px(50);
-        mRightPadding = UIUtils.dip2px(25);
         mBarWidth = (getWidth() - mLeft - mRightPadding) / 2;
-        mPerHeight = getHeight() / mSteps.length;
+        mPerHeight = (getHeight() - mBottomPadding) / mSteps.length;
     }
 
     @Override
@@ -152,7 +154,7 @@ public class HorizontalChartView extends View {
             canvas.save();
             Rect textBounds = new Rect();
             mTextPaint.getTextBounds(mSteps[i - 1], 0, mSteps[i - 1].length(), textBounds);
-            canvas.translate(0, getHeight() / mSteps.length * (i - 0.5f));
+            canvas.translate(0, (getHeight() - mBottomPadding) / mSteps.length * (i - 0.5f));
             canvas.drawText(mSteps[i - 1], textBounds.centerX(), textBounds.height() / 2, mTextPaint);
             canvas.restore();
         }
@@ -203,7 +205,7 @@ public class HorizontalChartView extends View {
             canvas.translate(mLeft + mBarWidth, mPerHeight * (i + 0.5f));
             Path path = new Path();
             float[] radii = {mBarRadius, mBarRadius, 0f, 0f, 0f, 0f, mBarRadius, mBarRadius};
-            path.addRoundRect(new RectF(-mBarWidth * mDatasA[i], -mBarHeight / 2, 0, mBarHeight / 2),
+            path.addRoundRect(new RectF(-mBarWidth * mDatasA[i] - mBarRadius, -mBarHeight / 2, 0, mBarHeight / 2),
                     radii, Path.Direction.CW);
             canvas.drawPath(path, mBarPaint);
             canvas.restore();
@@ -217,7 +219,7 @@ public class HorizontalChartView extends View {
             canvas.translate(mLeft + mBarWidth, mPerHeight * (i + 0.5f));
             Path path = new Path();
             float[] radii = {0, 0, mBarRadius, mBarRadius, mBarRadius, mBarRadius, 0, 0};
-            path.addRoundRect(new RectF(0, -mBarHeight / 2, mBarWidth * mDatasB[i], mBarHeight / 2),
+            path.addRoundRect(new RectF(0, -mBarHeight / 2, mBarWidth * mDatasB[i] + mBarRadius, mBarHeight / 2),
                     radii, Path.Direction.CW);
             canvas.drawPath(path, mBarPaint);
             canvas.restore();
