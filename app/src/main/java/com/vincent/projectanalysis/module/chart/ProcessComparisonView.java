@@ -51,6 +51,7 @@ public class ProcessComparisonView extends View {
     private int mBarLeftPadding;
     private int mBarRightPadding;
     private Rect mTextBounds;
+    private float mValueTextY;
 
     /**
      * @param context
@@ -117,6 +118,7 @@ public class ProcessComparisonView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         mBarWidth = getWidth() - mBarLeftPadding - mBarRightPadding;
+        mValueTextY = getHeight() - mBarBottomPadding + UIUtils.dip2px(12);
     }
 
     @Override
@@ -217,7 +219,7 @@ public class ProcessComparisonView extends View {
 
     private void drawBar(Canvas canvas) {
         mLeft = mBarLeftPadding;
-        canvas.drawText("0", mBarLeftPadding, getHeight() - mBarBottomPadding / 2, mValuePaint);
+        canvas.drawText("0", mBarLeftPadding, mValueTextY, mValuePaint);
         for (int i = 0; i < mSteps.length; i++) {
             float[] radii;
             if (i == 0) {
@@ -240,8 +242,7 @@ public class ProcessComparisonView extends View {
             mLeft += stepWidth;
             canvas.drawText(mSteps[i] + "", mLeft - stepWidth / 2,
                     getHeight() - mBarBottomPadding - mBarHeight - UIUtils.dip2px(2), mValuePaint);
-            canvas.drawText((int) mStepValues[i] + "", mLeft,
-                    getHeight() - mBarBottomPadding + UIUtils.dip2px(12), mValuePaint);
+            canvas.drawText((int) mStepValues[i] + "", mLeft, mValueTextY, mValuePaint);
         }
     }
 
