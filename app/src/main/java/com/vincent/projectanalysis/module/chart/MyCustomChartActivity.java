@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.vincent.projectanalysis.R;
 
+import java.util.ArrayList;
+
 public class MyCustomChartActivity extends AppCompatActivity {
 
     @Override
@@ -23,10 +25,26 @@ public class MyCustomChartActivity extends AppCompatActivity {
         ProcessComparisonView chart3 = findViewById(R.id.chart3);
         String[] steps = {"不足", "正常", "良好", "优秀"};
         int[] stepColors = {0xffff706f, 0xffffb800, 0xff7ed321, 0xff7ed399};
-        float[] stepValues = {10, 20, 30, 60};
+        float[] stepValues = {10, 12, 30, 32};
         String[] group = {"您20%", "天津市平均 50%"};
         float[] groupValus = {20, 50};
         chart3.setStepConfig(steps, stepColors, stepValues);
         chart3.setData(group, groupValus);
+
+        ProcessComparisonView2 chart4 = findViewById(R.id.chart4);
+        ArrayList<String> steps1 = new ArrayList<>();
+        steps1.add("不足");
+        steps1.add("正常");
+        steps1.add("良好");
+        ArrayList<Integer> stepValues1 = new ArrayList<>();
+        stepValues1.add(10);
+        stepValues1.add(30);
+        ArrayList<String> group1 = new ArrayList<>();
+        group1.add("您20%");
+        group1.add("天津市平均 99%");
+        ArrayList<Integer> groupValus1 = new ArrayList<>();
+        groupValus1.add(20);
+        groupValus1.add(90);
+        chart4.setData(steps1, stepValues1, group1, groupValus1);
     }
 }

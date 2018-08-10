@@ -11,6 +11,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.vincent.projectanalysis.module.chart.ProcessComparisonView2
+            android:id="@+id/chart4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_black_10"/>
+
         <com.vincent.projectanalysis.module.chart.ProcessComparisonView
             android:id="@+id/chart3"
             android:layout_width="match_parent"
