@@ -159,9 +159,9 @@ public class ProcessComparisonView2 extends View {
             return;
         }
         Integer localValue = mGroupValues.get(1);
-        int localStep = 0;
+        int localStep = mStepValues.size() - 1;
         for (int i = 0; i < mStepValues.size(); i++) {
-            if (localValue <= mStepValues.get(i)) {
+            if (localValue < mStepValues.get(i)) {
                 localStep = i;
                 break;
             }
@@ -206,9 +206,9 @@ public class ProcessComparisonView2 extends View {
             return;
         }
         Integer yourValue = mGroupValues.get(0);
-        int yourStep = 0;
+        int yourStep = mStepValues.size() - 1;
         for (int i = 0; i < mStepValues.size(); i++) {
-            if (yourValue <= mStepValues.get(i)) {
+            if (yourValue < mStepValues.get(i)) {
                 yourStep = i;
                 break;
             }
