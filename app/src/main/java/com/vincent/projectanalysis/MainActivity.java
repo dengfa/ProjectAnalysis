@@ -14,6 +14,7 @@ import com.vincent.projectanalysis.activity.ClipRevealActivity;
 import com.vincent.projectanalysis.activity.CountDownActivity;
 import com.vincent.projectanalysis.activity.GuideActivity;
 import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
+import com.vincent.projectanalysis.knowbox.KnowBoxMainActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.LottieActivity;
 import com.vincent.projectanalysis.activity.OrderHomeworkActivity;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private ListView mListView;
     private String[] tabs = {
-            "引导遮罩",
+            "KnowBox",
             "地图场景",
             "RippleView",
             "LevelProgress",
@@ -42,12 +43,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "控件集合",
             "BlinkTag",
             "Guide",
-            "LottieAnimation","Chart","Order Homework"};
+            "LottieAnimation",
+            "Chart",
+            "Order Homework",
+            "引导遮罩"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_naivigate);
         mListView = (ListView) findViewById(R.id.lv);
         mListView.setAdapter(new ArrayAdapter<>(this, R.layout.item_main_listview, R.id.tv_item, tabs));
         mListView.setOnItemClickListener(this);
@@ -63,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
-                startActivity(new Intent(MainActivity.this, ShowGuideActivity.class));
+                startActivity(new Intent(MainActivity.this, KnowBoxMainActivity.class));
                 break;
             case 1:
                 startActivity(new Intent(MainActivity.this, MapSceneActivity.class));
@@ -103,6 +108,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
             case 13:
                 startActivity(new Intent(MainActivity.this, OrderHomeworkActivity.class));
+                break;
+            case 14:
+                startActivity(new Intent(MainActivity.this, ShowGuideActivity.class));
                 break;
         }
     }

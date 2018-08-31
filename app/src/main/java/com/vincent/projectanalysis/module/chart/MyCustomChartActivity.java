@@ -43,7 +43,7 @@ public class MyCustomChartActivity extends AppCompatActivity {
         group1.add("您20%");
         group1.add("天津市平均 99%");
         ArrayList<Integer> groupValus1 = new ArrayList<>();
-        groupValus1.add(20);
+        groupValus1.add(90);
         groupValus1.add(90);
         chart4.setData(steps1, stepValues1, group1, groupValus1);
     }
