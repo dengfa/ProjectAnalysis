@@ -280,6 +280,10 @@ public class ProcessComparisonView2 extends View {
         }
     }
 
+    public void setColors(int[] colors) {
+        mStepColors = colors;
+    }
+
     public void setData(ArrayList<String> steps, ArrayList<Integer> stepValues, ArrayList<String> group,
                         ArrayList<Integer> groupValus) {
         if (steps == null || stepValues == null
@@ -292,7 +296,7 @@ public class ProcessComparisonView2 extends View {
         mStepValues.clear();
         mStepValues.addAll(stepValues);
         //当地数据和我的数据的较大值，作为x轴的最大值
-        mStepValues.add(Math.max(groupValus.get(0), groupValus.get(1)));
+        mStepValues.add(mSteps.size() - 1,Math.max(groupValus.get(0), groupValus.get(1)));
         mGroup.clear();
         mGroup.addAll(group);
         mGroupValues.clear();

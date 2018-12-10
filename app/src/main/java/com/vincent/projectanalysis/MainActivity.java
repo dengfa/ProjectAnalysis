@@ -1,7 +1,11 @@
 package com.vincent.projectanalysis;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,7 +18,6 @@ import com.vincent.projectanalysis.activity.ClipRevealActivity;
 import com.vincent.projectanalysis.activity.CountDownActivity;
 import com.vincent.projectanalysis.activity.GuideActivity;
 import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
-import com.vincent.projectanalysis.knowbox.KnowBoxMainActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.LottieActivity;
 import com.vincent.projectanalysis.activity.OrderHomeworkActivity;
@@ -23,8 +26,10 @@ import com.vincent.projectanalysis.activity.ScanActivity;
 import com.vincent.projectanalysis.activity.WidgetsCollectionsActivity;
 import com.vincent.projectanalysis.java.Json;
 import com.vincent.projectanalysis.java.Test;
+import com.vincent.projectanalysis.knowbox.KnowBoxMainActivity;
 import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
+import com.vincent.projectanalysis.utils.AddressBookUtils;
 import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.MD5Util;
 
@@ -62,6 +67,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         LogUtil.d("vincent", "packageMd5 - " + packageMd5);
 
         Test.test();
+
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_CONTACTS)
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS}, 1001);
+        } else {
+            AddressBookUtils.testSave(this);
+        }
     }
 
     @Override
@@ -112,6 +126,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case 14:
                 startActivity(new Intent(MainActivity.this, ShowGuideActivity.class));
                 break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1001: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    AddressBookUtils.testSave(this);
+                }
+                return;
+            }
         }
     }
 }
