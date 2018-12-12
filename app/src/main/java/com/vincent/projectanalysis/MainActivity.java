@@ -24,14 +24,14 @@ import com.vincent.projectanalysis.activity.OrderHomeworkActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
 import com.vincent.projectanalysis.activity.ScanActivity;
 import com.vincent.projectanalysis.activity.WidgetsCollectionsActivity;
-import com.vincent.projectanalysis.java.Json;
-import com.vincent.projectanalysis.java.Test;
 import com.vincent.projectanalysis.knowbox.KnowBoxMainActivity;
 import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
-import com.vincent.projectanalysis.utils.AddressBookUtils;
+import com.vincent.projectanalysis.utils.ContactsUtils;
 import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.MD5Util;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -61,12 +61,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mListView = (ListView) findViewById(R.id.lv);
         mListView.setAdapter(new ArrayAdapter<>(this, R.layout.item_main_listview, R.id.tv_item, tabs));
         mListView.setOnItemClickListener(this);
-        Json.jsonArrayTest();
 
         String packageMd5 = MD5Util.encode("com.alibaba.android.rimet" + ".box");
         LogUtil.d("vincent", "packageMd5 - " + packageMd5);
 
-        Test.test();
+        //Test.test();
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_CONTACTS)
                 && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CONTACTS)
@@ -74,7 +73,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS}, 1001);
         } else {
-            AddressBookUtils.testSave(this);
+            addContacts();
+        }
+    }
+
+    private void addContacts() {
+        try {
+            ArrayList<String> phoneNumbers = new ArrayList<>();
+            phoneNumbers.add("1111451111");
+            phoneNumbers.add("22222dd222");
+            phoneNumbers.add("33333df333");
+            phoneNumbers.add("555556454");
+            ContactsUtils.update(this, phoneNumbers);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -132,12 +144,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case 1001: {
+            case 1001:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    AddressBookUtils.testSave(this);
+                    addContacts();
                 }
-                return;
-            }
+                break;
         }
     }
 }
