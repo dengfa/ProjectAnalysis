@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="RippleView">
-       <attr name="RvColor" format="color"/>
-       <attr name="RvRadius" format="dimension"/>
+        <attr name="RvColor" format="color"/>
+        <attr name="RvRadius" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="sw_StarWarsTilesFrameLayout">
-        <attr name="sw_animationDuration" format="integer" />
-        <attr name="sw_numberOfTilesX" format="integer" />
+        <attr name="sw_animationDuration" format="integer"/>
+        <attr name="sw_numberOfTilesX" format="integer"/>
     </declare-styleable>
 
     <declare-styleable name="inputAttrs">
@@ -16,5 +16,12 @@
         <attr name="pswTogDrawableClose" format="reference|color"/>
         <attr name="closeTogEnabled" format="boolean"/>
         <attr name="pswTogEnabled" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="StatusBarPaddingAdjustLayout">
+        <attr name="use_type" format="integer">
+            <enum name="use_height" value="0"/>
+            <enum name="use_padding_top" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>

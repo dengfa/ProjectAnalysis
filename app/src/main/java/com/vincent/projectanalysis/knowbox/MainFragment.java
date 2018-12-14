@@ -8,7 +8,6 @@ import android.widget.ListView;
 
 import com.hyena.framework.app.fragment.BaseUIFragment;
 import com.hyena.framework.app.fragment.BaseUIFragmentHelper;
-import com.hyena.framework.utils.ToastUtils;
 import com.vincent.projectanalysis.R;
 
 /**
@@ -19,7 +18,7 @@ public class MainFragment extends BaseUIFragment<BaseUIFragmentHelper> implement
 
     private ListView mListView;
     private String[] tabs = {
-            "pie chart", "HorizontalBarChartActivity", "MyCustomChart"};
+            "沉浸式适配", "HorizontalBarChartActivity", "MyCustomChart"};
 
     @Override
     public void onCreateImpl(Bundle savedInstanceState) {
@@ -42,10 +41,9 @@ public class MainFragment extends BaseUIFragment<BaseUIFragmentHelper> implement
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ToastUtils.showShortToast(getContext(), tabs[position]);
         switch (position) {
             case 0:
-                showFragment(TestFragment.class, null);
+                showFragment(StatusBarImmersionFragment.class, null);
                 break;
         }
     }

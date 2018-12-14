@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--顶部的需要沉浸的图片View 或其他东西 视频View  等 -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitStart"
+        android:src="@drawable/anakin"/>
+
+    <!-- app:use_type="use_padding_top 向上paddingTop状态栏高度-->
+    <com.vincent.projectanalysis.widgets.StatusBarPaddingAdjustLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:use_type="use_padding_top">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="ANAKIN"
+            android:textColor="@color/white"
+            android:textSize="40dp"/>
+    </com.vincent.projectanalysis.widgets.StatusBarPaddingAdjustLayout>
+</RelativeLayout>

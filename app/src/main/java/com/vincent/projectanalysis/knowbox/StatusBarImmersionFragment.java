@@ -9,9 +9,10 @@ import com.vincent.projectanalysis.knowbox.base.UIFragmentHelper;
 
 /**
  * Created by dengfa on 2018/12/12.
+ * 沉浸式适配
  */
 
-public class TestFragment extends BaseUIFragment<UIFragmentHelper> {
+public class StatusBarImmersionFragment extends BaseUIFragment<UIFragmentHelper> {
 
     @Override
     public void onCreateImpl(Bundle savedInstanceState) {
@@ -21,12 +22,11 @@ public class TestFragment extends BaseUIFragment<UIFragmentHelper> {
 
     @Override
     public View onCreateViewImpl(Bundle savedInstanceState) {
-        return View.inflate(getActivity(), R.layout.fragment_test, null);
+        return View.inflate(getActivity(), R.layout.fragment_status_bar_immersion, null);
     }
 
     @Override
     public void onViewCreatedImpl(View view, Bundle savedInstanceState) {
         super.onViewCreatedImpl(view, savedInstanceState);
-
     }
 }
