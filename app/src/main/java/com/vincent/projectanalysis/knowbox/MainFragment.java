@@ -24,7 +24,7 @@ public class MainFragment extends BaseUIFragment<BaseUIFragmentHelper> implement
     @Override
     public void onCreateImpl(Bundle savedInstanceState) {
         super.onCreateImpl(savedInstanceState);
-        setSlideable(true);
+        setSlideable(false);
     }
 
     @Override
@@ -45,6 +45,7 @@ public class MainFragment extends BaseUIFragment<BaseUIFragmentHelper> implement
         ToastUtils.showShortToast(getContext(), tabs[position]);
         switch (position) {
             case 0:
+                showFragment(TestFragment.class, null);
                 break;
         }
     }
