@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="default_blue">#00b0ff</color>
+
+
     <color name="green_default">#46b789</color>
     <color name="green_deep">#198e5e</color>
     <color name="green_leep">#9dd8c0</color>
