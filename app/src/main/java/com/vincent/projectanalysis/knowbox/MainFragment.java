@@ -18,7 +18,7 @@ public class MainFragment extends BaseUIFragment<BaseUIFragmentHelper> implement
 
     private ListView mListView;
     private String[] tabs = {
-            "沉浸式适配", "HorizontalBarChartActivity", "MyCustomChart"};
+            "沉浸式适配", "HomeworkResultDialog", "MyCustomChart"};
 
     @Override
     public void onCreateImpl(Bundle savedInstanceState) {
@@ -44,6 +44,9 @@ public class MainFragment extends BaseUIFragment<BaseUIFragmentHelper> implement
         switch (position) {
             case 0:
                 showFragment(StatusBarImmersionFragment.class, null);
+                break;
+            case 1:
+                showFragment(HomeworkResultDialogFragment.class, null);
                 break;
         }
     }

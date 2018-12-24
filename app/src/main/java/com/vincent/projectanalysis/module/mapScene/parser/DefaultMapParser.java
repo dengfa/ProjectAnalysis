@@ -49,8 +49,7 @@ public class DefaultMapParser implements MapParser {
     public CMap parse(String xml, int screenWidth, int screenHeight) {
         try {
             CMap map = new CMap();
-            DocumentBuilder builder = DocumentBuilderFactory.newInstance()
-                    .newDocumentBuilder();
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = builder.parse(new ByteArrayInputStream(xml.getBytes("UTF-8")));
             Element rootElement = document.getDocumentElement();
             //初始化标题等信息

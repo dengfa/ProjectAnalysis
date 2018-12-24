@@ -15,7 +15,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.vincent.projectanalysis.components.MainComponnentsFragment;
+import com.vincent.projectanalysis.custom.MainCostomFragment;
 import com.vincent.projectanalysis.knowbox.MainFragment;
+import com.vincent.projectanalysis.knowbox.MainKnowboxFragment;
 import com.vincent.projectanalysis.utils.ContactsUtils;
 import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.MD5Util;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager mVpMain;
     MagicIndicator mIndicator;
     private List<Fragment> mFragments = new ArrayList<>();
-    private String[] mModuleTitles = new String[]{"Components", "Helper", "Demo", "Lab"};
+    private String[] mModuleTitles = new String[]{"Components", "Helper", "KnowBox", "Custom"};
     private MainAdapter mMainAdapter;
 
     @Override
@@ -86,8 +88,8 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         mFragments.add(new MainComponnentsFragment());
         mFragments.add(new MainFragment());
-        mFragments.add(new MainFragment());
-        mFragments.add(new MainFragment());
+        mFragments.add(new MainKnowboxFragment());
+        mFragments.add(new MainCostomFragment());
         mMainAdapter.notifyDataSetChanged();
     }
 

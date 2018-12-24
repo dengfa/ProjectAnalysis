@@ -34,7 +34,6 @@ allprojects {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/universal-image-loader-1.9.4.jar')
     compile('com.airbnb.android:lottie:2.3.0') {
         exclude module: 'appcompat-v7'
     }
