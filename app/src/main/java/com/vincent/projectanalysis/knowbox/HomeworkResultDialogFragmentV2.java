@@ -8,16 +8,16 @@ import com.hyena.framework.app.fragment.BaseUIFragment;
 import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.knowbox.base.UIFragmentHelper;
 import com.vincent.projectanalysis.widgets.SnowFall;
-import com.vincent.projectanalysis.widgets.VerticalProgressWithIndicatorView;
+import com.vincent.projectanalysis.widgets.VerticalProgressWithIndicatorViewV2;
 
 /**
  * Created by dengfa on 2018/12/12.
  * 沉浸式适配
  */
 
-public class HomeworkResultDialogFragment extends BaseUIFragment<UIFragmentHelper> implements View.OnClickListener {
+public class HomeworkResultDialogFragmentV2 extends BaseUIFragment<UIFragmentHelper> implements View.OnClickListener {
 
-    public VerticalProgressWithIndicatorView mProgress;
+    public VerticalProgressWithIndicatorViewV2 mProgress;
     public SnowFall mSnowView;
 
     @Override
@@ -29,7 +29,7 @@ public class HomeworkResultDialogFragment extends BaseUIFragment<UIFragmentHelpe
 
     @Override
     public View onCreateViewImpl(Bundle savedInstanceState) {
-        return View.inflate(getActivity(), R.layout.fragment_reault_dialog, null);
+        return View.inflate(getActivity(), R.layout.fragment_reault_dialog_v2, null);
     }
 
     @Override
@@ -37,9 +37,9 @@ public class HomeworkResultDialogFragment extends BaseUIFragment<UIFragmentHelpe
         super.onViewCreatedImpl(view, savedInstanceState);
         mSnowView = view.findViewById(R.id.snow_view);
         mProgress = view.findViewById(R.id.progress);
-        view.findViewById(R.id.tv_continue).setOnClickListener(this);
-        mProgress.setData(3, 10, 90);
+        mProgress.setData(3, 90, 80);
         playWinSnow();
+        view.findViewById(R.id.tv_continue).setOnClickListener(this);
     }
 
     private void playWinSnow() {

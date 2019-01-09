@@ -18,7 +18,7 @@ public class MainFragment extends BaseUIFragment<BaseUIFragmentHelper> implement
 
     private ListView mListView;
     private String[] tabs = {
-            "沉浸式适配", "HomeworkResultDialog", "MyCustomChart"};
+            "沉浸式适配", "HomeworkResultDialog", "HomeworkResultDialog"};
 
     @Override
     public void onCreateImpl(Bundle savedInstanceState) {
@@ -47,6 +47,9 @@ public class MainFragment extends BaseUIFragment<BaseUIFragmentHelper> implement
                 break;
             case 1:
                 showFragment(HomeworkResultDialogFragment.class, null);
+                break;
+            case 2:
+                showFragment(HomeworkResultDialogFragmentV2.class, null);
                 break;
         }
     }

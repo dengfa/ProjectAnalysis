@@ -28,7 +28,7 @@
             android:textSize="18dp"
             tools:text="总分提升了10分"/>
 
-        <com.vincent.projectanalysis.widgets.VerticalProgressWithIndicatorView
+        <com.vincent.projectanalysis.widgets.VerticalProgressWithIndicatorViewV2
             android:id="@+id/progress"
             android:layout_width="135dp"
             android:layout_height="175dp"
