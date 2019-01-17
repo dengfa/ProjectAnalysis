@@ -99,6 +99,24 @@
                 app:pswTogDrawableOpen="@drawable/icon_psw_show"
                 app:pswTogEnabled="true"/>
         </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
 
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"/>
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"/>
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"/>
+    </LinearLayout>
 </ScrollView>
