@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.hyena.framework.app.fragment.AnimType;
 import com.hyena.framework.app.fragment.BaseUIFragment;
+import com.hyena.framework.clientlog.LogUtil;
 import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.knowbox.base.UIFragmentHelper;
 import com.vincent.projectanalysis.widgets.SnowFall;
@@ -40,6 +41,19 @@ public class HomeworkResultDialogFragment extends BaseUIFragment<UIFragmentHelpe
         view.findViewById(R.id.tv_continue).setOnClickListener(this);
         mProgress.setData(3, 10, 90);
         playWinSnow();
+        LogUtil.d("vincent", "HomeworkResultDialogFragment onViewCreatedImpl");
+    }
+
+    @Override
+    public void setVisibleToUser(boolean visible) {
+        super.setVisibleToUser(visible);
+        LogUtil.d("vincent", "HomeworkResultDialogFragment setVisibleToUser - "  + visible);
+    }
+
+    @Override
+    public void onResumeImpl() {
+        super.onResumeImpl();
+        LogUtil.d("vincent", "HomeworkResultDialogFragment onResumeImpl");
     }
 
     private void playWinSnow() {
