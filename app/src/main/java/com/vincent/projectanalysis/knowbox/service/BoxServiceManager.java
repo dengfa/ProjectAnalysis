@@ -3,10 +3,10 @@ package com.vincent.projectanalysis.knowbox.service;
 import com.hyena.framework.app.fragment.BaseFragment;
 import com.hyena.framework.app.fragment.BaseUIFragment;
 import com.hyena.framework.app.fragment.BaseUIFragmentHelper;
-import com.hyena.framework.service.BaseServiceManager;
-import com.hyena.framework.service.debug.DebugService;
-import com.hyena.framework.service.debug.DebugServiceImpl;
-import com.hyena.framework.service.navigate.UIHelperService;
+import com.hyena.framework.servcie.BaseServiceManager;
+import com.hyena.framework.servcie.debug.DebugService;
+import com.hyena.framework.servcie.debug.DebugServiceImpl;
+import com.hyena.framework.servcie.navigate.UIHelperService;
 import com.vincent.projectanalysis.knowbox.base.UIFragmentHelper;
 
 public class BoxServiceManager extends BaseServiceManager {

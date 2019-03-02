@@ -2,11 +2,11 @@ package com.vincent.projectanalysis;
 
 import com.hyena.framework.config.FrameworkConfig;
 import com.hyena.framework.network.executor.UrlConnectionHttpExecutor;
-import com.hyena.framework.service.ServiceProvider;
+import com.hyena.framework.servcie.ServiceProvider;
 import com.hyena.framework.utils.BaseApp;
 import com.hyena.framework.utils.CrashHelper;
-import com.vincent.projectanalysis.Utils.DirContext;
 import com.vincent.projectanalysis.knowbox.service.BoxServiceManager;
+import com.vincent.projectanalysis.utils.DirContext;
 
 public class App extends BaseApp {
 

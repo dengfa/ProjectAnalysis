@@ -1,7 +1,4 @@
-/**
- * Copyright (C) 2014 The plugin_music Project
- */
-package com.vincent.projectanalysis.Utils;
+package com.vincent.projectanalysis.utils;
 
 import com.hyena.framework.utils.BaseApp;
 

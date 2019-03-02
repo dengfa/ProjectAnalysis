@@ -3,7 +3,7 @@ package com.vincent.projectanalysis.knowbox.base;
 import com.hyena.framework.app.fragment.BaseUIFragment;
 import com.hyena.framework.app.fragment.BaseUIFragmentHelper;
 import com.hyena.framework.app.fragment.ViewBuilder;
-import com.hyena.framework.service.audio.PlayerBusService;
+import com.hyena.framework.servcie.audio.PlayerBusService;
 import com.knowbox.base.coretext.AudioBlock;
 
 /**
