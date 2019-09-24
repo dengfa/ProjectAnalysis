@@ -1,5 +1,6 @@
 package com.vincent.projectanalysis.widgets;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,7 +14,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
-import com.nineoldandroids.animation.ValueAnimator;
 import com.vincent.projectanalysis.R;
 
 import static android.graphics.Canvas.ALL_SAVE_FLAG;

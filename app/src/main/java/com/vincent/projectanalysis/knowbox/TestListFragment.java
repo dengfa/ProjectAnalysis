@@ -32,13 +32,12 @@ public class TestListFragment extends ListFragment<UIFragmentHelper, String> {
     }
 
     @Override
-    protected SingleTypeAdapter<String> getListAdapter() {
+    protected SingleTypeAdapter<String> buildListAdapter() {
         return new TestAdapter(getContext());
     }
 
-
     @Override
-    public List<String> getList(BaseObject baseObject) {
+    public List<String> convertData2List(BaseObject baseObject) {
         ArrayList<String> strings = new ArrayList<>();
         return strings;
     }
