@@ -16,9 +16,11 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/javatest" />
             <option value="$PROJECT_DIR$/javatestLib" />
+            <option value="$PROJECT_DIR$/libjavaadvanced" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>
