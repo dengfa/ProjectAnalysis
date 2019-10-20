@@ -18,24 +18,35 @@ public class MyClass {
         }
         Solution.maxSlidingWindow3(new int[]{}, 0);
 
-        int[] nums = {2, 6, 2, 8, 3, 5, 7, 11, 9, 0, 4};
-        //Solution.bubbleSort(nums);
+        int[] nums = {2, 0, 0, 0, 1, 1, 1, 4, 5, 6};
+        Solution.bubbleSort(nums);
         //Solution.insertionSort(nums);
         //Solution.MergeSort(nums, 0, nums.length - 1);
-        Solution.quickSort(nums, 0, nums.length - 1);
+        //Solution.quickSort(nums, 0, nums.length - 1);
     }
 
     static class Solution {
 
         public static void bubbleSort(int[] nums) {
-            for (int i = 0; i < nums.length; i++) {
+            /*for (int i = 0; i < nums.length; i++) {
                 for (int j = 0; j < nums.length - i - 1; j++) {
                     if (nums[j] > nums[j + 1]) {
                         swap(nums, j, j + 1);
                     }
                 }
+            }*/
+            //优化：如果有一轮冒泡全都没有交换顺序，说明已经是有序的了不用再继续冒泡了！
+            boolean hasSwap = true;
+            for (int i = 0; i < nums.length && hasSwap; i++) {
+                hasSwap = false;
+                for (int j = 0; j < nums.length - i - 1; j++) {
+                    if (nums[j] > nums[j + 1]) {
+                        swap(nums, j, j + 1);
+                        hasSwap = true;
+                    }
+                }
+                System.out.println("bubbleSort" + Arrays.toString(nums));
             }
-            System.out.println("bubbleSort" + Arrays.toString(nums));
         }
 
         public static void swap(int[] nums, int... indexs) {
@@ -47,12 +58,12 @@ public class MyClass {
         }
 
         public static void insertionSort(int[] nums) {
-            for (int i = 1; i < nums.length; i++) {
-                for (int j = i - 1; j >= 0; j--) {
-                    if (nums[i] < nums[j]) {
-                        swap(nums, i, j);
-                    }
+            for (int i = 1, j; i < nums.length; i++) {
+                int current = nums[i];
+                for (j = i - 1; j >= 0 && current < nums[j]; j--) {
+                    nums[j + 1] = nums[j];
                 }
+                nums[j + 1] = current;
             }
             System.out.println("insertionSort: " + Arrays.toString(nums));
         }
