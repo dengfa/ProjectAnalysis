@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/javatest/javatest.iml" filepath="$PROJECT_DIR$/javatest/javatest.iml" />
       <module fileurl="file://$PROJECT_DIR$/javatestLib/javatestLib.iml" filepath="$PROJECT_DIR$/javatestLib/javatestLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/libjavaadvanced/libjavaadvanced.iml" filepath="$PROJECT_DIR$/libjavaadvanced/libjavaadvanced.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>
   </component>
 </project>

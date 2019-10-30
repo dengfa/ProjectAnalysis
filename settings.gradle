@@ -1,1 +1,1 @@
-include ':app', ':MPChartLib', ':javatest', ':javatestLib', ':libjavaadvanced'
+include ':app', ':MPChartLib', ':javatest', ':javatestLib', ':libjavaadvanced', ':test'

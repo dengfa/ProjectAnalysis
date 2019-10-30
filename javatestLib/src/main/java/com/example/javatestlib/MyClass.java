@@ -1,9 +1,12 @@
 package com.example.javatestlib;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
@@ -208,6 +211,145 @@ public class MyClass {
                 }
             }
             return result;
+        }
+
+        public static boolean isAnagram(String s, String t) {
+            if (s.length() != t.length())
+                return false;
+            Map<Character, Integer> count = new HashMap<>();
+            for (char sc : s.toCharArray()) {
+                if (count.containsKey(sc)) {
+                    count.put(sc, count.get(sc) + 1);
+                } else {
+                    count.put(sc, 1);
+                }
+            }
+            for (char tc : t.toCharArray()) {
+                if (!count.containsKey(tc) || count.get(tc) - 1 < 0) {
+                    return false;
+                } else {
+                    count.put(tc, count.get(tc) - 1);
+                }
+            }
+            return true;
+        }
+
+        public List<List<Integer>> threeSum(int[] nums) {
+            List<List<Integer>> result = new ArrayList<>();
+            Arrays.sort(nums);
+            for (int i = 0; i < nums.length - 1; i++) {
+                if (i > 0 && nums[i] == nums[i - 1])
+                    continue;
+                int lo = i + 1;
+                int hi = nums.length - 1;
+                while (lo < hi) {
+                    if (nums[lo] + nums[hi] + nums[i] == 0) {
+                        result.add(Arrays.asList(nums[lo], nums[i], nums[hi]));
+                        while (lo < hi && nums[lo + 1] == nums[lo])
+                            lo++;
+                        while (lo < hi && nums[hi - 1] == nums[hi])
+                            hi--;
+                    } else if (nums[lo] + nums[hi] + nums[i] > 0) {
+                        hi--;
+                    } else {
+                        lo++;
+                    }
+                }
+            }
+            return result;
+        }
+
+        //16. 最接近的三数之和
+        public int threeSumClosest(int[] nums, int target) {
+            if (nums.length < 3) {
+                return 0;
+            }
+            Arrays.sort(nums);
+            int min = Math.abs(nums[0] + nums[1] + nums[2] - target);
+            for (int i = 0; i < nums.length - 2; i++) {
+                int lo = i + 1;
+                int hi = nums.length - 1;
+                while (lo < hi) {
+                    int sum = nums[lo] + nums[i] + nums[hi];
+                    min = Math.min(min, sum - target);
+                    if (sum == target) {
+                        return sum;
+                    } else if (sum < target) {
+                        lo++;
+                    } else {
+                        hi--;
+                    }
+                }
+            }
+            return min;
+        }
+
+        public List<List<Integer>> fourSum(int[] nums, int target) {
+            List<List<Integer>> result = new ArrayList<>();
+            Arrays.sort(nums);
+            for (int j = 0; j < nums.length - 3; j++) {
+                if (j > 0 && nums[j] == nums[j - 1])
+                    continue;
+                int tempTarget = target - nums[j];
+                for (int i = j + 1; i < nums.length - 2; i++) {
+                    if (i > j + 1 && nums[i] == nums[i - 1])
+                        continue;
+                    int lo = i + 1;
+                    int hi = nums.length - 1;
+                    while (lo < hi) {
+                        if (nums[lo] + nums[hi] + nums[i] == tempTarget) {
+                            result.add(Arrays.asList(nums[j], nums[i], nums[lo], nums[hi]));
+                            while (lo < hi && nums[lo + 1] == nums[lo])
+                                lo++;
+                            while (lo < hi && nums[hi - 1] == nums[hi])
+                                hi--;
+                        } else if (nums[lo] + nums[hi] + nums[i] > tempTarget) {
+                            hi--;
+                        } else {
+                            lo++;
+                        }
+                        hi--;
+                        lo++;
+                    }
+                }
+            }
+            return result;
+        }
+
+        //98. 验证二叉搜索树
+        public boolean isValidBST(TreeNode root) {
+
+            double pre = Integer.MIN_VALUE;
+            if (root.left == null && root.right == null) {
+                return true;
+            }
+            if (root.left != null) {
+                isValidBST(root.left);
+            }
+            if (root.right != null) {
+                isValidBST(root.right);
+            }
+            if (root.left != null && root.left.val > root.val) {
+                return false;
+            }
+            if (root.right != null && root.right.val < root.val) {
+                return false;
+            }
+            HashMap<String, Object> map = new HashMap<>();
+            for (String s : map.keySet()) {
+                Object o = map.get(s);
+            }
+            return true;
+        }
+    }
+
+    public class TreeNode {
+        int      val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
         }
     }
 }
