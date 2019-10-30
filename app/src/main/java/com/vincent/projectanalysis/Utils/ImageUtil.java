@@ -34,10 +34,6 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
-import com.hyena.framework.clientlog.LogUtil;
-import com.hyena.framework.imageloader.base.displayer.RoundDisplayer;
-import com.hyena.framework.utils.ImageFetcher;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -1219,14 +1215,5 @@ public class ImageUtil {
 
     public static void loadImage(String url, ImageView imageView, int defaultRes) {
         ImageFetcher.getImageFetcher().loadImage(url, imageView, defaultRes);
-    }
-
-    public static void loadRoundImage(String url, ImageView imageView, int defaultRes) {
-        ImageFetcher.getImageFetcher().loadImage(url, new RoundDisplayer(imageView), defaultRes);
-    }
-
-    public static void loadRoundImage(String url, ImageView imageView, int strokeColor, int strokeWidth, int defaultRes) {
-        ImageFetcher.getImageFetcher().loadImage(url, new RoundDisplayer(imageView, strokeColor, strokeWidth),
-                defaultRes);
     }
 }

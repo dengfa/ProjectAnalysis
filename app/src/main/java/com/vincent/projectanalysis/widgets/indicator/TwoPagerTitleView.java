@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.knowbox.base.utils.UIUtils;
-
+import com.vincent.projectanalysis.utils.UIUtils;
 
 /**
  * 带文本的指示器标题

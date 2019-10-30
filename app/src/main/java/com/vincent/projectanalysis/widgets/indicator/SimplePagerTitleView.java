@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
 
-import com.knowbox.base.utils.UIUtils;
+import com.vincent.projectanalysis.utils.UIUtils;
 
 
 /**

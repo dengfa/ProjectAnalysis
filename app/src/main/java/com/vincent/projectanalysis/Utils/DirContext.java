@@ -1,6 +1,6 @@
 package com.vincent.projectanalysis.utils;
 
-import com.hyena.framework.utils.BaseApp;
+import com.vincent.projectanalysis.App;
 
 import java.io.File;
 
@@ -96,7 +96,7 @@ public class DirContext {
      * @return
      */
     public static File getCityJsonFile() {
-        return new File(BaseApp.getAppContext().getCacheDir(), "city.json");
+        return new File(App.getAppContext().getCacheDir(), "city.json");
     }
 
     /**
@@ -105,7 +105,7 @@ public class DirContext {
      * @return
      */
     public static File getTemplateDir() {
-        return new File(BaseApp.getAppContext().getCacheDir(), "template");
+        return new File(App.getAppContext().getCacheDir(), "template");
     }
 
     /**
@@ -114,7 +114,7 @@ public class DirContext {
      * @return
      */
     public static File getTempTemplateDir() {
-        return new File(BaseApp.getAppContext().getCacheDir(), "tempTemplate");
+        return new File(App.getAppContext().getCacheDir(), "tempTemplate");
     }
 
     /**
@@ -123,7 +123,7 @@ public class DirContext {
      * @return
      */
     public static File getTemplateFile() {
-        return new File(BaseApp.getAppContext().getCacheDir(), "webView.zip");
+        return new File(App.getAppContext().getCacheDir(), "webView.zip");
     }
 
 }

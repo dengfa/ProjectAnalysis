@@ -18,7 +18,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-import com.knowbox.base.utils.UIUtils;
+import com.vincent.projectanalysis.utils.UIUtils;
 
 import java.util.ArrayList;
 import java.util.Vector;

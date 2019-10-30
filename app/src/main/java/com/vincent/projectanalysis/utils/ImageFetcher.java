@@ -9,7 +9,6 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.hyena.framework.utils.UiThreadHandler;
 import com.nostra13.universalimageloader.cache.disc.DiskCache;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -41,8 +40,8 @@ import java.util.List;
 public class ImageFetcher {
 
     private static ImageFetcher mImageFetcher;
-    private DiskCache mDiscCacheAware;
-    private MemoryCache mMemoryCache;
+    private        DiskCache    mDiscCacheAware;
+    private        MemoryCache  mMemoryCache;
 
     private ImageFetcher() {
         initImageFetcher();
@@ -141,7 +140,7 @@ public class ImageFetcher {
         final DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageForEmptyUri(defaultRes)
                 .showImageOnFail(defaultRes)
-//			.showImageOnLoading(defaultRes)
+                //			.showImageOnLoading(defaultRes)
                 .displayer(displayer)
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
@@ -176,7 +175,7 @@ public class ImageFetcher {
             public void run() {
                 //sd卡中存在该文件
                 DisplayImageOptions options = new DisplayImageOptions.Builder()
-//					.showImageOnLoading(0)
+                        //					.showImageOnLoading(0)
                         .showImageForEmptyUri(0)
                         .showImageOnFail(0)
                         .cacheInMemory(true)

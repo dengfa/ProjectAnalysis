@@ -12,19 +12,18 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.RelativeLayout;
 
-import com.knowbox.base.utils.UIUtils;
+import com.vincent.projectanalysis.R;
 import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.Animator.AnimatorListener;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
-import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.utils.UIUtils;
 
 @SuppressLint("ClickableViewAccessibility")
 public class DragablePanel extends RelativeLayout {
 
-    private boolean mDraging = false;
-    private View mDragView;
-    private static final int PADDING = 10;
+    private              boolean mDraging = false;
+    private              View    mDragView;
+    private static final int     PADDING  = 10;
 
     public DragablePanel(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -85,7 +84,7 @@ public class DragablePanel extends RelativeLayout {
                 float disX = x - mLastX;
                 float disY = y - mLastY;
                 getParent().requestDisallowInterceptTouchEvent(true);
-                if (Math.abs(disX) > UIUtils.dip2px(2)
+                if (Math.abs(disX) > com.vincent.projectanalysis.utils.UIUtils.dip2px(2)
                         && Math.abs(disY) > UIUtils.dip2px(2)) {
                     mMoving = true;
                     LayoutParams params = (LayoutParams) mDragView
@@ -150,7 +149,7 @@ public class DragablePanel extends RelativeLayout {
                                 : getWidth() - mDragView.getLeft()
                                 - mDragView.getWidth()
                                 - UIUtils.dip2px(6))
-                .setListener(new AnimatorListener() {
+                .setListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {
                     }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
 import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.utils.UIUtils;
 
 import static android.graphics.Canvas.ALL_SAVE_FLAG;
 
@@ -59,8 +60,8 @@ public class VerticalProgressWithIndicatorViewV2 extends View {
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mColorBg = 0xff00a0ee;
         mColorProgress = 0xffffcd6d;
-        mTopBottomPadding = com.knowbox.base.utils.UIUtils.dip2px(15);
-        mRadius = com.knowbox.base.utils.UIUtils.dip2px(11);
+        mTopBottomPadding = UIUtils.dip2px(15);
+        mRadius = UIUtils.dip2px(11);
         mProgress = 0.5f;
         mXfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP);
         mBitmapIndicator = BitmapFactory.decodeResource(getResources(), R.drawable.indicator_excellent);
@@ -68,7 +69,7 @@ public class VerticalProgressWithIndicatorViewV2 extends View {
 
         mTextPaint = new Paint();
         mTextPaint.setAntiAlias(true);
-        mTextPaint.setTextSize(com.knowbox.base.utils.UIUtils.dip2px(14));
+        mTextPaint.setTextSize(UIUtils.dip2px(14));
         mTextPaint.setColor(0xffffffff);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         mTextBounds = new Rect();
@@ -111,12 +112,12 @@ public class VerticalProgressWithIndicatorViewV2 extends View {
                     getWidth() / 2 + mRadius,
                     getHeight() - mTopBottomPadding);
             canvas.drawRoundRect(mRectF, mRadius, mRadius, mPaint);
-            canvas.drawBitmap(mBitmapIndicator, getWidth() / 2 + mRadius + com.knowbox.base.utils.UIUtils.dip2px(7), 0,
+            canvas.drawBitmap(mBitmapIndicator, getWidth() / 2 + mRadius + UIUtils.dip2px(7), 0,
                     mPaint);
             String progressStr = mCurrentScore + "";
             mTextPaint.getTextBounds(progressStr, 0, progressStr.length(), mTextBounds);
             canvas.drawText(progressStr,
-                    getWidth() / 2 + mRadius + com.knowbox.base.utils.UIUtils.dip2px(8) + mBitmapIndicator.getWidth() / 2,
+                    getWidth() / 2 + mRadius + UIUtils.dip2px(8) + mBitmapIndicator.getWidth() / 2,
                     mBitmapIndicator.getHeight() / 2 + mTextBounds.height() / 2,
                     mTextPaint);
         } else {
@@ -141,13 +142,13 @@ public class VerticalProgressWithIndicatorViewV2 extends View {
             mPaint.setXfermode(null);
             canvas.restoreToCount(saveLayer);
             //draw indicator
-            canvas.drawBitmap(mBitmapIndicator, getWidth() / 2 + mRadius + com.knowbox.base.utils.UIUtils.dip2px(7),
+            canvas.drawBitmap(mBitmapIndicator, getWidth() / 2 + mRadius + UIUtils.dip2px(7),
                     top - mBitmapIndicator.getHeight() / 2,
                     mPaint);
             String scoreStr = (int) (mCurrentScore * mProgress) + "";
             mTextPaint.getTextBounds(scoreStr, 0, scoreStr.length(), mTextBounds);
             canvas.drawText(scoreStr,
-                    getWidth() / 2 + mRadius + com.knowbox.base.utils.UIUtils.dip2px(8) + mBitmapIndicator.getWidth() / 2,
+                    getWidth() / 2 + mRadius + UIUtils.dip2px(8) + mBitmapIndicator.getWidth() / 2,
                     top + mTextBounds.height() / 2,
                     mTextPaint);
         }

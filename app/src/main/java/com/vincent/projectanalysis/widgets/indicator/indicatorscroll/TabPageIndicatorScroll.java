@@ -28,8 +28,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.knowbox.base.utils.UIUtils;
 import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.utils.UIUtils;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;

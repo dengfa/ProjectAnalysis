@@ -1,6 +1,5 @@
 package com.vincent.projectanalysis.custom;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.vincent.projectanalysis.R;
-import com.vincent.projectanalysis.knowbox.KnowBoxMainActivity;
 
 /**
  * Created by dengfa on 2018/12/14.
@@ -45,7 +43,7 @@ public class MainCostomFragment extends Fragment implements AdapterView.OnItemCl
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
-                startActivity(new Intent(getActivity(), KnowBoxMainActivity.class));
+                //startActivity(new Intent(getActivity(), KnowBoxMainActivity.class));
                 break;
         }
     }

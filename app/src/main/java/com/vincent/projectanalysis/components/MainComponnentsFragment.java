@@ -25,7 +25,6 @@ import com.vincent.projectanalysis.activity.OrderHomeworkActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
 import com.vincent.projectanalysis.activity.ScanActivity;
 import com.vincent.projectanalysis.activity.WidgetsCollectionsActivity;
-import com.vincent.projectanalysis.knowbox.KnowBoxMainActivity;
 import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
 
@@ -73,7 +72,7 @@ public class MainComponnentsFragment extends Fragment implements AdapterView.OnI
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
-                startActivity(new Intent(getActivity(), KnowBoxMainActivity.class));
+                //startActivity(new Intent(getActivity(), KnowBoxMainActivity.class));
                 break;
             case 1:
                 startActivity(new Intent(getActivity(), MapSceneActivity.class));
