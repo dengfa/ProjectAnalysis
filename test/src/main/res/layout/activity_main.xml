@@ -23,4 +23,13 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer"/>
 
+    <TextView
+        android:id="@+id/tv_leak"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="100dp"
+        android:background="#88000000"
+        android:text="LeakActivity"
+        android:layout_width="100dp"
+        android:layout_height="50dp"/>
+
 </android.support.v4.widget.DrawerLayout>
