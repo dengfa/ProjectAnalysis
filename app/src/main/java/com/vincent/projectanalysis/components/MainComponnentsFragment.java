@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.activity.BlinkTagActivity;
@@ -32,9 +32,9 @@ import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
  * Created by dengfa on 2018/12/14.
  */
 
-public class MainComponnentsFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class MainComponnentsFragment extends Fragment {
 
-    private ListView mListView;
+    private RecyclerView mRecyclerView;
 
     private String[] tabs = {
             "KnowBox",
@@ -57,19 +57,61 @@ public class MainComponnentsFragment extends Fragment implements AdapterView.OnI
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.knowbox_main_fragment, null);
+        return inflater.inflate(R.layout.main_fragment, null);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mListView = (ListView) view.findViewById(R.id.lv);
-        mListView.setAdapter(new ArrayAdapter<>(getContext(), R.layout.item_main_listview, R.id.tv_item, tabs));
-        mListView.setOnItemClickListener(this);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.lv);
+        ComponentAdapter adapter = new ComponentAdapter(tabs);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
+                LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.ComponentViewHolder> {
+
+        private final String[] mDatas;
+
+        public ComponentAdapter(String[] datas) {
+            mDatas = datas;
+        }
+
+        @NonNull
+        @Override
+        public ComponentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return new ComponentViewHolder(View.inflate(getContext(), R.layout.item_main_listview, null));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ComponentViewHolder holder, final int position) {
+            holder.mTab.setText(mDatas[position]);
+            holder.mTab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClick(position);
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return mDatas.length;
+        }
+
+        public class ComponentViewHolder extends RecyclerView.ViewHolder {
+
+            public TextView mTab;
+
+            public ComponentViewHolder(View itemView) {
+                super(itemView);
+                mTab = itemView.findViewById(R.id.tv_item);
+            }
+        }
+    }
+
+    public void onItemClick(int position) {
         switch (position) {
             case 0:
                 //startActivity(new Intent(getActivity(), KnowBoxMainActivity.class));
