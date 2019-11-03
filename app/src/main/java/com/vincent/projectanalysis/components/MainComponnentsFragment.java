@@ -22,6 +22,7 @@ import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.LottieActivity;
 import com.vincent.projectanalysis.activity.OrderHomeworkActivity;
+import com.vincent.projectanalysis.activity.PhotoviewActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
 import com.vincent.projectanalysis.activity.ScanActivity;
 import com.vincent.projectanalysis.activity.WidgetsCollectionsActivity;
@@ -51,7 +52,8 @@ public class MainComponnentsFragment extends Fragment {
             "LottieAnimation",
             "Chart",
             "Order Homework",
-            "引导遮罩"
+            "引导遮罩",
+            "PhotoviewActivity"
     };
 
     @Nullable
@@ -157,6 +159,9 @@ public class MainComponnentsFragment extends Fragment {
                 break;
             case 14:
                 startActivity(new Intent(getContext(), ShowGuideActivity.class));
+                break;
+            case 15:
+                startActivity(new Intent(getContext(), PhotoviewActivity.class));
                 break;
         }
     }
