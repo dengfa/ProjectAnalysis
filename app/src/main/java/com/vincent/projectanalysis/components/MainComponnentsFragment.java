@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.activity.BlinkTagActivity;
@@ -26,6 +25,8 @@ import com.vincent.projectanalysis.activity.PhotoviewActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
 import com.vincent.projectanalysis.activity.ScanActivity;
 import com.vincent.projectanalysis.activity.WidgetsCollectionsActivity;
+import com.vincent.projectanalysis.adapter.holder.ItemTypeFactory;
+import com.vincent.projectanalysis.adapter.holder.base.BaseComponentVH;
 import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
 
@@ -72,7 +73,7 @@ public class MainComponnentsFragment extends Fragment {
         mRecyclerView.setAdapter(adapter);
     }
 
-    class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.ComponentViewHolder> {
+    class ComponentAdapter extends RecyclerView.Adapter<BaseComponentVH> {
 
         private final String[] mDatas;
 
@@ -80,19 +81,24 @@ public class MainComponnentsFragment extends Fragment {
             mDatas = datas;
         }
 
+        @Override
+        public int getItemViewType(int position) {
+            return super.getItemViewType(position);
+        }
+
         @NonNull
         @Override
-        public ComponentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new ComponentViewHolder(View.inflate(getContext(), R.layout.item_main_listview, null));
+        public BaseComponentVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            return ItemTypeFactory.createViewHolder(getContext(), viewType);
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ComponentViewHolder holder, final int position) {
-            holder.mTab.setText(mDatas[position]);
-            holder.mTab.setOnClickListener(new View.OnClickListener() {
+        public void onBindViewHolder(@NonNull BaseComponentVH holder, final int position) {
+            holder.onBindView(mDatas[position]);
+            holder.setOnItemClickListener(new BaseComponentVH.OnItemClickListener() {
                 @Override
-                public void onClick(View v) {
-                    onItemClick(position);
+                public void onItemClick() {
+                    itemClick(position);
                 }
             });
         }
@@ -101,19 +107,9 @@ public class MainComponnentsFragment extends Fragment {
         public int getItemCount() {
             return mDatas.length;
         }
-
-        public class ComponentViewHolder extends RecyclerView.ViewHolder {
-
-            public TextView mTab;
-
-            public ComponentViewHolder(View itemView) {
-                super(itemView);
-                mTab = itemView.findViewById(R.id.tv_item);
-            }
-        }
     }
 
-    public void onItemClick(int position) {
+    public void itemClick(int position) {
         switch (position) {
             case 0:
                 //startActivity(new Intent(getActivity(), KnowBoxMainActivity.class));
