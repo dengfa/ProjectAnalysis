@@ -32,7 +32,10 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
+import com.vincent.projectanalysis.utils.LogUtil;
+
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
 
 public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, VersionedGestureDetector.OnGestureListener,
         GestureDetector.OnDoubleTapListener, ViewTreeObserver.OnGlobalLayoutListener {
@@ -56,6 +59,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
     private float mMaxScale = DEFAULT_MAX_SCALE;
 
     private boolean mAllowParentInterceptOnEdge = true;
+    private RectF   mTarget;
 
     private static void checkZoomLevels(float minZoom, float midZoom, float maxZoom) {
         if (minZoom >= midZoom) {
@@ -157,6 +161,20 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
                             if (null != mLongClickListener) {
                                 mLongClickListener.onLongClick(mImageView.get());
                             }
+                            float x = e.getX();
+                            float y = e.getY();
+                            float[] p = new float[]{x, y};
+                            float[] mp = new float[2];
+                            LogUtil.d("vincent", " p beforeMap - " + Arrays.toString(p));
+                            getDisplayMatrix().mapPoints(mp, p);
+                            LogUtil.d("vincent", " p afterMap - " + Arrays.toString(mp));
+                            if (mTarget != null) {
+                                LogUtil.d("vincent", " Rect beforeMap - " + mTarget.toString());
+                                RectF mapTargetRect = new RectF();
+                                getDisplayMatrix().mapRect(mapTargetRect, mTarget);
+                                LogUtil.d("vincent", "Rect afterMap - " + mapTargetRect.toString());
+                                LogUtil.d("vincent", "contains - " + mapTargetRect.contains(x, y));
+                            }
                         }
                     });
 
@@ -165,6 +183,10 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
             // Finally, update the UI so that we're zoomable
             setZoomable(true);
         }
+    }
+
+    public void setTarget(RectF target) {
+        mTarget = target;
     }
 
     @Override

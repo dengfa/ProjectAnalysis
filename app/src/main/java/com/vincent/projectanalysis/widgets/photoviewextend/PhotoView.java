@@ -18,7 +18,9 @@ package com.vincent.projectanalysis.widgets.photoviewextend;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -35,6 +37,7 @@ public class PhotoView extends ImageView implements IPhotoView {
 
     private ScaleType mPendingScaleType;
     private Paint mPaint;
+    public  RectF mRect;
 
     public PhotoView(Context context) {
         this(context, null);
@@ -47,7 +50,12 @@ public class PhotoView extends ImageView implements IPhotoView {
     public PhotoView(Context context, AttributeSet attr, int defStyle) {
         super(context, attr, defStyle);
         super.setScaleType(ScaleType.MATRIX);
+        // TODO: 2019-11-03
+        mRect = new RectF(200, 200, 400, 400);
+
+
         mAttacher = new PhotoViewAttacher(this);
+        mAttacher.setTarget(mRect);
 
         if (null != mPendingScaleType) {
             setScaleType(mPendingScaleType);
@@ -63,7 +71,7 @@ public class PhotoView extends ImageView implements IPhotoView {
         super.onDraw(canvas);
         canvas.save();
         canvas.setMatrix(mAttacher.getDisplayMatrix());
-        canvas.drawRect(200, 200, 400, 400, mPaint);
+        canvas.drawRect(mRect, mPaint);
         canvas.restore();
     }
 
