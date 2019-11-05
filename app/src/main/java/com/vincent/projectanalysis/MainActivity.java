@@ -13,9 +13,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.vincent.projectanalysis.components.MainComponnentsFragment;
-import com.vincent.projectanalysis.custom.MainCostomFragment;
+import com.vincent.projectanalysis.fragment.Main2Fragment;
+import com.vincent.projectanalysis.fragment.Main3Fragment;
+import com.vincent.projectanalysis.fragment.Main4Fragment;
+import com.vincent.projectanalysis.fragment.Main5Fragment;
+import com.vincent.projectanalysis.fragment.Main6Fragment;
 import com.vincent.projectanalysis.utils.ContactsUtils;
 import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.MD5Util;
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     ViewPager mVpMain;
     MagicIndicator mIndicator;
     private List<Fragment> mFragments = new ArrayList<>();
-    private String[] mModuleTitles = new String[]{"Components", "Custom"};
+    private String[] mModuleTitles = new String[]{"demo", "t2","t3", "t4","t5", "t6"};
     private MainAdapter mMainAdapter;
 
     @Override
@@ -77,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         mVpMain = findViewById(R.id.vp_main);
-        mVpMain.setOffscreenPageLimit(mModuleTitles.length);
+        mVpMain.setOffscreenPageLimit(1);
         mMainAdapter = new MainAdapter(getSupportFragmentManager());
         mVpMain.setAdapter(mMainAdapter);
         initIndicator();
@@ -87,7 +92,12 @@ public class MainActivity extends AppCompatActivity {
         mFragments.add(new MainComponnentsFragment());
         //mFragments.add(new MainFragment());
         //mFragments.add(new MainKnowboxFragment());
-        mFragments.add(new MainCostomFragment());
+        mFragments.add(new Main2Fragment());
+        mFragments.add(new Main3Fragment());
+        mFragments.add(new Main4Fragment());
+        mFragments.add(new Main5Fragment());
+        mFragments.add(new Main6Fragment());
+        LogUtil.d("vincent", "notifyDataSetChanged");
         mMainAdapter.notifyDataSetChanged();
     }
 
@@ -113,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int pos) {
+            LogUtil.d("vincent", "getItem - " + pos);
             return mFragments.get(pos);
         }
 
@@ -124,6 +135,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return mModuleTitles[position];
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            LogUtil.d("vincent", "instantiateItem - " + position);
+            return super.instantiateItem(container, position);
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
+            LogUtil.d("vincent", "destroyItem - " + position);
         }
     }
 
