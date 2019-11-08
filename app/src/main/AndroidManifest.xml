@@ -45,9 +45,7 @@
         <activity android:name=".module.chart.HorizontalBarChartActivity" />
         <activity android:name=".module.chart.MyCustomChartActivity"></activity>
         <activity android:name=".activity.OrderHomeworkActivity" />
-        <activity
-            android:name=".knowbox.KnowBoxMainActivity"
-            android:theme="@style/Theme.KnowBox.Activity" />
+        <activity android:name=".activity.DraftPaperActivity" />
     </application>
 
 </manifest>

@@ -16,6 +16,7 @@ import com.vincent.projectanalysis.activity.BlinkTagActivity;
 import com.vincent.projectanalysis.activity.ChartActivity;
 import com.vincent.projectanalysis.activity.ClipRevealActivity;
 import com.vincent.projectanalysis.activity.CountDownActivity;
+import com.vincent.projectanalysis.activity.DraftPaperActivity;
 import com.vincent.projectanalysis.activity.GuideActivity;
 import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
@@ -54,7 +55,8 @@ public class MainComponnentsFragment extends Fragment {
             "Chart",
             "Order Homework",
             "引导遮罩",
-            "PhotoviewActivity"
+            "PhotoviewActivity",
+            "DraftPaperActivity"
     };
 
     @Nullable
@@ -158,6 +160,9 @@ public class MainComponnentsFragment extends Fragment {
                 break;
             case 15:
                 startActivity(new Intent(getContext(), PhotoviewActivity.class));
+                break;
+            case 16:
+                startActivity(new Intent(getContext(), DraftPaperActivity.class));
                 break;
         }
     }

@@ -3,6 +3,8 @@ package com.vincent.projectanalysis;
 import android.app.Application;
 import android.content.Context;
 
+import com.vincent.projectanalysis.utils.CrashHandler;
+
 public class App extends Application {
 
     //全局应用上下文
@@ -12,6 +14,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mAppContext = this;
+        CrashHandler.getInstance().init(this);
     }
 
     /*

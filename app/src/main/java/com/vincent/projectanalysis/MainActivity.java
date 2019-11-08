@@ -21,7 +21,6 @@ import com.vincent.projectanalysis.fragment.Main3Fragment;
 import com.vincent.projectanalysis.fragment.Main4Fragment;
 import com.vincent.projectanalysis.fragment.Main5Fragment;
 import com.vincent.projectanalysis.fragment.Main6Fragment;
-import com.vincent.projectanalysis.utils.ContactsUtils;
 import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.MD5Util;
 import com.vincent.projectanalysis.utils.StatusBarUtil;
@@ -108,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             phoneNumbers.add("22222dd222");
             phoneNumbers.add("33333df333");
             phoneNumbers.add("555556454");
-            ContactsUtils.update(this, phoneNumbers);
+            //ContactsUtils.update(this, phoneNumbers);
         } catch (Exception e) {
             e.printStackTrace();
         }
