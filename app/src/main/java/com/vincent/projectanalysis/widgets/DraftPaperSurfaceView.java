@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.vincent.projectanalysis.utils.LogUtil;
+
 import java.util.Stack;
 
 /**
@@ -25,6 +27,8 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
     private Stack<Path>   mLayerIfs = new Stack<Path>();
     private SurfaceHolder mHolder;
     private boolean       mIsDrawing;
+    private Thread        mThread;
+    private Canvas        mCanvas;
 
     public DraftPaperSurfaceView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -44,7 +48,9 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
     private void init() {
         mHolder = getHolder();
         mHolder.addCallback(this);
-
+        setFocusable(true);
+        setFocusableInTouchMode(true);
+        this.setKeepScreenOn(true);
 
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setColor(Color.WHITE);
@@ -79,7 +85,6 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
                     mPreviousX = x;
                     mPreviousY = y;
                 }
-                invalidate();
                 break;
             }
             case MotionEvent.ACTION_UP: {
@@ -96,14 +101,17 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
 
     public void clear() {
         mLayerIfs.clear();
-        invalidate();
-
         if (mDraftPaperListener != null) {
             mDraftPaperListener.onPaperChange(!mLayerIfs.isEmpty());
         }
     }
 
-    public void drawCanvas(Canvas canvas) {
+    public synchronized void drawCanvas(Canvas canvas) {
+        LogUtil.d("vincent", "drawCanvas == null ? " + (canvas == null));
+        if (canvas == null) {
+            return;
+        }
+        canvas.drawColor(Color.GRAY);
         if (mLayerIfs != null) {
             for (int i = 0; i < mLayerIfs.size(); i++) {
                 Path pathInfo = mLayerIfs.get(i);
@@ -122,29 +130,38 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        LogUtil.d("vincent", "surfaceCreated");
         mIsDrawing = true;
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        new Thread(this).start();
+        LogUtil.d("vincent", "surfaceChanged");
+        mThread = new Thread(this);
+        mThread.start();
     }
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+        LogUtil.d("vincent", "surfaceDestroyed");
         mIsDrawing = false;
+        mHolder.removeCallback(this);
     }
 
     @Override
     public void run() {
         while (mIsDrawing) {
-            Canvas canvas = mHolder.lockCanvas();
             try {
-                drawCanvas(canvas);
+                mCanvas = mHolder.lockCanvas();
+                drawCanvas(mCanvas);
+                Thread.sleep(20);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                mHolder.unlockCanvasAndPost(canvas);
+                // 解锁画布，提交绘制，显示内容
+                if (mCanvas != null) {
+                    mHolder.unlockCanvasAndPost(mCanvas);
+                }
             }
         }
     }

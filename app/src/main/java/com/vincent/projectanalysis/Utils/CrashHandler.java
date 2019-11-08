@@ -9,6 +9,8 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.vincent.projectanalysis.App;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -83,8 +85,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             } catch (InterruptedException e) {
                 Log.e(TAG, "error : ", e);
             }
-            // TODO: 2019-11-08
-            //AppManager.getAppManager().AppExit(mContext);
+            App.exit();
         }
 
     }

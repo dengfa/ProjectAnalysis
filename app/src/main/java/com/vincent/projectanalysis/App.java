@@ -23,4 +23,8 @@ public class App extends Application {
     public static Context getAppContext() {
         return mAppContext;
     }
+
+    public static void exit() {
+        System.exit(0);
+    }
 }
