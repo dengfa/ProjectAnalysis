@@ -1,4 +1,4 @@
-package com.vincent.projectanalysis.components;
+package com.vincent.projectanalysis.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.activity.BlinkTagActivity;
+import com.vincent.projectanalysis.activity.CameraActivity;
 import com.vincent.projectanalysis.activity.ChartActivity;
 import com.vincent.projectanalysis.activity.ClipRevealActivity;
 import com.vincent.projectanalysis.activity.CountDownActivity;
@@ -56,7 +57,8 @@ public class MainComponnentsFragment extends Fragment {
             "Order Homework",
             "引导遮罩",
             "PhotoviewActivity",
-            "DraftPaperActivity"
+            "DraftPaperActivity",
+            "CameraActivity"
     };
 
     @Nullable
@@ -163,6 +165,9 @@ public class MainComponnentsFragment extends Fragment {
                 break;
             case 16:
                 startActivity(new Intent(getContext(), DraftPaperActivity.class));
+                break;
+            case 17:
+                startActivity(new Intent(getContext(), CameraActivity.class));
                 break;
         }
     }

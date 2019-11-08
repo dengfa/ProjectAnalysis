@@ -1,4 +1,4 @@
-package com.vincent.projectanalysis;
+package com.vincent.projectanalysis.main;
 
 import android.Manifest;
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vincent.projectanalysis.components.MainComponnentsFragment;
+import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.fragment.Main2Fragment;
 import com.vincent.projectanalysis.fragment.Main3Fragment;
 import com.vincent.projectanalysis.fragment.Main4Fragment;

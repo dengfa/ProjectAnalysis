@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.CameraActivity">
+
+    <com.vincent.projectanalysis.camera.CameraView
+        android:id="@+id/camera_new"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:keepScreenOn="true"
+        app:cameraAudio="on"
+        app:cameraCropOutput="false"
+        app:cameraFacing="back"
+        app:cameraFlash="off"
+        app:cameraGestureLongTap="none"
+        app:cameraGesturePinch="zoom"
+        app:cameraGestureScrollHorizontal="none"
+        app:cameraGestureScrollVertical="none"
+        app:cameraGestureTap="focusWithMarker"
+        app:cameraGrid="draw3x3"
+        app:cameraPlaySounds="true" />
+
+
+</android.support.constraint.ConstraintLayout>
