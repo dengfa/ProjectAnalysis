@@ -107,7 +107,6 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
     }
 
     public synchronized void drawCanvas(Canvas canvas) {
-        LogUtil.d("vincent", "drawCanvas == null ? " + (canvas == null));
         if (canvas == null) {
             return;
         }
