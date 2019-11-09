@@ -154,6 +154,8 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
             try {
                 mCanvas = mHolder.lockCanvas();
                 drawCanvas(mCanvas);
+                //这么弄为什么会卡呢？？？
+                //Thread.sleep(1000);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -161,6 +163,11 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
                 if (mCanvas != null) {
                     mHolder.unlockCanvasAndPost(mCanvas);
                 }
+            }
+            try {
+                mThread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
