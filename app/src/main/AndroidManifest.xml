@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".activity.CameraActivity"></activity>
+        <activity android:name=".activity.MyCameraActivity"></activity>
         <activity android:name=".activity.PhotoviewActivity" />
         <activity android:name=".main.MainActivity">
             <intent-filter>

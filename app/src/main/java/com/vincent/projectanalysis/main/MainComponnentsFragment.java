@@ -22,6 +22,7 @@ import com.vincent.projectanalysis.activity.GuideActivity;
 import com.vincent.projectanalysis.activity.HomeworkCheckActivity;
 import com.vincent.projectanalysis.activity.LevelProgressActivity;
 import com.vincent.projectanalysis.activity.LottieActivity;
+import com.vincent.projectanalysis.activity.MyCameraActivity;
 import com.vincent.projectanalysis.activity.OrderHomeworkActivity;
 import com.vincent.projectanalysis.activity.PhotoviewActivity;
 import com.vincent.projectanalysis.activity.RippleAndWaveActivity;
@@ -58,7 +59,8 @@ public class MainComponnentsFragment extends Fragment {
             "引导遮罩",
             "PhotoviewActivity",
             "DraftPaperActivity",
-            "CameraActivity"
+            "CameraActivity",
+            "MyCameraActivity"
     };
 
     @Nullable
@@ -168,6 +170,9 @@ public class MainComponnentsFragment extends Fragment {
                 break;
             case 17:
                 startActivity(new Intent(getContext(), CameraActivity.class));
+                break;
+            case 18:
+                startActivity(new Intent(getContext(), MyCameraActivity.class));
                 break;
         }
     }
