@@ -20,6 +20,8 @@
         app:layout_constraintVertical_bias="0.064" />
 
     <com.vincent.projectanalysis.widgets.BreatheView
+        android:id="@+id/bv"
+        android:onClick="bv_click"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginTop="80dp"
