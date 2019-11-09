@@ -123,7 +123,7 @@ public abstract class Controller implements CameraPreview.SurfaceCallback {
                     onStart();
                     LOG.i("Start:", "returned from onStart().", "Dispatching.", ss());
                     mState = STATE_STARTED;
-                    mCameraCallbacks.dispatchOnCameraOpened(mOptions);
+                    //mCameraCallbacks.dispatchOnCameraOpened(mOptions);
 
                 } catch (Exception e) {
                     LOG.e("Error while starting the camera engine.", e);

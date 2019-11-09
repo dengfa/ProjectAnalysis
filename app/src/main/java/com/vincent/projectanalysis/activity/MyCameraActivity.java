@@ -4,33 +4,17 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.vincent.projectanalysis.R;
-import com.vincent.projectanalysis.camera.CameraListener;
-import com.vincent.projectanalysis.camera.CameraOptions;
-import com.vincent.projectanalysis.camera.CameraView;
-import com.vincent.projectanalysis.camera.options.Gesture;
-import com.vincent.projectanalysis.camera.options.GestureAction;
+import com.vincent.projectanalysis.widgets.mycamera.MyCameraView;
 
 public class MyCameraActivity extends AppCompatActivity {
 
-    private CameraView mCamera;
+    private MyCameraView mCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_camera);
         mCamera = findViewById(R.id.camera_new);
-        mCamera.mapGesture(Gesture.SCROLL_HORIZONTAL, GestureAction.NONE);
-        mCamera.addCameraListener(new CameraListener() {
-            public void onPictureTaken(byte[] jpeg) {
-
-            }
-
-            @Override
-            public void onCameraOpened(CameraOptions options) {
-                super.onCameraOpened(options);
-            }
-        });
-        mCamera.setPlaySounds(false);
         mCamera.start();
 
 
@@ -56,7 +40,7 @@ public class MyCameraActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         if (mCamera != null) {
-            mCamera.destroy();
+            //mCamera.destroy();
         }
     }
 }
