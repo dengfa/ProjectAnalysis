@@ -20,9 +20,18 @@ import com.vincent.projectanalysis.camera.utils.CameraLogger;
 public class SurfaceCameraPreview extends CameraPreview<View, SurfaceHolder> {
 
     private final static CameraLogger LOG = CameraLogger.create(SurfaceCameraPreview.class.getSimpleName());
+    private              int          mWidth;
+    private              int          mHeight;
 
     public SurfaceCameraPreview(Context context, ViewGroup parent, SurfaceCallback callback) {
         super(context, parent, callback);
+    }
+
+    public SurfaceCameraPreview(Context context, ViewGroup parent, SurfaceCallback callback,
+                                int width, int height) {
+        super(context, parent, callback);
+        mWidth = width;
+        mHeight = height;
     }
 
     private SurfaceView mSurfaceView;

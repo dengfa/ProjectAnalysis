@@ -110,6 +110,7 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
         if (canvas == null) {
             return;
         }
+        LogUtil.d("vincent", "drawCanvas");
         canvas.drawColor(Color.GRAY);
         if (mLayerIfs != null) {
             for (int i = 0; i < mLayerIfs.size(); i++) {
@@ -136,6 +137,7 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         LogUtil.d("vincent", "surfaceChanged");
+        mIsDrawing = true;
         mThread = new Thread(this);
         mThread.start();
     }
@@ -144,7 +146,6 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
     public void surfaceDestroyed(SurfaceHolder holder) {
         LogUtil.d("vincent", "surfaceDestroyed");
         mIsDrawing = false;
-        mHolder.removeCallback(this);
     }
 
     @Override
@@ -153,7 +154,6 @@ public class DraftPaperSurfaceView extends SurfaceView implements SurfaceHolder.
             try {
                 mCanvas = mHolder.lockCanvas();
                 drawCanvas(mCanvas);
-                Thread.sleep(20);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

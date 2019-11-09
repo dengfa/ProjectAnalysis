@@ -47,7 +47,7 @@ public class MyCameraView extends FrameLayout {
     }
 
     void instantiatePreview() {
-        mCameraPreview = new SurfaceCameraPreview(getContext(), this, null);
+        mCameraPreview = new SurfaceCameraPreview(getContext(), this, null, 800, 800);
         mCameraController.setPreview(mCameraPreview);
     }
 
@@ -65,13 +65,9 @@ public class MyCameraView extends FrameLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Size previewSize = getPreviewSize();
-        if (previewSize == null) {
-            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-            return;
-        }
-        int measureWidth = previewSize.getWidth();
-        int measureHeight = previewSize.getHeight();
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int measureWidth = DEFAULT_WIDTH;
+        int measureHeight = DEFAULT_HEIGHT;
 
         // Let's which dimensions need to be adapted.
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
@@ -79,10 +75,10 @@ public class MyCameraView extends FrameLayout {
         final int widthValue = MeasureSpec.getSize(widthMeasureSpec);
         final int heightValue = MeasureSpec.getSize(heightMeasureSpec);
 
-        if (widthMode == MeasureSpec.EXACTLY) {
+        if (widthMode != MeasureSpec.AT_MOST) {
             measureWidth = widthValue;
         }
-        if (heightMode == MeasureSpec.EXACTLY) {
+        if (heightMode != MeasureSpec.AT_MOST) {
             measureHeight = heightValue;
         }
         setMeasuredDimension(measureWidth, measureHeight);

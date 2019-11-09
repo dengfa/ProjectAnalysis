@@ -10,7 +10,6 @@ import android.support.annotation.WorkerThread;
 import android.view.SurfaceHolder;
 
 import com.vincent.projectanalysis.camera.CameraView;
-import com.vincent.projectanalysis.camera.Size;
 import com.vincent.projectanalysis.camera.options.Audio;
 import com.vincent.projectanalysis.camera.options.Facing;
 import com.vincent.projectanalysis.camera.options.Flash;
@@ -52,23 +51,10 @@ class Camera1 extends Controller {
         } else {
             mCamera.setPreviewTexture((SurfaceTexture) output);
         }
-
-        boolean invertPreviewSizes = shouldFlipSizes();
-        //mCaptureSize = computeCaptureSize();
-        //mPreviewSize = computePreviewSize();
-        mCaptureSize = new Size(400, 400);
-        mPreviewSize = new Size(400, 400);
-        LOG.i("setup:", "Dispatching onCameraPreviewSizeChanged.");
         if (mCameraCallbacks != null) {
             mCameraCallbacks.onCameraPreviewSizeChanged();
         }
-        mPreview.setDesiredSize(
-                invertPreviewSizes ? mPreviewSize.getHeight() : mPreviewSize.getWidth(),
-                invertPreviewSizes ? mPreviewSize.getWidth() : mPreviewSize.getHeight()
-        );
-        LOG.i("setup:", "Starting preview with startPreview().");
         mCamera.startPreview();
-        LOG.i("setup:", "Started preview with startPreview().");
         mIsSetup = true;
     }
 
