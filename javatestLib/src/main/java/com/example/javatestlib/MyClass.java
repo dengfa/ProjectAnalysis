@@ -344,21 +344,18 @@ public class MyClass {
 
         public int eraseOverlapIntervals(int[][] intervals) {
             int res = 1;
-            Arrays.sort(intervals, new Comparator<int[]>() {
-                @Override
-                public int compare(int[] o1, int[] o2) {
-                    return o1[1] - o2[1];
-                }
-            });
+            Arrays.sort(intervals, (o1, o2) -> o1[1] - o2[1]);
             int[] preInterval = intervals[0];
             for (int i = 1; i < intervals.length; i++) {
                 if (preInterval[1] < intervals[i][0]){
                     res++;
                     preInterval = intervals[i];
                 }
+                PriorityQueue<TreeNode> queue = new PriorityQueue<TreeNode>((o1, o2) -> o1.val - o2.val);
             }
             return res;
         }
+
     }
 
     public class TreeNode {
