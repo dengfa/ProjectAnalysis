@@ -21,15 +21,18 @@ public class MyClass {
         }
         Solution.maxSlidingWindow3(new int[]{}, 0);
 
-        int[] nums = {2, 0, 0, 0, 1, 1, 1, 4, 5, 6};
-        Solution.bubbleSort(nums);
+        int[] nums = {2, 0, 8, 3, 1, 7, 9, 4, 5, 6};
+        //Solution.bubbleSort(nums);
         //Solution.insertionSort(nums);
         //Solution.MergeSort(nums, 0, nums.length - 1);
         //Solution.quickSort(nums, 0, nums.length - 1);
+        Solution.heapSort(nums);
     }
 
+    /**
+     * 常考算法整理！！！
+     */
     static class Solution {
-
         public static void bubbleSort(int[] nums) {
             /*for (int i = 0; i < nums.length; i++) {
                 for (int j = 0; j < nums.length - i - 1; j++) {
@@ -116,11 +119,16 @@ public class MyClass {
             System.out.println("random: " + random);
             swap(nums, random, hi);
             int i = lo, j = lo;
-            while (j < hi) {
+           /* while (j < hi) {
                 if (nums[j] < nums[hi]) {
                     swap(nums, i++, j);
                 }
                 j++;
+            }*/
+            for (j = lo; j < hi; j++) {
+                if (nums[j] < nums[hi]) {
+                    swap(nums, j, i++);
+                }
             }
             swap(nums, i, hi);
             System.out.println("quickSort: " + Arrays.toString(nums));
@@ -132,6 +140,39 @@ public class MyClass {
         public static int getRandom(int m, int n) {
             return (int) (m + Math.random() * (n - m + 1));
         }
+
+        //注意堆的第一个位置是不用的！！！
+        public static void heapSort(int[] nums) {
+
+            //build heap
+            for (int i = nums.length / 2 - 1; i >= 0; i--) {
+                adjustHeap(nums, i, nums.length);
+            }
+            for (int i = nums.length - 1; i > 0; i--) {
+                swap(nums, 0, i);
+                adjustHeap(nums, 0, i);
+            }
+            System.out.println("heapSort: " + Arrays.toString(nums));
+        }
+
+        public static void adjustHeap(int[] nums, int t, int length) {
+            int cur = nums[t];
+            for (int p = 2 * t + 1; p < length; p = p * 2 + 1) {
+                if (p + 1 < length && nums[p] < nums[p + 1]) {
+                    p++;
+                }
+                if (nums[p] > cur) {
+                    nums[t] = nums[p];
+                    t = p;
+                } else {
+                    break;
+                }
+            }
+            nums[t] = cur;
+        }
+
+        /*****************************************************************************************/
+
 
         public int[] maxSlidingWindow(int[] nums, int k) {
             int[] result = new int[]{};
@@ -347,7 +388,7 @@ public class MyClass {
             Arrays.sort(intervals, (o1, o2) -> o1[1] - o2[1]);
             int[] preInterval = intervals[0];
             for (int i = 1; i < intervals.length; i++) {
-                if (preInterval[1] < intervals[i][0]){
+                if (preInterval[1] < intervals[i][0]) {
                     res++;
                     preInterval = intervals[i];
                 }

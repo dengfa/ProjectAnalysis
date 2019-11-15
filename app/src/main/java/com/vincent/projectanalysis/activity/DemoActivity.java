@@ -24,6 +24,8 @@ public class DemoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_demo);
 
         Glide.with(this).load(R.drawable.anakin);
+        Glide.with(this).pauseRequests();
+        Glide.with(this).resumeRequests();
         String url = "http://ip.taobao.com/service/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)

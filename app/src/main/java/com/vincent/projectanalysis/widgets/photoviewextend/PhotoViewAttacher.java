@@ -730,6 +730,11 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, Vers
         final float viewHeight = imageView.getHeight();
         final int drawableWidth = d.getIntrinsicWidth();
         final int drawableHeight = d.getIntrinsicHeight();
+        LogUtil.d("vincent", "updateBaseMatrix");
+        LogUtil.d("vincent", "viewWidth - " + viewWidth);
+        LogUtil.d("vincent", "viewHeight - " + viewHeight);
+        LogUtil.d("vincent", "drawableWidth - " + drawableWidth);
+        LogUtil.d("vincent", "drawableHeight - " + drawableHeight);
 
         mBaseMatrix.reset();
 

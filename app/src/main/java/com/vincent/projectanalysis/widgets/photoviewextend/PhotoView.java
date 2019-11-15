@@ -27,6 +27,7 @@ import android.net.Uri;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.widgets.photoviewextend.PhotoViewAttacher.OnMatrixChangedListener;
 import com.vincent.projectanalysis.widgets.photoviewextend.PhotoViewAttacher.OnPhotoTapListener;
 import com.vincent.projectanalysis.widgets.photoviewextend.PhotoViewAttacher.OnViewTapListener;
@@ -36,8 +37,8 @@ public class PhotoView extends ImageView implements IPhotoView {
     private final PhotoViewAttacher mAttacher;
 
     private ScaleType mPendingScaleType;
-    private Paint mPaint;
-    public  RectF mRect;
+    private Paint     mPaint;
+    public  RectF     mRect;
 
     public PhotoView(Context context) {
         this(context, null);
@@ -71,6 +72,19 @@ public class PhotoView extends ImageView implements IPhotoView {
         super.onDraw(canvas);
         canvas.save();
         canvas.setMatrix(mAttacher.getDisplayMatrix());
+        if (getDisplayRect() != null) {
+            LogUtil.d("vincent", "DisplayRect - " + getDisplayRect().toShortString());
+        }
+        Drawable drawable = getDrawable();
+        int drawableWidth = drawable.getIntrinsicWidth();
+        int drawableHeight = drawable.getIntrinsicHeight();
+        if (drawable != null) {
+            LogUtil.d("vincent", "updateBaseMatrix");
+            LogUtil.d("vincent", "drawableWidth - " + drawableWidth);
+            LogUtil.d("vincent", "drawableHeight - " + drawableHeight);
+            mRect.set((int) (drawableWidth * 0.25), (int) (drawableHeight * 0.25),
+                    (int) (drawableWidth * 0.75), (int) (drawableHeight * 0.75));
+        }
         canvas.drawRect(mRect, mPaint);
         canvas.restore();
     }

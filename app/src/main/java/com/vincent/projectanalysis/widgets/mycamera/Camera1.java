@@ -19,8 +19,10 @@ import com.vincent.projectanalysis.camera.options.SessionType;
 import com.vincent.projectanalysis.camera.options.VideoQuality;
 import com.vincent.projectanalysis.camera.options.WhiteBalance;
 import com.vincent.projectanalysis.camera.utils.CameraLogger;
+import com.vincent.projectanalysis.utils.LogUtil;
 
 import java.io.File;
+import java.util.List;
 
 
 @SuppressWarnings("deprecation")
@@ -66,6 +68,14 @@ class Camera1 extends Controller {
         }
         if (collectCameraId()) {
             mCamera = Camera.open(mCameraId);
+
+
+            // TODO: 2019-11-12 test
+            List<Camera.Size> supportedPreviewSizes = mCamera.getParameters().getSupportedPreviewSizes();
+            LogUtil.d("vincent", "supportedPreviewSize: ");
+            for (Camera.Size size : supportedPreviewSizes) {
+                LogUtil.d("vincent", size.width + " x " + size.height);
+            }
             // Try starting preview.
             mCamera.setDisplayOrientation(computeSensorToDisplayOffset()); // <- not allowed during preview
             if (shouldSetup())
