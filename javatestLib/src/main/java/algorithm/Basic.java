@@ -1,4 +1,4 @@
-package com.example.javatestlib;
+package algorithm;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
-public class MyClass {
+public class Basic {
 
     public static void main(String[] args) {
         System.out.println("Hello JAVA!");
