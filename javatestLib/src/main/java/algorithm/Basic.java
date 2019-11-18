@@ -3,6 +3,7 @@ package algorithm;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,24 @@ public class Basic {
         //Solution.MergeSort(nums, 0, nums.length - 1);
         //Solution.quickSort(nums, 0, nums.length - 1);
         Solution.heapSort(nums);
+    }
+
+    public void UsefulMethods() {
+        //构造集合
+        List<String> testList = new ArrayList<String>() {{
+            add("aa");
+            add("bb");
+            add("cc");
+        }};
+
+        //使用toArray(T[] a)方法
+        String[] array = testList.toArray(new String[testList.size()]);
+
+        //array to list
+        ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(array));
+
+        List<String> list2 = new ArrayList<String>(array.length);
+        Collections.addAll(list2, array);
     }
 
     /**

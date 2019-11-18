@@ -1,4 +1,4 @@
-package cs.productor_consumer;
+package cs.productor_consumer.blockingqueue;
 
 import java.util.concurrent.BlockingQueue;
 

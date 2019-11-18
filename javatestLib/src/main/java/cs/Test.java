@@ -1,6 +1,6 @@
 package cs;
 
-import cs.productor_consumer.ProductorAndConsumer;
+import cs.productor_consumer.blockingqueue.ProductorAndConsumer;
 
 /**
  * Created by dengfa on 2019-11-16.
