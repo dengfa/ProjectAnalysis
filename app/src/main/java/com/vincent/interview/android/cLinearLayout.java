@@ -60,11 +60,14 @@ public class cLinearLayout extends LinearLayout {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, t, r, b);
-
+        //super.onLayout(changed, l, t, r, b);
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
-            child.layout(l + UIUtils.dip2px(150), t, r + UIUtils.dip2px(150), b);
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) child.getLayoutParams();
+            int paddingTop = getPaddingTop();
+            int paddingLeft = getPaddingLeft();
+            child.layout(l + UIUtils.dip2px(150), t + lp.topMargin + paddingTop,
+                    r + UIUtils.dip2px(150), b + lp.topMargin + paddingTop);
         }
     }
 
