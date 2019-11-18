@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vincent.interview.android.InterviewActivity;
 import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.activity.BlinkTagActivity;
 import com.vincent.projectanalysis.activity.CameraActivity;
@@ -60,7 +61,8 @@ public class MainComponnentsFragment extends Fragment {
             "PhotoviewActivity",
             "DraftPaperActivity",
             "CameraActivity",
-            "MyCameraActivity"
+            "MyCameraActivity",
+            "InterviewActivity"
     };
 
     @Nullable
@@ -191,6 +193,9 @@ public class MainComponnentsFragment extends Fragment {
                 break;
             case 18:
                 startActivity(new Intent(getContext(), MyCameraActivity.class));
+                break;
+            case 19:
+                startActivity(new Intent(getContext(), InterviewActivity.class));
                 break;
         }
     }
