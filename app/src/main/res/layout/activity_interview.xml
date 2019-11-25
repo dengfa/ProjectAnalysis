@@ -1,22 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.vincent.interview.android.InterviewActivity">
 
     <com.vincent.interview.android.cLinearLayout
-        android:paddingTop="10dp"
         android:layout_width="200dp"
-        android:layout_height="200dp">
+        android:layout_height="200dp"
+        android:paddingTop="10dp"
+        android:visibility="gone">
 
         <TextView
-            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="0123456789" />
     </com.vincent.interview.android.cLinearLayout>
-</RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startIntentService"
+        android:padding="10dp"
+        android:text="start intent service" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="stopIntentService"
+        android:padding="10dp"
+        android:text="stop intent service" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="bindIntentService"
+        android:padding="10dp"
+        android:text="bind intent service" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="unbindIntentService"
+        android:padding="10dp"
+        android:text="unbind intent service" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="stop"
+        android:padding="10dp"
+        android:text="stop" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="startnormalService"
+        android:padding="10dp"
+        android:text="start normal service" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="stopnormalService"
+        android:padding="10dp"
+        android:text="stop normal service" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="bindnormalService"
+        android:padding="10dp"
+        android:text="bind normal service" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="unbindnormalService"
+        android:padding="10dp"
+        android:text="unbind normal service" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="startAsynctask"
+        android:padding="10dp"
+        android:text="startAsynctask" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:onClick="cancleAsynctask"
+        android:padding="10dp"
+        android:text="cancleAsynctask" />
+</LinearLayout>
 

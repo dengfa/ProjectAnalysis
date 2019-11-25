@@ -3,7 +3,6 @@ package algorithm;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -28,24 +27,12 @@ public class Basic {
         //Solution.MergeSort(nums, 0, nums.length - 1);
         //Solution.quickSort(nums, 0, nums.length - 1);
         Solution.heapSort(nums);
-    }
 
-    public void UsefulMethods() {
-        //构造集合
-        List<String> testList = new ArrayList<String>() {{
-            add("aa");
-            add("bb");
-            add("cc");
-        }};
 
-        //使用toArray(T[] a)方法
-        String[] array = testList.toArray(new String[testList.size()]);
-
-        //array to list
-        ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(array));
-
-        List<String> list2 = new ArrayList<String>(array.length);
-        Collections.addAll(list2, array);
+        int[][] ints = new int[3][3];
+        ints[0] = new int[]{1, 3, 1};
+        ints[1] = new int[]{1, 5, 1};
+        ints[2] = new int[]{4, 2, 1};
     }
 
     /**
@@ -189,6 +176,144 @@ public class Basic {
             }
             nums[t] = cur;
         }
+
+        /**
+         * 70. 爬楼梯
+         * 假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+         * 每次你可以爬 1 或 2 个台阶。
+         * 你有多少种不同的方法可以爬到楼顶呢？
+         */
+        public int climbStairs(int n) {
+            int[] dp = new int[n + 1];
+            //为什么dp[0] = 1 ？
+            dp[0] = 1;
+            dp[1] = 1;
+            for (int i = 2; i <= n; i++) {
+                dp[i] = dp[i - 1] + dp[i - 2];
+            }
+            return dp[n];
+        }
+
+        /**
+         * 746. 使用最小花费爬楼梯\数组的每个索引做为一个阶梯，
+         * 第 i个阶梯对应着一个非负数的体力花费值 cost[i](索引从0开始)。
+         *
+         * 每当你爬上一个阶梯你都要花费对应的体力花费值，
+         * 然后你可以选择继续爬一个阶梯或者爬两个阶梯。
+         *
+         * 您需要找到达到楼层顶部的最低花费。
+         * 在开始时，你可以选择从索引为 0 或 1 的元素作为初始阶梯。
+         *
+         * 示例 1:
+         *
+         * 输入: cost = [10, 15, 20]
+         * 输出: 15
+         * 解释: 最低花费是从cost[1]开始，然后走两步即可到阶梯顶，一共花费15。
+         */
+
+
+        /**
+         *
+         */
+        public int coinChange(int[] coins, int amount) {
+            int[] dp = new int[amount + 1];
+            for (int i = 1; i < amount + 1; i++) {
+                dp[i] = amount + 1;
+                for (int j = 0; j < coins.length; j++) {
+                    if (i >= coins[j]) {
+                        dp[i] = Math.min(dp[i - coins[j]] + 1, dp[i]);
+                    }
+                }
+            }
+            return dp[amount] > amount ? -1 : dp[amount];
+        }
+
+        /**
+         * 198. 打家劫舍
+         */
+        public int rob(int[] nums) {
+            if (nums == null || nums.length == 0) {
+                return 0;
+            }
+            int n = nums.length;
+            int[] dp = new int[n];
+            dp[n - 1] = nums[n - 1];
+            for (int i = n - 2; i >= 0; i--) {
+                for (int j = i; j < n; j++) {
+                    dp[i] = Math.max(dp[i], j + 2 < n ? dp[j + 2] : 0 + nums[j]);
+                }
+            }
+            return dp[0];
+        }
+
+        public int[] memo;
+
+        public int tryRob(int[] nums, int index) {
+            if (index >= nums.length) {
+                return 0;
+            }
+            if (memo[index] > -1) {
+                return memo[index];
+            }
+            int max = -1;
+            for (int i = index; i < nums.length; i++) {
+                max = Math.max(max, tryRob(nums, i + 2) + nums[i]);
+            }
+            memo[index] = max;
+            return max;
+        }
+
+
+        /**
+         * 1143. 最长公共子序列
+         */
+        public int longestCommonSubsequence(String text1, String text2) {
+            if (text1 == null || text2 == null
+                    || text1.length() == 0 || text2.length() == 0)
+                return 0;
+            int m = text1.length();
+            int n = text2.length();
+            int[][] dp = new int[m + 1][n + 1];
+            for (int i = 1; i <= m; i++) {
+                for (int j = 1; j <= n; j++) {
+                    //注意长度m，n和下标的转换
+                    if (text1.charAt(i - 1) == text2.charAt(j - 1)) {
+                        dp[i][j] = dp[i - 1][j - 1] + 1;
+                    } else {
+                        dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
+                    }
+                }
+            }
+            return dp[m][n];
+        }
+
+
+        int[][] memos;
+
+        public int tryLongestCommonSubsequence(String text1, int end1, String text2, int end2) {
+            if (end1 < 0 || end2 < 0) {
+                return 0;
+            }
+            if (memos[end1][end2] > -1) {
+                return memos[end1][end2];
+            }
+            if (text1.charAt(end1) == text2.charAt(end2)) {
+                memos[end1][end2] = 1 + tryLongestCommonSubsequence(text1, end1 - 1, text2, end2 - 1);
+            } else {
+                memos[end1][end2] = Math.max(tryLongestCommonSubsequence(text1, end1 - 1, text2, end2),
+                        tryLongestCommonSubsequence(text1, end1, text2, end2 - 1));
+            }
+            return memos[end1][end2];
+        }
+
+        public int longestCommonSubsequence1(String text1, String text2) {
+            memos = new int[text1.length()][text2.length()];
+            for (int[] ints : memos) {
+                Arrays.fill(ints, -1);
+            }
+            return tryLongestCommonSubsequence(text1, text1.length() - 1, text2, text2.length() - 1);
+        }
+
 
         /*****************************************************************************************/
 
