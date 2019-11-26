@@ -107,5 +107,11 @@
         android:onClick="cancleAsynctask"
         android:padding="10dp"
         android:text="cancleAsynctask" />
+
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
 
