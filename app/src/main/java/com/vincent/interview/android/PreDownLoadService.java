@@ -12,6 +12,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.support.annotation.Nullable;
 
+import com.vincent.projectanalysis.utils.AppPreferences;
 import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.MD5Util;
 import com.vincent.projectanalysis.utils.UIUtils;
@@ -183,6 +184,8 @@ public class PreDownLoadService extends IntentService {
         fos.flush();
         fos.close();
         LogUtil.d("vincent", "saveImageToPhotos");
+        AppPreferences.setStringValue("path",file.getAbsolutePath());
+
     }
 
     public void saveImage(InputStream is, String url) throws IOException {

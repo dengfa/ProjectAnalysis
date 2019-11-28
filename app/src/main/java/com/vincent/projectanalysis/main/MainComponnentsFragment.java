@@ -31,6 +31,7 @@ import com.vincent.projectanalysis.activity.ScanActivity;
 import com.vincent.projectanalysis.activity.WidgetsCollectionsActivity;
 import com.vincent.projectanalysis.adapter.holder.ItemTypeFactory;
 import com.vincent.projectanalysis.adapter.holder.base.BaseComponentVH;
+import com.vincent.projectanalysis.animation.AnimationActivity;
 import com.vincent.projectanalysis.module.guideMask.demo.ShowGuideActivity;
 import com.vincent.projectanalysis.module.mapScene.MapSceneActivity;
 
@@ -62,7 +63,8 @@ public class MainComponnentsFragment extends Fragment {
             "DraftPaperActivity",
             "CameraActivity",
             "MyCameraActivity",
-            "InterviewActivity"
+            "InterviewActivity",
+            "AnimationActivity"
     };
 
     @Nullable
@@ -196,6 +198,9 @@ public class MainComponnentsFragment extends Fragment {
                 break;
             case 19:
                 startActivity(new Intent(getContext(), InterviewActivity.class));
+                break;
+            case 20:
+                startActivity(new Intent(getContext(), AnimationActivity.class));
                 break;
         }
     }

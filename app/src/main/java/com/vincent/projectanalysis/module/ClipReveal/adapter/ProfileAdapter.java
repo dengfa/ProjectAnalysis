@@ -15,7 +15,7 @@ import com.vincent.projectanalysis.module.ClipReveal.interfaces.ProfileAdapterLi
 import com.vincent.projectanalysis.module.ClipReveal.model.User;
 import com.vincent.projectanalysis.widgets.BackgroundDrawableSwitchCompat;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -124,15 +124,15 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable
-        @Bind(R.id.side_switch)
+        @BindView(R.id.side_switch)
         BackgroundDrawableSwitchCompat mySwitch;
 
         @Nullable
-        @Bind(R.id.tv_label)
+        @BindView(R.id.tv_label)
         TextView label;
 
         @Nullable
-        @Bind(R.id.tv_value)
+        @BindView(R.id.tv_value)
         TextView value;
 
         public ViewHolder(View itemView) {

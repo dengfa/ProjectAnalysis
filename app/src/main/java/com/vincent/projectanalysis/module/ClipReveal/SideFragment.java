@@ -29,7 +29,7 @@ import com.vincent.projectanalysis.module.ClipReveal.interfaces.ProfileAdapterLi
 import com.vincent.projectanalysis.module.ClipReveal.model.User;
 import com.vincent.projectanalysis.widgets.ClipRevealFrame;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
@@ -42,15 +42,15 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
     public static final  String ARG_SHOULD_EXPAND = "should expand";
     private static final long   ANIM_DURATION     = 250L;
     protected float mRadius;
-    @Bind(R.id.recycler)
+    @BindView(R.id.recycler)
     RecyclerView            mRecycler;
-    @Bind(R.id.toolbar)
+    @BindView(R.id.toolbar)
     Toolbar                 mToolbar;
-    @Bind(R.id.header)
+    @BindView(R.id.header)
     ImageView               mHeader;
-    @Bind(R.id.collapsing_toolbar_layout)
+    @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
-    @Bind(R.id.app_bar_layout)
+    @BindView(R.id.app_bar_layout)
     AppBarLayout            mAppBarLayout;
     private View                  mRootView;
     private DemoActivityInterface mDemoActivityInterface;
@@ -200,7 +200,7 @@ public abstract class SideFragment extends Fragment implements ProfileAdapterLis
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
+
     }
 
     private boolean isAppBarExpanded() {

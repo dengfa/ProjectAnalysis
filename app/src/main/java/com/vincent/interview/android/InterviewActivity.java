@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Message;
@@ -14,6 +15,7 @@ import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,8 +23,12 @@ import android.widget.Toast;
 import com.vincent.interview.android.retrofit.IpModel;
 import com.vincent.interview.android.retrofit.IpService;
 import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.utils.AppPreferences;
 import com.vincent.projectanalysis.utils.LogUtil;
 
+import java.io.File;
+
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,6 +50,10 @@ public class InterviewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interview);
+        ButterKnife.bind(this);
+
+
+
         mIvImage = findViewById(R.id.iv_image);
 
         mAsynctask = new MyAsynctask();
@@ -70,6 +80,17 @@ public class InterviewActivity extends AppCompatActivity {
 
             }
         });
+
+        String path = AppPreferences.getStringValue("path");
+        File file = new File(path);
+        mIvImage.setImageURI(Uri.fromFile(file));
+    }
+
+
+    public void test() {
+
+        SparseArray<String> sparseArray = new SparseArray<>();
+        sparseArray.put(1, "1");
     }
 
     public void startIntentService(View view) {
