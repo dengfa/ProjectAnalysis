@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.UIUtils;
 
 import butterknife.BindView;
@@ -146,5 +147,17 @@ public class AnimationActivity extends AppCompatActivity {
     public void less(View view) {
         mSuppMatrix.postScale(0.9f, 0.9f, mPx, mPy);
         mTargetView.setImageMatrix(getDisplayMatrix());
+    }
+
+    public void topButtonClick(View view) {
+        LogUtil.d("vincent", "topButtonClick");
+    }
+
+    public void bottomButtonClick(View view) {
+        LogUtil.d("vincent", "bottomButtonClick");
+    }
+
+    public void topTextClick(View view) {
+        LogUtil.d("vincent", "topTextClick");
     }
 }

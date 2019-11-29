@@ -8,6 +8,44 @@
     tools:context=".animation.AnimationActivity">
 
 
+    <TextView
+        android:layout_marginTop="150dp"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:gravity="center"
+        android:background="@color/gray"
+        android:onClick="bottomButtonClick"
+        android:text="bottom" />
+
+
+    <Button
+        android:gravity="center"
+        android:background="@color/green_leep"
+        android:layout_marginTop="200dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:onClick="topTextClick"
+        android:text="text" />
+
+
+    <FrameLayout
+
+        android:layout_marginTop="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:padding="50dp">
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@color/blue_default_50"
+            android:onClick="topButtonClick"
+            android:text="top" />
+    </FrameLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,17 +60,17 @@
             android:text="start" />
 
         <Button
-            android:onClick="add"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginLeft="5dp"
+            android:onClick="add"
             android:text="+" />
 
         <Button
-            android:onClick="less"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginLeft="5dp"
+            android:onClick="less"
             android:text="-" />
     </LinearLayout>
 </RelativeLayout>
