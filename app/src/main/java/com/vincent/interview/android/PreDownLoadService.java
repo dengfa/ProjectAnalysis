@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.vincent.projectanalysis.utils.AppPreferences;
@@ -35,7 +36,9 @@ public class PreDownLoadService extends IntentService {
 
     public static final String TAG   = "preload";
     private static      int    start = 5;
-
+    // 5MB. This is the max image header size we can handle, we preallocate a much smaller buffer but will resize up to
+    // this amount if necessary.
+    private static final int MARK_POSITION = 5 * 1024 * 1024;
     public PreDownLoadService() {
         super(TAG);
     }
@@ -75,12 +78,7 @@ public class PreDownLoadService extends IntentService {
             }
             start--;
         }*/
-        //downloadimage(url);
-        try {
-            saveImage(loadBitmap(url, 0.5f), url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        downloadimage(url);
     }
 
 
@@ -98,7 +96,7 @@ public class PreDownLoadService extends IntentService {
                 return null;
             }
             InputStream is = conn.getInputStream();
-            saveImage(is, url);
+            loadBitmapFromStream(is, url);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,30 +163,45 @@ public class PreDownLoadService extends IntentService {
         return BitmapFactory.decodeByteArray(data, 0, data.length, options);
     }
 
+    public Bitmap loadBitmapFromStream(InputStream inputStream, String url) throws IOException {
+        BufferedInputStream stream = new BufferedInputStream(inputStream);
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        stream.mark(MARK_POSITION);
+        BitmapFactory.decodeStream(stream, null, options);
+        int outHeight = options.outHeight;
+        int outWidth = options.outWidth;
+        int inSampleSize = 1;
+        while (outWidth > UIUtils.dip2px(300)) {
+            outWidth /= 2;
+            inSampleSize *= 2;
+        }
+        options.inJustDecodeBounds = false;
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        options.inSampleSize = inSampleSize;
+        stream.reset();
+        Bitmap bitmap = BitmapFactory.decodeStream(stream, null, options);
+        LogUtil.d("vincent", "loadBitmapFromStream - " + bitmap.getByteCount());
+        File file = getFile(url + "_loadBitmapFromStream");
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(file));
+        return bitmap;
+    }
+
     public void saveImage(Bitmap bitmap, String url) throws IOException {
         if (bitmap == null) {
             return;
         }
-        // 首先保存图片
-        File appDir = new File(Environment.getExternalStorageDirectory(), "Boohee");
-        if (!appDir.exists()) {
-            appDir.mkdir();
-        }
-        String fileName = MD5Util.encode(url) + ".jpg";
-        File file = new File(appDir, fileName);
-        if (file.exists()) {
-            file.delete();
-        }
+        File file = getFile(url);
         FileOutputStream fos = new FileOutputStream(file);
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
         fos.flush();
         fos.close();
         LogUtil.d("vincent", "saveImageToPhotos");
-        AppPreferences.setStringValue("path",file.getAbsolutePath());
-
+        AppPreferences.setStringValue("path", file.getAbsolutePath());
     }
 
-    public void saveImage(InputStream is, String url) throws IOException {
+    @NonNull
+    private File getFile(String url) {
         // 首先保存图片
         File appDir = new File(Environment.getExternalStorageDirectory(), "Boohee");
         if (!appDir.exists()) {
@@ -199,6 +212,12 @@ public class PreDownLoadService extends IntentService {
         if (file.exists()) {
             file.delete();
         }
+        return file;
+    }
+
+    public void saveImage(InputStream is, String url) throws IOException {
+        // 首先保存图片
+        File file = getFile(url);
 
         BufferedInputStream in = new BufferedInputStream(is);
         BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file));
