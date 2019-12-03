@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.nineoldandroids.view.ViewHelper;
 import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.UIUtils;
@@ -97,10 +98,20 @@ public class AnimationActivity extends AppCompatActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();
+                //View外部动画的方式
+                //1.修改parmas后调用requestLayout或setlayoutparams
                 //doAnimate(value, params);
+                //2.Scrollxx移动的是view里的内容
                 //mTargetView.scrollBy(-2,2);
+                //mTargetView.requestLayout();
+                //3.整体都会内容移动
                 //mRlContainer.scrollBy(-2,2);
+                //mRlContainer.requestLayout();
+                //4.通过layout
                 //mTargetView.layout(mTargetView.getLeft() + 1, mTargetView.getTop() + 1, mTargetView.getRight() + 1, mTargetView.getBottom() + 1);
+                //5.更改属性
+                ViewHelper.setTranslationX(mTargetView, ViewHelper.getTranslationX(mTargetView) - 2);
+
             }
         });
         animator.start();
@@ -116,7 +127,7 @@ public class AnimationActivity extends AppCompatActivity {
         params.height = curHeight;
         params.topMargin = mDefaultValue++;
         mTargetView.requestLayout();
-        //mSuppMatrix.postScale(0.999f, 0.999f, params.width / 2, params.height / 2);
+        mSuppMatrix.postScale(0.999f, 0.999f, params.width / 2, params.height / 2);
         mTargetView.setImageMatrix(getDisplayMatrix());
     }
 

@@ -1,5 +1,7 @@
 package algorithm;
 
+import com.sun.tools.javac.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -750,6 +752,89 @@ public class Normal {
                 }
             }*/
             return false;
+        }
+
+        /**
+         * 104. 二叉树的最大深度
+         */
+        public int subMaxDepth(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            return 1 + Math.max(subMaxDepth(root.left), subMaxDepth(root.right));
+        }
+
+        public int maxDepth(TreeNode root) {
+            Stack<Pair<TreeNode, Integer>> stack = new Stack<>();
+            stack.push(new Pair<>(root, 1));
+            int maxDepth = 0;
+            while (!stack.isEmpty()) {
+                Pair<TreeNode, Integer> pop = stack.pop();
+                TreeNode node = pop.fst;
+                int curDepth = pop.snd;
+                maxDepth = Math.max(maxDepth, curDepth);
+                if (node.left != null) {
+                    stack.push(new Pair<>(node.left, curDepth + 1));
+                }
+                if (node.right != null) {
+                    stack.push(new Pair<>(node.right, curDepth + 1));
+                }
+            }
+            return maxDepth;
+        }
+
+        public void DFS(TreeNode root) {
+            Stack<TreeNode> stack = new Stack<>();
+            TreeNode p = root;
+            List<Integer> res = new ArrayList<>();
+            while (!stack.isEmpty() || p != null) {
+                while (p != null) {
+                    stack.push(p);
+                    res.add(p.val);
+                    p = p.left;
+                }
+                TreeNode node = stack.pop();
+                if (node.right != null) {
+                    p = node.right;
+                }
+            }
+        }
+
+        /**
+         * 98. 验证二叉搜索树
+         */
+        public boolean helper(TreeNode root, Integer lower, Integer upper) {
+            if (root == null) {
+                return true;
+            }
+            if (lower != null && root.val < lower)
+                return false;
+            if (upper != null && root.val > upper)
+                return false;
+            if (!helper(root.left, lower, root.val))
+                return false;
+            if (!helper(root.right, root.val, upper))
+                return false;
+            return true;
+        }
+
+        public boolean inorder(TreeNode root) {
+            Stack<TreeNode> stack = new Stack<>();
+            TreeNode p = root;
+            long prevalue = Long.MIN_VALUE;
+            while (!stack.isEmpty() || p != null) {
+                while (p != null) {
+                    stack.push(p);
+                    p = p.left;
+                }
+                TreeNode node = stack.pop();
+                if (node.val <= prevalue) {
+                    return false;
+                }
+                prevalue = node.val;
+                p = node.right;
+            }
+            return true;
         }
     }
 }

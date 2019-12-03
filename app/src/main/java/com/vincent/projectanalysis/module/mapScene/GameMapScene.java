@@ -488,7 +488,7 @@ public class GameMapScene extends MapScene {
         this.mMapClickListener = listener;
     }
 
-    public static interface GameMapClickListener {
+    public interface GameMapClickListener {
         /**
          * 关卡点击事件
          *

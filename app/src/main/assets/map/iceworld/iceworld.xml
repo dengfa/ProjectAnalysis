@@ -1,146 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<map version="1" title="冰雪世界" levelCnt="15">
-	<!--src可能是图片或者颜色-->
-	<background src="#95c2f2"/>  
+<map levelCnt="15" title="冰雪世界" version="1">
+    <!-- 根据-->
 
-	<!--每个关卡描述样式(左侧样式)-->
-	<style id="style_block_left" titleColor="#ffffff" titleFontSize="12" subTitleFontSize="12"
-		subTitleColor="#ffffff" attach="level_15" attachDirection="left"
-		marginLeft="0" marginRight="10"/>
-	<!--每个关卡描述样式(右侧样式)-->
-	<style id="style_block_right" titleColor="#ffffff" titleFontSize="12" subTitleFontSize="12"
-		subTitleColor="#ffffff" attach="level_15" attachDirection="right"
-		marginLeft="10" marginRight=""/>
-	<!--每个关卡索引字体样式-->
-	<style id="style_text_index" width="36" height="34" color="#79a4d2" pressed="#ff0000" disable='#ffffff' fontSize="13" zindex="1" tag="" textAlign=""/>
+    <!--src可能是图片或者颜色-->
+    <background src="#95c2f2" />
 
-	<!--标题层-->
-	<layer id="level_title" zindex="3" depth="-1" width="func(WIDTH)" height="func(HEIGHT)">
-		<title id="title" x="func(WIDTH/2-61)" y="10" width="123" height="43" background="res:map/title_bg.png"
-			title="未知" titleFontSize="16" titleColor="#ffffff"
-			subTitleLeft="0/" subTitleFontSize="12" subTitleLeftColor="#f8cb2f"
-			subTitleRight="0" subTitleRightColor="#ffffff"/>
-	</layer>
+    <!--每个关卡描述样式(左侧样式)-->
+    <style attach="level_15" attachDirection="left" id="style_block_left" marginLeft="0"
+        marginRight="10" subTitleColor="#ffffff" subTitleFontSize="12" titleColor="#ffffff"
+        titleFontSize="12" />
+    <!--每个关卡描述样式(右侧样式)-->
+    <style attach="level_15" attachDirection="right" id="style_block_right" marginLeft="10"
+        marginRight="" subTitleColor="#ffffff" subTitleFontSize="12" titleColor="#ffffff"
+        titleFontSize="12" />
+    <!--每个关卡索引字体样式-->
+    <style color="#79a4d2" disable='#ffffff' fontSize="13" height="34" id="style_text_index"
+        pressed="#ff0000" tag="" textAlign="" width="36" zindex="1" />
 
-	<!--zIndex:层次关系  depth:景深-->
-	<layer id="level_layer" zindex="1" depth="1" width="func(WIDTH)" height="1399">
+    <!--标题层-->
+    <layer depth="-1" height="func(HEIGHT)" id="level_title" width="func(WIDTH)" zindex="3">
+        <title background="res:map/title_bg.png" height="43" id="title" subTitleFontSize="12"
+            subTitleLeft="0/" subTitleLeftColor="#f8cb2f" subTitleRight="0"
+            subTitleRightColor="#ffffff" title="未知" titleColor="#ffffff" titleFontSize="16"
+            width="123" x="func(WIDTH/2-61)" y="10" />
+    </layer>
 
-
-		<line id="line_1" from="level_1" to="level_2" style="dot" color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_2" from="level_2" to="level_3" style="dot" color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_3" from="level_3" to="level_4" style="dot" color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_4" from="level_4" to="level_5" style="dot" color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_5" from="level_5" to="level_6" style="dot"  color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_6" from="level_6" to="level_7" style="dot"  color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_7" from="level_7" to="level_8" style="dot"  color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_8" from="level_8" to="level_9" style="dot"  color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_9" from="level_9" to="level_10" style="dot"  color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_10" from="level_10" to="level_11" style="dot"  color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_11" from="level_11" to="level_12" style="dot"  color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_12" from="level_12" to="level_13" style="dot"  color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_13" from="level_13" to="level_14" style="dot"  color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_14" from="level_14" to="level_15" style="dot"  color="#5899df" open="#ff6666" tag=""/>
-		<line id="line_15" from="level_15" to="bag_15" style="dot"  color="#5899df" open="#ff6666" tag=""/>
+    <!--zIndex:层次关系  depth:景深-->
+    <layer depth="1" height="1399" id="level_layer" width="func(WIDTH)" zindex="1">
 
 
-		<!--level sprite-->
-		<node id="level_15" x="89" y="154" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" tag="">
-			<block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="15" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
-		</node>
-		<node id="level_14" x="57" y="247" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" bagId="bag_11_12" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="14" style="style_text_index"/>
-            <node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
-		</node>
-		<node id="level_13" x="108" y="349" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_left"/>
-			<text text="13" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <line style="dot" color="#5899df" from="level_1" id="line_1" open="#ff6666" tag=""
+            to="level_2" />
+        <line style="dot" color="#5899df" from="level_2" id="line_2" open="#ff6666" tag=""
+            to="level_3" />
+        <line style="dot" color="#5899df" from="level_3" id="line_3" open="#ff6666" tag=""
+            to="level_4" />
+        <line style="dot" color="#5899df" from="level_4" id="line_4" open="#ff6666" tag=""
+            to="level_5" />
+        <line style="dot" color="#5899df" from="level_5" id="line_5" open="#ff6666" tag=""
+            to="level_6" />
+        <line style="dot" color="#5899df" from="level_6" id="line_6" open="#ff6666" tag=""
+            to="level_7" />
+        <line style="dot" color="#5899df" from="level_7" id="line_7" open="#ff6666" tag=""
+            to="level_8" />
+        <line style="dot" color="#5899df" from="level_8" id="line_8" open="#ff6666" tag=""
+            to="level_9" />
+        <line style="dot" color="#5899df" from="level_9" id="line_9" open="#ff6666" tag=""
+            to="level_10" />
+        <line style="dot" color="#5899df" from="level_10" id="line_10" open="#ff6666" tag=""
+            to="level_11" />
+        <line style="dot" color="#5899df" from="level_11" id="line_11" open="#ff6666" tag=""
+            to="level_12" />
+        <line style="dot" color="#5899df" from="level_12" id="line_12" open="#ff6666" tag=""
+            to="level_13" />
+        <line style="dot" color="#5899df" from="level_13" id="line_13" open="#ff6666" tag=""
+            to="level_14" />
+        <line style="dot" color="#5899df" from="level_14" id="line_14" open="#ff6666" tag=""
+            to="level_15" />
+        <line style="dot" color="#5899df" from="level_15" id="line_15" open="#ff6666" tag=""
+            to="bag_15" />
+
+
+        <!--level sprite-->
+        <node height="33" id="level_15" src="res:map/iceworld/icon_level_open.png" tag=""
+            unable="res:map/iceworld/icon_level.png" width="45" x="89" y="154">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="15" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
-		<node id="level_12" x="188" y="402" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" tag="">
-			<block title="未知" subTitle="0/0" style="style_block_left"/>
-			<text text="12" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
-		</node>
-		<node id="level_11" x="264" y="462" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" bagId="bag_11_12" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_left"/>
-			<text text="11" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
-		</node>
-		<node id="level_10" x="200" y="592" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="10" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <node bagId="bag_11_12" height="33" id="level_14" src="res:map/iceworld/icon_level_open.png"
+            tag="" unable="res:map/iceworld/icon_level.png" width="45" x="57" y="247">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="14" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
-		<node id="level_9" x="81" y="638" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" bagId="bag_9_10" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="9" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <node height="33" id="level_13" src="res:map/iceworld/icon_level_open.png" tag=""
+            unable="res:map/iceworld/icon_level.png" width="45" x="108" y="349">
+            <block style="style_block_left" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="13" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
-		<node id="level_8" x="38" y="716" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="8" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <node height="33" id="level_12" src="res:map/iceworld/icon_level_open.png" tag=""
+            unable="res:map/iceworld/icon_level.png" width="45" x="188" y="402">
+            <block style="style_block_left" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="12" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
-		<node id="level_7" x="66" y="792" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="7" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <node bagId="bag_11_12" height="33" id="level_11" src="res:map/iceworld/icon_level_open.png"
+            tag="" unable="res:map/iceworld/icon_level.png" width="45" x="264" y="462">
+            <block style="style_block_left" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="11" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
-		<node id="level_6" x="143" y="859" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" bagId="bag_6_7" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="6" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <node height="33" id="level_10" src="res:map/iceworld/icon_level_open.png" tag=""
+            unable="res:map/iceworld/icon_level.png" width="45" x="200" y="592">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="10" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
-		<node id="level_5" x="206" y="926" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="5" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <node bagId="bag_9_10" height="33" id="level_9" src="res:map/iceworld/icon_level_open.png"
+            tag="" unable="res:map/iceworld/icon_level.png" width="45" x="81" y="638">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="9" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
-		<node id="level_4" x="121" y="1020" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" bagId="bag_4_5" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="4" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <node height="33" id="level_8" src="res:map/iceworld/icon_level_open.png" tag=""
+            unable="res:map/iceworld/icon_level.png" width="45" x="38" y="716">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="8" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
-		<node id="level_3" x="135" y="1104" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="3" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <node height="33" id="level_7" src="res:map/iceworld/icon_level_open.png" tag=""
+            unable="res:map/iceworld/icon_level.png" width="45" x="66" y="792">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="7" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
-		<node id="level_2" x="45" y="1207" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" bagId="bag_2_3" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="2" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <node bagId="bag_6_7" height="33" id="level_6" src="res:map/iceworld/icon_level_open.png"
+            tag="" unable="res:map/iceworld/icon_level.png" width="45" x="143" y="859">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="6" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
-		<node id="level_1" x="70" y="1290" width="45" height="33" src="res:map/iceworld/icon_level_open.png" unable="res:map/iceworld/icon_level.png" tag="">
-            <block title="未知" subTitle="0/0" style="style_block_right"/>
-			<text text="1" style="style_text_index"/>
-			<node src="res:map/icon_lock.png" x="14" y="6" width="17" height="21"/>
+        <node height="33" id="level_5" src="res:map/iceworld/icon_level_open.png" tag=""
+            unable="res:map/iceworld/icon_level.png" width="45" x="206" y="926">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="5" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
+        </node>
+        <node bagId="bag_4_5" height="33" id="level_4" src="res:map/iceworld/icon_level_open.png"
+            tag="" unable="res:map/iceworld/icon_level.png" width="45" x="121" y="1020">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="4" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
+        </node>
+        <node height="33" id="level_3" src="res:map/iceworld/icon_level_open.png" tag=""
+            unable="res:map/iceworld/icon_level.png" width="45" x="135" y="1104">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="3" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
+        </node>
+        <node bagId="bag_2_3" height="33" id="level_2" src="res:map/iceworld/icon_level_open.png"
+            tag="" unable="res:map/iceworld/icon_level.png" width="45" x="45" y="1207">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="2" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
+        </node>
+        <node height="33" id="level_1" src="res:map/iceworld/icon_level_open.png" tag=""
+            unable="res:map/iceworld/icon_level.png" width="45" x="70" y="1290">
+            <block style="style_block_right" subTitle="0/0" title="未知" />
+            <text style="style_text_index" text="1" />
+            <node height="21" src="res:map/icon_lock.png" width="17" x="14" y="6" />
         </node>
 
-		<!--bag sprite-->
-		<node id="bag_2" x="85" y="1155" width="43" height="33" src="res:map/iceworld/bag_clickable.png" unable="res:map/iceworld/bag_unable.png" open="res:map/iceworld/bag_open.png" anchorX="0.5" anchorY="0.5" tag=""/>
-		<node id="bag_4" x="160" y="972" width="43" height="33" src="res:map/iceworld/bag_clickable.png" unable="res:map/iceworld/bag_unable.png" open="res:map/iceworld/bag_open.png" anchorX="0.5" anchorY="0.5" tag=""/>
-		<node id="bag_10" x="233" y="520" width="43" height="33" src="res:map/iceworld/bag_clickable.png" unable="res:map/iceworld/bag_unable.png" open="res:map/iceworld/bag_open.png" anchorX="0.5" anchorY="0.5" tag=""/>
-		<node id="bag_13" x="85" y="293" width="43" height="33" src="res:map/iceworld/bag_clickable.png" unable="res:map/iceworld/bag_unable.png" open="res:map/iceworld/bag_open.png" anchorX="0.5" anchorY="0.5" tag=""/>
-		<node id="bag_15" x="186" y="75" width="32" height="38" src="res:map/iceworld/badge_unfinish.png" unable="res:map/iceworld/badge_unfinish.png" open="res:map/iceworld/badge_finish.png" anchorX="0.5" anchorY="0.5"/>
-	<!--试玩-->
-		<node id="try" x="23" y="1298" width="42" height="16" src="res:map/try.png"/>
-		<node id="anchor" x="51" y="1195" width="34" height="42" src="res:map/iceworld/bg_anchor.png" zindex="10"/>
+        <!--bag sprite-->
+        <node anchorX="0.5" anchorY="0.5" height="33" id="bag_2"
+            open="res:map/iceworld/bag_open.png" src="res:map/iceworld/bag_clickable.png" tag=""
+            unable="res:map/iceworld/bag_unable.png" width="43" x="85" y="1155" />
+        <node anchorX="0.5" anchorY="0.5" height="33" id="bag_4"
+            open="res:map/iceworld/bag_open.png" src="res:map/iceworld/bag_clickable.png" tag=""
+            unable="res:map/iceworld/bag_unable.png" width="43" x="160" y="972" />
+        <node anchorX="0.5" anchorY="0.5" height="33" id="bag_10"
+            open="res:map/iceworld/bag_open.png" src="res:map/iceworld/bag_clickable.png" tag=""
+            unable="res:map/iceworld/bag_unable.png" width="43" x="233" y="520" />
+        <node anchorX="0.5" anchorY="0.5" height="33" id="bag_13"
+            open="res:map/iceworld/bag_open.png" src="res:map/iceworld/bag_clickable.png" tag=""
+            unable="res:map/iceworld/bag_unable.png" width="43" x="85" y="293" />
+        <node anchorX="0.5" anchorY="0.5" height="38" id="bag_15"
+            open="res:map/iceworld/badge_finish.png" src="res:map/iceworld/badge_unfinish.png"
+            unable="res:map/iceworld/badge_unfinish.png" width="32" x="186" y="75" />
+        <!--试玩-->
+        <node height="16" id="try" src="res:map/try.png" width="42" x="23" y="1298" />
+        <node height="42" id="anchor" src="res:map/iceworld/bg_anchor.png" width="34" x="51"
+            y="1195" zindex="10" />
 
-	</layer>
+    </layer>
 
-	<!--背景层-->
-	<layer id="background_layer" zindex="0" depth="1" width="func(WIDTH)" height="1399">
-		<node id="bg_1" x="0" y="98" width="64" height="232" src="res:map/iceworld/bg_0_156.png"/>
-		<node id="bg_2" x="0" y="398" width="162" height="342" src="res:map/iceworld/bg_0_756.png"/>
-		<node id="bg_3" x="0" y="857" width="105" height="287" src="res:map/iceworld/bg_0_1674.png" />
-		<node id="bg_4" x="0" y="1326" width="320" height="73" src="res:map/iceworld/bg_0_2632.png"/>
-		<node id="bg_5" x="146" y="123" width="174" height="239" src="res:map/iceworld/bg_292_206.png"/>
-		<node id="bg_6" x="196" y="663" width="124" height="352" src="res:map/iceworld/bg_392_1285.png"/>
-		<node id="bg_8" x="254" y="1076" width="66" height="153" src="res:map/iceworld/bg_503_2111.png"/>
-		<node id="bg_7" x="216" y="1215" width="104" height="154" src="res:map/iceworld/bg_431_2449.png"/>
-	</layer>
+    <!--背景层-->
+    <layer depth="1" height="1399" id="background_layer" width="func(WIDTH)" zindex="0">
+        <node height="232" id="bg_1" src="res:map/iceworld/bg_0_156.png" width="64" x="0" y="98" />
+        <node height="342" id="bg_2" src="res:map/iceworld/bg_0_756.png" width="162" x="0"
+            y="398" />
+        <node height="287" id="bg_3" src="res:map/iceworld/bg_0_1674.png" width="105" x="0"
+            y="857" />
+        <node height="73" id="bg_4" src="res:map/iceworld/bg_0_2632.png" width="320" x="0"
+            y="1326" />
+        <node height="239" id="bg_5" src="res:map/iceworld/bg_292_206.png" width="174" x="146"
+            y="123" />
+        <node height="352" id="bg_6" src="res:map/iceworld/bg_392_1285.png" width="124" x="196"
+            y="663" />
+        <node height="153" id="bg_8" src="res:map/iceworld/bg_503_2111.png" width="66" x="254"
+            y="1076" />
+        <node height="154" id="bg_7" src="res:map/iceworld/bg_431_2449.png" width="104" x="216"
+            y="1215" />
+    </layer>
 </map>
