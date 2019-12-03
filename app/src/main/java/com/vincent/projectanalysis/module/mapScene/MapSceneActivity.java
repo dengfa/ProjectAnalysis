@@ -8,7 +8,6 @@ import com.vincent.projectanalysis.bean.OnlineMapDetailInfo;
 import com.vincent.projectanalysis.module.mapScene.base.CNode;
 import com.vincent.projectanalysis.module.mapScene.base.CScene;
 import com.vincent.projectanalysis.module.mapScene.base.RenderView;
-import com.vincent.projectanalysis.module.mapScene.practicemap.GameMapScene2;
 import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.UIUtils;
 
@@ -16,7 +15,7 @@ import java.util.HashMap;
 
 public class MapSceneActivity extends AppCompatActivity {
 
-    private GameMapScene2 mGameMapScene;
+    private GameMapScene mGameMapScene;
     private static HashMap<String, String> MAPS = new HashMap<String, String>();
 
     static {
@@ -38,7 +37,7 @@ public class MapSceneActivity extends AppCompatActivity {
 
         final int screenWidth = UIUtils.getWindowWidth(MapSceneActivity.this);
         final int screenHeight = UIUtils.getWindowHeight(MapSceneActivity.this);
-        mGameMapScene = new  GameMapScene2(MapSceneActivity.this, mDirector);
+        mGameMapScene = new  GameMapScene(MapSceneActivity.this, mDirector);
         showScene(mGameMapScene);
         mGameMapScene.setGameMapClickListener(mMapClickListener);
         String path = MAPS.get("1");
