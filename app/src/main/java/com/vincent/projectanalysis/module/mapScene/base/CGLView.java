@@ -13,7 +13,6 @@ import android.view.View;
 
 import com.vincent.projectanalysis.module.mapScene.Director;
 import com.vincent.projectanalysis.module.mapScene.EngineConfig;
-import com.vincent.projectanalysis.utils.LogUtil;
 
 /**
  * 视图基类
@@ -91,7 +90,7 @@ public class CGLView extends View implements RenderView {
         if (scene != null) {
             long start = System.currentTimeMillis();
             scene.render(canvas);
-            LogUtil.d("vincent", "drawEngine cost: " + (System.currentTimeMillis() - start));
+            //LogUtil.d("vincent", "drawEngine cost: " + (System.currentTimeMillis() - start));
         }
     }
 

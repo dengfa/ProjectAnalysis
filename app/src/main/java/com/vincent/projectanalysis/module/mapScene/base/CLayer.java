@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 import com.vincent.projectanalysis.module.mapScene.Director;
+import com.vincent.projectanalysis.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -98,7 +99,8 @@ public class CLayer extends CNode {
 
     /**
      * 添加渲染节点
-     * @param node node
+     *
+     * @param node   node
      * @param zIndex z轴索引
      */
     public synchronized void addNode(CNode node, int zIndex) {
@@ -137,7 +139,7 @@ public class CLayer extends CNode {
 
         if (mTargetNode != null)
             return mTargetNode.dispatchTouchEvent(ev);
-        
+
         boolean isIntercept = onInterceptTouchEvent(ev);
         if (isIntercept) {
             return onTouch(ev);
@@ -218,6 +220,8 @@ public class CLayer extends CNode {
     }
 
     protected boolean isScrollable() {
+        LogUtil.d("vincent", "isScrollable getHeight() = " + getHeight());
+        LogUtil.d("vincent", "isScrollable ViewSizeHeight() = " + getDirector().getViewSize().height());
         return getHeight() > getDirector().getViewSize().height();
     }
 

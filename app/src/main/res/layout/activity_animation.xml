@@ -9,41 +9,39 @@
 
 
     <TextView
-        android:layout_marginTop="150dp"
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:gravity="center"
+        android:layout_marginTop="150dp"
         android:background="@color/gray"
+        android:gravity="center"
         android:onClick="bottomButtonClick"
         android:text="bottom" />
 
 
     <Button
-        android:gravity="center"
-        android:background="@color/green_leep"
-        android:layout_marginTop="200dp"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:layout_marginTop="200dp"
+        android:background="@color/green_leep"
+        android:gravity="center"
         android:onClick="topTextClick"
         android:text="text" />
 
 
-    <FrameLayout
-
-        android:layout_marginTop="150dp"
+    <com.vincent.projectanalysis.widgets.CustomFrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="150dp"
         android:padding="50dp">
 
-        <Button
+        <com.vincent.projectanalysis.widgets.CustomButton
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:background="@color/blue_default_50"
             android:onClick="topButtonClick"
             android:text="top" />
-    </FrameLayout>
-
+    </com.vincent.projectanalysis.widgets.CustomFrameLayout>
 
 
     <LinearLayout

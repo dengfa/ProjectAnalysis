@@ -7,6 +7,7 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.Scroller;
 
 import com.vincent.projectanalysis.module.mapScene.Director;
+import com.vincent.projectanalysis.utils.LogUtil;
 
 /**
  * Created by yangzc on 16/4/19.
@@ -93,13 +94,16 @@ public class CScrollLayer extends CLayer {
                 addTrackerMovement(event);
                 int minY = -getHeight() + getDirector().getViewSize().height();
                 if (getScrollY() + y - mLastY < minY) {
+                    LogUtil.d("vincent", "ACTION_MOVE_1 minY - " + minY);
                     scrollTo(0, minY);
                 } else if (getScrollY() + y - mLastY > 0) {
                     scrollTo(0, 0);
+                    LogUtil.d("vincent", "ACTION_MOVE_2");
                 } else {
                     int dy = (int) (y - mLastY);
                     scrollBy(0, dy);
                     mLastY = y;
+                    LogUtil.d("vincent", "ACTION_MOVE_3");
                 }
                 break;
             }
