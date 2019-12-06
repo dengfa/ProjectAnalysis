@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -171,6 +172,10 @@ public class AnimationActivity extends AppCompatActivity {
     public void bottomButtonClick(View view) {
         LogUtil.d("vincent", "bottomButtonClick");
         SimpleCustomAnimation animation = new SimpleCustomAnimation();
+        animation.setDuration(1000);
+        animation.setRepeatMode(Animation.REVERSE);
+        animation.setRepeatCount(Animation.INFINITE);
+        view.startAnimation(animation);
     }
 
     public void topTextClick(View view) {

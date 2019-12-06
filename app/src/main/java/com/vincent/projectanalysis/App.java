@@ -3,6 +3,8 @@ package com.vincent.projectanalysis;
 import android.app.Application;
 import android.content.Context;
 
+import com.vincent.db.BoxDataBase;
+import com.vincent.db.DataBaseManager;
 import com.vincent.projectanalysis.utils.CrashHandler;
 
 public class App extends Application {
@@ -15,6 +17,8 @@ public class App extends Application {
         super.onCreate();
         mAppContext = this;
         CrashHandler.getInstance().init(this);
+        // 初始化数据库
+        DataBaseManager.getDataBaseManager().registDataBase(new BoxDataBase(this));
     }
 
     /*

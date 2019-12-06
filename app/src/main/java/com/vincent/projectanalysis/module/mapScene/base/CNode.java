@@ -7,7 +7,6 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 import com.vincent.projectanalysis.module.mapScene.Director;
-import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.UIUtils;
 
 import java.util.Random;
@@ -420,15 +419,10 @@ public abstract class CNode {
 
     public boolean needDraw() {
         if (mParent != null && mParent instanceof CLayer) {
-            int scrollX = 0, scrollY = 0;
-            scrollX = ((CLayer) mParent).getScrollX();
+            int scrollY = 0;
             scrollY = ((CLayer) mParent).getScrollY();
             int y = mPosition.y + scrollY;
             if (y < 0 - getHeight() || y > mDirector.getViewSize().height()) {
-                LogUtil.d("vincent", "needDraw - " + false);
-                LogUtil.d("vincent", "needDraw dy = " + y);
-                LogUtil.d("vincent", "scrollY  = " + scrollY);
-                LogUtil.d("vincent", "mPosition.y  = " + mPosition.y);
                 return false;
             }
         }

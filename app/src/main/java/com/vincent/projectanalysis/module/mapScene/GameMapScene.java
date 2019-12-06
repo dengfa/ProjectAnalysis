@@ -48,7 +48,7 @@ public class GameMapScene extends MapScene {
         }
         //初始化所有关卡
         setLevelStatus("level_1", STATUS_LEVEL_OPEN, false);
-        setAnchor("level_1");
+        //setAnchor("level_3");
         setTry("level_1", false);
         mCurrentLevel = 1;
     }

@@ -50,6 +50,7 @@ public class MapSceneActivity extends AppCompatActivity {
         @Override
         public void onNodeClick(OnlineMapDetailInfo.OnlineLevelInfo levelInfo, CNode node) {
             LogUtil.d("GameMapFragment", "onNodeClick: ");
+            mGameMapScene.nextLevel(false,true);
         }
 
         @Override
