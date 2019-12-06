@@ -463,14 +463,8 @@ public class GameMapScene extends MapScene {
             StateSprite levelSprite = (StateSprite) findNodeById(levelId);
             if (levelSprite != null) {
                 switch (status) {
-                    case STATUS_LEVEL_LOCKED: {
-                        levelSprite.setOnNodeClickListener(mNodeClickListener);
-                        break;
-                    }
-                    case STATUS_LEVEL_UNLOCK: {
-                        levelSprite.setOnNodeClickListener(mNodeClickListener);
-                        break;
-                    }
+                    case STATUS_LEVEL_LOCKED:
+                    case STATUS_LEVEL_UNLOCK:
                     case STATUS_LEVEL_OPEN: {
                         levelSprite.setOnNodeClickListener(mNodeClickListener);
                         break;

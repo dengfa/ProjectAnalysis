@@ -26,6 +26,10 @@ public class AnimationActivity extends AppCompatActivity {
 
     @BindView(R.id.rl_container)
     RelativeLayout mRlContainer;
+
+    @BindView(R.id.tv_bottom)
+    View mTvBottom;
+
     private int       mScreenWidth;
     private ImageView mTargetView;
     private int       mTargetViewWidth;
@@ -166,6 +170,7 @@ public class AnimationActivity extends AppCompatActivity {
 
     public void bottomButtonClick(View view) {
         LogUtil.d("vincent", "bottomButtonClick");
+        SimpleCustomAnimation animation = new SimpleCustomAnimation();
     }
 
     public void topTextClick(View view) {

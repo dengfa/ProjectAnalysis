@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 import com.vincent.projectanalysis.module.mapScene.Director;
-import com.vincent.projectanalysis.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -220,8 +219,6 @@ public class CLayer extends CNode {
     }
 
     protected boolean isScrollable() {
-        LogUtil.d("vincent", "isScrollable getHeight() = " + getHeight());
-        LogUtil.d("vincent", "isScrollable ViewSizeHeight() = " + getDirector().getViewSize().height());
         return getHeight() > getDirector().getViewSize().height();
     }
 

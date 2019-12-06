@@ -1,6 +1,7 @@
 package com.vincent.projectanalysis.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.vincent.projectanalysis.R;
+import com.vincent.projectanalysis.activity.MyMapSceneActivity;
 import com.vincent.projectanalysis.utils.LogUtil;
 
 public class Main2Fragment extends Fragment implements AdapterView.OnItemClickListener {
@@ -20,7 +22,7 @@ public class Main2Fragment extends Fragment implements AdapterView.OnItemClickLi
     private ListView mListView;
 
     private String[] tabs = {
-            "KnowBox",
+            "MyMapSceneActivity",
     };
 
     public Main2Fragment() {
@@ -85,7 +87,7 @@ public class Main2Fragment extends Fragment implements AdapterView.OnItemClickLi
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
-                //startActivity(new Intent(getActivity(), KnowBoxMainActivity.class));
+                startActivity(new Intent(getActivity(), MyMapSceneActivity.class));
                 break;
         }
     }

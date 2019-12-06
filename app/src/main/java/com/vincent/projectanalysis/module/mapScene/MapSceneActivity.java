@@ -28,7 +28,7 @@ public class MapSceneActivity extends AppCompatActivity {
         setContentView(R.layout.activity_map_scene);
 
         mDirector = new Director(this);
-        mDirector.setRefreshDelay(20);
+        mDirector.setRefreshDelay(5);
 
         mDirector.start();
 
