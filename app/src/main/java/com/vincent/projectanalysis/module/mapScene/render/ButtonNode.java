@@ -61,6 +61,9 @@ public class ButtonNode extends CNode {
     @Override
     public void render(Canvas canvas) {
         super.render(canvas);
+        if (!needDraw()){
+            return;
+        }
         mRect.set(getPosition().x, getPosition().y, getPosition().x + getWidth(),
                 getPosition().y + getHeight());
 

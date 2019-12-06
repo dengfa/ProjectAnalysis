@@ -119,6 +119,9 @@ public class BlockNode extends CNode {
     @Override
     public void render(Canvas canvas) {
         super.render(canvas);
+        if (!needDraw()){
+            return;
+        }
         mPaint.setTextSize(mTitleFontSize);
         mPaint.setColor(mTitleColor);
 

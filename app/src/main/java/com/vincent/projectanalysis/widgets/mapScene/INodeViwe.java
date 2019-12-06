@@ -1,4 +1,4 @@
-package com.vincent.projectanalysis.module.mapScene.base;
+package com.vincent.projectanalysis.widgets.mapScene;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -7,7 +7,9 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 
 import com.vincent.projectanalysis.module.mapScene.Director;
-import com.vincent.projectanalysis.utils.LogUtil;
+import com.vincent.projectanalysis.module.mapScene.base.CLayer;
+import com.vincent.projectanalysis.module.mapScene.base.CNode;
+import com.vincent.projectanalysis.module.mapScene.base.RenderView;
 import com.vincent.projectanalysis.utils.UIUtils;
 
 import java.util.Random;
@@ -17,7 +19,7 @@ import java.util.Random;
  *
  * @author yangzc
  */
-public abstract class CNode {
+public abstract class INodeViwe {
 
     public static final int FILL_PARENT = -1;
 
@@ -27,12 +29,12 @@ public abstract class CNode {
     private int    mZIndex;
     private String mId;
     private String mTag;
-    private int    mX = 0, mY = 0;
+    private int mX = 0, mY = 0;
     private int     mWidth    = FILL_PARENT;
     private int     mHeight   = FILL_PARENT;
     private boolean isVisible = true;
 
-    private        Paint  mPaint;
+    private Paint mPaint;
     //对齐方式
     protected      CAlign mAlign    = null;
     //花费的时间
@@ -42,7 +44,7 @@ public abstract class CNode {
 
     private Director mDirector;
 
-    public CNode(Director director) {
+    public INodeViwe(Director director) {
         this.mDirector = director;
     }
 
@@ -54,13 +56,13 @@ public abstract class CNode {
      * 渲染
      */
     public void render(Canvas canvas) {
-        if (!isValid() || !isVisible() || !needDraw()) {
-            return;
-        }
-        if (mPaint != null) {
-            canvas.drawRect(new Rect(getPosition().x, getPosition().y,
-                    getPosition().x + getWidth(), getPosition().y + getHeight()), mPaint);
-        }
+        //        if (!isValid() || !isVisible()) {
+        //            return;
+        //        }
+        //        if (mPaint != null) {
+        //            canvas.drawRect(new Rect(getPosition().x, getPosition().y,
+        //                    getPosition().x + getWidth(), getPosition().y + getHeight()), mPaint);
+        //        }
     }
 
     /**
@@ -377,7 +379,7 @@ public abstract class CNode {
         return mId;
     }
 
-    public CNode findNodeById(String id) {
+    public INodeViwe findNodeById(String id) {
         if (id != null && id.equals(getId())) {
             return this;
         }
@@ -405,7 +407,7 @@ public abstract class CNode {
     }
 
     public interface OnNodeClickListener {
-        void onClick(CNode node);
+        void onClick(INodeViwe node);
     }
 
     private boolean mTouchable = false;
@@ -416,22 +418,5 @@ public abstract class CNode {
 
     public boolean isTouchable() {
         return mTouchable;
-    }
-
-    public boolean needDraw() {
-        if (mParent != null && mParent instanceof CLayer) {
-            int scrollX = 0, scrollY = 0;
-            scrollX = ((CLayer) mParent).getScrollX();
-            scrollY = ((CLayer) mParent).getScrollY();
-            int y = mPosition.y + scrollY;
-            if (y < 0 - getHeight() || y > mDirector.getViewSize().height()) {
-                LogUtil.d("vincent", "needDraw - " + false);
-                LogUtil.d("vincent", "needDraw dy = " + y);
-                LogUtil.d("vincent", "scrollY  = " + scrollY);
-                LogUtil.d("vincent", "mPosition.y  = " + mPosition.y);
-                return false;
-            }
-        }
-        return true;
     }
 }

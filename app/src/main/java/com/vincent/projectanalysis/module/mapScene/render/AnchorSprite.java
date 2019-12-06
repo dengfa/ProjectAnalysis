@@ -49,7 +49,9 @@ public class AnchorSprite extends StateSprite {
     @Override
     public synchronized void render(Canvas canvas) {
         super.render(canvas);
-
+        if (!needDraw()){
+            return;
+        }
         Point position = this.getPosition();
         int rc = canvas.save();
         if (position == null) {

@@ -86,6 +86,9 @@ public class CTextNode extends CNode {
 	@Override
 	public synchronized void render(Canvas canvas) {
 		super.render(canvas);
+		if (!needDraw()){
+			return;
+		}
 		if(TextUtils.isEmpty(mText) || mPaint == null)
 			return;
 		

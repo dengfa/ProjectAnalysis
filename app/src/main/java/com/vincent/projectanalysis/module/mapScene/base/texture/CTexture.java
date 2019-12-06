@@ -33,6 +33,9 @@ public class CTexture extends CBaseTexture {
 	@Override
 	public void render(Canvas canvas) {
 		super.render(canvas);
+		if (!needDraw()){
+			return;
+		}
 		if(mBitmap == null || mMatrix == null 
 				|| mPaint == null || mBitmap.isRecycled())
 			return;

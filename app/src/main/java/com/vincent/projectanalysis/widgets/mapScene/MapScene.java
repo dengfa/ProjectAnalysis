@@ -79,7 +79,6 @@ public class MapScene extends View {
         super.onLayout(changed, left, top, right, bottom);
         mWidth = getWidth();
         mMatrix.postScale(mWidth * 1.0f / mBitmaps[4].getWidth(), mWidth * 1.0f / mBitmaps[4].getWidth());
-        mMatrix.postTranslate(0, mBitmaps[4].getHeight());
 
     }
 
@@ -102,15 +101,19 @@ public class MapScene extends View {
         canvas.restore();
         canvas.restore();
 
+
         canvas.save();
-        canvas.translate(mWidth - mBitmaps[3].getWidth(), mapHeight - mBitmaps[3].getHeight());
-        canvas.drawBitmap(mBitmaps[3], 0, 0, mPaint);
+        //mMatrix.postTranslate(0,mapHeight - mBitmaps[4].getHeight());
+        float[] values = new float[9];
+        mMatrix.getValues(values);
+        float scaleX = values[Matrix.MSCALE_X];
+        canvas.translate(0, (mapHeight - mBitmaps[4].getHeight() * scaleX));
+        canvas.drawBitmap(mBitmaps[4], mMatrix, mPaint);
         canvas.restore();
 
         canvas.save();
-        //canvas.translate(0, mapHeight - mBitmaps[4].getHeight());
-        //mMatrix.postTranslate(0,mapHeight - mBitmaps[4].getHeight());
-        canvas.drawBitmap(mBitmaps[4], mMatrix, mPaint);
+        canvas.translate(mWidth - mBitmaps[3].getWidth(), mapHeight - mBitmaps[3].getHeight());
+        canvas.drawBitmap(mBitmaps[3], 0, 0, mPaint);
         canvas.restore();
     }
 
@@ -124,13 +127,13 @@ public class MapScene extends View {
             case MotionEvent.ACTION_DOWN: {
                 mLastX = x;
                 mLastY = y;
-                //abortScroller();
-                //initOrResetVelocityTracker();
-                //addTrackerMovement(event);
+                abortScroller();
+                initOrResetVelocityTracker();
+                addTrackerMovement(event);
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
-                //addTrackerMovement(event);
+                addTrackerMovement(event);
                 int minY = mapHeight - getHeight();
                 int dy = -(int) (y - mLastY);
                 if (getScrollY() + dy >= minY) {
@@ -145,19 +148,20 @@ public class MapScene extends View {
                 break;
             }
             case MotionEvent.ACTION_UP: {
-                /*mDragging = false;
+                mDragging = false;
                 addTrackerMovement(event);
                 abortScroller();
                 if (mVelocityTracker != null) {
                     mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
                     float yVelocity = mVelocityTracker.getYVelocity();
                     if (Math.abs(yVelocity) > mMinimumVelocity) {
-                        int minY = -getHeight() + mapHeight;
-                        mScroller.fling(0, getScrollY(), 0, (int) yVelocity
-                                , 0, 0, minY, 0);
+                        int minY = mapHeight - getHeight();
+                        mScroller.fling(0, getScrollY(), 0, -(int) yVelocity
+                                , 0, 0, 0, minY);
+                        invalidate();
                     }
                 }
-                recycleTracker();*/
+                recycleTracker();
                 break;
             }
         }
@@ -188,6 +192,15 @@ public class MapScene extends View {
         if (mVelocityTracker != null) {
             mVelocityTracker.recycle();
             mVelocityTracker = null;
+        }
+    }
+
+    @Override
+    public void computeScroll() {
+        super.computeScroll();
+        if (mScroller.computeScrollOffset()) {
+            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+            postInvalidate();
         }
     }
 }
