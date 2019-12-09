@@ -14,10 +14,6 @@ public class Basic {
 
     public static void main(String[] args) {
         System.out.println("Hello JAVA!");
-        float a = 1.0f - 0.9f;
-        float b = 0.9f - 0.8f;
-        System.out.println("a == b " + (a == b));
-
 
         try {
             Solution.isValid(")}{({))[{{[}");

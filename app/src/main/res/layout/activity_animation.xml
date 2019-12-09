@@ -4,29 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl_container"
     android:layout_width="match_parent"
+    android:layout_gravity="top"
     android:layout_height="match_parent"
     tools:context=".animation.AnimationActivity">
 
 
-    <TextView
-        android:id="@+id/tv_bottom"
+    <RelativeLayout
         android:layout_width="200dp"
         android:layout_height="150dp"
-        android:layout_marginTop="150dp"
-        android:background="@color/gray"
-        android:gravity="center"
-        android:onClick="bottomButtonClick"
-        android:text="bottom" />
+        android:layout_marginTop="150dp">
+
+        <TextView
+            android:id="@+id/tv_bottom"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:onClick="bottomButtonClick"
+            android:text="bottom" />
 
 
-    <Button
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="200dp"
-        android:background="@color/green_leep"
-        android:gravity="center"
-        android:onClick="topTextClick"
-        android:text="text" />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:background="@color/green_leep"
+            android:gravity="center"
+            android:onClick="topTextClick"
+            android:text="text" />
+    </RelativeLayout>
 
 
     <com.vincent.projectanalysis.widgets.CustomFrameLayout

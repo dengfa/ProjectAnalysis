@@ -1,7 +1,5 @@
 package algorithm;
 
-import com.sun.tools.javac.util.Pair;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -382,6 +380,22 @@ public class Normal {
                 }
             }
             return s.substring(maxL, maxR + 1);
+        }
+
+        public String longestPalindrome2(String s) {
+            int n = s.length();
+            boolean[][] dp = new boolean[n][n];
+            String res = "";
+            for (int i = n - 1; i >= 0; i--) {
+                for (int j = i; j < n; j++) {
+                    //j - i < 2这个判断很巧妙
+                    dp[i][j] = s.charAt(i) == s.charAt(j) && (j - i < 2 || dp[i + 1][j - 1]);
+                    if (dp[i][j] && j - i + 1 > res.length()) {
+                        res = s.substring(i, j + 1);
+                    }
+                }
+            }
+            return res;
         }
 
         public int expand(String s, int left, int right) {
@@ -765,7 +779,7 @@ public class Normal {
         }
 
         public int maxDepth(TreeNode root) {
-            Stack<Pair<TreeNode, Integer>> stack = new Stack<>();
+            /*Stack<Pair<TreeNode, Integer>> stack = new Stack<>();
             stack.push(new Pair<>(root, 1));
             int maxDepth = 0;
             while (!stack.isEmpty()) {
@@ -780,7 +794,8 @@ public class Normal {
                     stack.push(new Pair<>(node.right, curDepth + 1));
                 }
             }
-            return maxDepth;
+            return maxDepth;*/
+            return 0;
         }
 
         public void DFS(TreeNode root) {

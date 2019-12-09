@@ -1,5 +1,7 @@
 package com.vincent.projectanalysis.animation;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -57,6 +59,7 @@ public class AnimationActivity extends AppCompatActivity {
         mTargetView.setScaleType(ImageView.ScaleType.MATRIX);
         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
         mRlContainer.addView(mTargetView, params);
+        mTargetView.setVisibility(View.GONE);
 
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         mScreenWidth = displayMetrics.widthPixels;
@@ -178,7 +181,22 @@ public class AnimationActivity extends AppCompatActivity {
         view.startAnimation(animation);
     }
 
-    public void topTextClick(View view) {
+    public void topTextClick(final View view) {
         LogUtil.d("vincent", "topTextClick");
+        LogUtil.d("vincent", "view width before " + view.getWidth());
+        AnimatorSet animatorSet = new AnimatorSet();
+        animatorSet.playTogether(
+                ObjectAnimator.ofFloat(view, "translationX", view.getX() + 200),
+                ObjectAnimator.ofFloat(view, "scaleX", 1.5f),
+                ObjectAnimator.ofFloat(view, "scaleY", 1.5f));
+        animatorSet.setDuration(1000);
+        animatorSet.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                LogUtil.d("vincent", "view width " + view.getWidth());
+            }
+        });
+        animatorSet.start();
     }
 }
