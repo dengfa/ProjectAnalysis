@@ -102,4 +102,9 @@ public class Template {
             }
         }
     }
+
+    /**
+     * 四个方向搜索
+     */
+    public int[][] scans = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 }

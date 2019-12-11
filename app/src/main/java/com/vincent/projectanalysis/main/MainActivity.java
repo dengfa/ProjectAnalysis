@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import com.vincent.projectanalysis.fragment.Main3Fragment;
 import com.vincent.projectanalysis.fragment.Main4Fragment;
 import com.vincent.projectanalysis.fragment.Main5Fragment;
 import com.vincent.projectanalysis.fragment.Main6Fragment;
+import com.vincent.projectanalysis.fragment.StateFragment;
 import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.MD5Util;
 import com.vincent.projectanalysis.utils.StatusBarUtil;
@@ -39,11 +41,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewPager mVpMain;
+    ViewPager      mVpMain;
     MagicIndicator mIndicator;
-    private List<Fragment> mFragments = new ArrayList<>();
-    private String[] mModuleTitles = new String[]{"demo", "t2","t3", "t4","t5", "t6"};
-    private MainAdapter mMainAdapter;
+    private List<Fragment> mFragments    = new ArrayList<>();
+    private String[]       mModuleTitles = new String[]{"demo", "t2", "t3", "t4", "t5", "t6"};
+    private MainAdapter    mMainAdapter;
+    private StateFragment  stateFragment;
+    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,15 @@ public class MainActivity extends AppCompatActivity {
         } else {
             addContacts();
         }
+
+        mFragmentManager = getSupportFragmentManager();
+        stateFragment = (StateFragment) mFragmentManager.findFragmentByTag("state");
+        if (stateFragment == null) {
+            FragmentTransaction transaction = mFragmentManager.beginTransaction();
+            stateFragment = new StateFragment();
+            transaction.add(stateFragment, "state");
+            transaction.commit();
+        }
     }
 
     private void initView() {
@@ -91,13 +104,33 @@ public class MainActivity extends AppCompatActivity {
         mFragments.add(new MainComponnentsFragment());
         //mFragments.add(new MainFragment());
         //mFragments.add(new MainKnowboxFragment());
-        mFragments.add(new Main2Fragment());
+        Main2Fragment main2Fragment = new Main2Fragment();
+        main2Fragment.setArgs("args");
+        mFragments.add(main2Fragment);
         mFragments.add(new Main3Fragment());
         mFragments.add(new Main4Fragment());
         mFragments.add(new Main5Fragment());
         mFragments.add(new Main6Fragment());
         LogUtil.d("vincent", "notifyDataSetChanged");
         mMainAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        LogUtil.d("vincent", "onSaveInstanceState");
+        stateFragment.setArgs("success!!!");
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        stateFragment = (StateFragment) fragmentManager.findFragmentByTag("state");
+        LogUtil.d("vincent", "onRestoreInstanceState");
+        if (stateFragment != null) {
+            LogUtil.d("vincent", "getArgs - " + stateFragment.getArgs());
+        }
     }
 
     private void addContacts() {
@@ -203,5 +236,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFragmentManager.beginTransaction().remove(stateFragment).commit();
     }
 }

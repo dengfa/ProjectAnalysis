@@ -15,28 +15,28 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.vincent.projectanalysis.R;
-import com.vincent.projectanalysis.activity.DemoActivity;
-import com.vincent.projectanalysis.activity.FragmentTestActivity;
 import com.vincent.projectanalysis.activity.MyMapSceneActivity;
 import com.vincent.projectanalysis.utils.LogUtil;
 
-public class Main2Fragment extends Fragment implements AdapterView.OnItemClickListener {
+public class StateFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private ListView mListView;
 
     private String[] tabs = {
             "MyMapSceneActivity",
-            "DemoActivity",
-            "FragmentTestActivity"
     };
     private String   mTest;
 
-    public Main2Fragment() {
+    public StateFragment() {
         super();
     }
 
     public void setArgs(String test) {
         mTest = test;
+    }
+
+    public String getArgs() {
+        return mTest;
     }
 
     @Override
@@ -50,6 +50,7 @@ public class Main2Fragment extends Fragment implements AdapterView.OnItemClickLi
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         LogUtil.d("vincent", this.getClass().getSimpleName() + " onCreate");
     }
 
@@ -98,12 +99,6 @@ public class Main2Fragment extends Fragment implements AdapterView.OnItemClickLi
         switch (position) {
             case 0:
                 startActivity(new Intent(getActivity(), MyMapSceneActivity.class));
-                break;
-            case 1:
-                startActivity(new Intent(getActivity(), DemoActivity.class));
-                break;
-            case 2:
-                startActivity(new Intent(getActivity(), FragmentTestActivity.class));
                 break;
         }
     }

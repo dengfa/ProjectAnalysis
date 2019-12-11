@@ -22,6 +22,15 @@ android {
     dataBinding {
         enabled = true
     }
+    flavorDimensions 'df'
+    productFlavors {
+        ss {
+            dimension = 'df'
+            applicationId = 'com.baidu'
+            versionCode = 1
+            versionName = '1'
+        }
+    }
 }
 
 allprojects {

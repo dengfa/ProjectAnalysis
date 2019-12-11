@@ -27,12 +27,11 @@ public class Test {
         System.out.println("ir == ir2 " + (ir == ir2));
         System.out.println("ir = " + ir);
         System.out.println("ir2 = " + ir2);
-        change(str,ints,strs,ir2, ir);
+        change(str, ints, strs, ir2, ir);
         System.out.println("ir = " + ir);
         System.out.println("ir2 = " + ir2);
         System.out.println("strs = " + Arrays.toString(strs));
         System.out.println("ints = " + Arrays.toString(ints));
-
     }
 
     public static void change(String str, int[] is, String[] strs, int i, Integer ir) {

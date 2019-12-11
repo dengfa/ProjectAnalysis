@@ -20,7 +20,7 @@ public class Main6Fragment extends Fragment implements AdapterView.OnItemClickLi
     private ListView mListView;
 
     private String[] tabs = {
-            "KnowBox",
+            "Main6Fragment",
     };
 
     public Main6Fragment() {

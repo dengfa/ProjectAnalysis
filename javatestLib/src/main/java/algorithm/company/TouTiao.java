@@ -69,11 +69,11 @@ public class TouTiao {
             int end = nums.length - 1;
             int target = -nums[i];
             //!!!1
-            if (nums[i] > 0){
+            if (nums[i] > 0) {
                 break;
             }
             //!!!2去重
-            if (i > 0 && nums[i] == nums[i-1]){
+            if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
             while (start < end) {
@@ -89,10 +89,10 @@ public class TouTiao {
                     res.add(temp);*/
                     //!!!3
                     res.add(Arrays.asList(nums[i], nums[start], nums[end]));
-                    while (start < end && nums[start] == nums[start+1]){
+                    while (start < end && nums[start] == nums[start + 1]) {
                         start++;
                     }
-                    while (start < end && nums[end] == nums[end-1]){
+                    while (start < end && nums[end] == nums[end - 1]) {
                         end--;
                     }
                     //!!!4
@@ -102,5 +102,128 @@ public class TouTiao {
             }
         }
         return res;
+    }
+
+    /**
+     * 695. 岛屿的最大面积
+     *
+     * @param grid
+     * @return
+     */
+    public int maxAreaOfIsland(int[][] grid) {
+        int max = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    max = Math.max(dfs(grid, i, j), max);
+                }
+            }
+        }
+        return max;
+    }
+
+    public int[][] scans = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+
+    public int dfs(int[][] grid, int r, int c) {
+        if (!check(grid, r, c) || grid[r][c] == 0) {
+            return 0;
+        }
+        int res = 0;
+        if (grid[r][c] == 1) {
+            res++;
+            grid[r][c] = 0;
+        }
+        for (int[] scan : scans) {
+            res += dfs(grid, r + scan[0], c + scan[1]);
+        }
+        return res;
+    }
+
+    public <T> boolean check(int[][] grid, int r, int c) {
+        return r >= 0 && r < grid.length && c >= 0 && c < grid[0].length;
+    }
+
+    /**
+     * 200. 岛屿数量
+     */
+    public int numIslands(char[][] grid) {
+        int num = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == '1') {
+                    num++;
+                    dfs(grid, i, j);
+                }
+            }
+        }
+        return num;
+    }
+
+    public int dfs(char[][] grid, int r, int c) {
+        if (!check(grid, r, c) || grid[r][c] == '0') {
+            return 0;
+        }
+        int res = 0;
+        if (grid[r][c] == '1') {
+            res++;
+            grid[r][c] = '0';
+        }
+        for (int[] scan : scans) {
+            res += dfs(grid, r + scan[0], c + scan[1]);
+        }
+        return res;
+    }
+
+    public boolean check(char[][] grid, int r, int c) {
+        return r >= 0 && r < grid.length && c >= 0 && c < grid[0].length;
+    }
+
+
+    /**
+     * 33. 搜索旋转排序数组
+     */
+    public int search(int[] nums, int target) {
+        int lo = 0;
+        int hi = nums.length - 1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (nums[mid] == target)
+                return mid;
+            //在任意一个点划开，要么前半段有序，要么后半段有序
+            if (nums[mid] >= nums[lo]) {
+                if (nums[mid] > target && target >= nums[lo]) {
+                    hi = mid - 1;
+                } else {
+                    lo = mid + 1;
+                }
+            } else {
+                if (nums[mid] < target && target <= nums[hi]) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 69. x 的平方根
+     */
+    public int mySqrt(int x) {
+        if (x == 0)
+            return 0;
+        int lo = 1;
+        int hi = x / 2;
+        while (lo <= hi) {
+            int mid = (lo + hi + 1) >> 1;
+            long sqrt = mid * mid;
+            if (sqrt > x) {
+                hi = mid - 1;
+            } else {
+                lo = mid;
+            }
+        }
+        return lo;
     }
 }
