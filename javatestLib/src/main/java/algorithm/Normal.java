@@ -851,6 +851,16 @@ public class Normal {
             }
             return true;
         }
+
+        public int firstUniqChar(String s) {
+
+            for (int i = 0; i < s.length(); i++) {
+                if (s.lastIndexOf(s.charAt(i)) == i) {
+                    return i;
+                }
+            }
+            return -1;
+        }
     }
 }
 

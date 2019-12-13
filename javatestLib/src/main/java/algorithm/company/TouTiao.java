@@ -226,4 +226,137 @@ public class TouTiao {
         }
         return lo;
     }
+
+    /**
+     * 121. 买卖股票的最佳时机
+     */
+    public int maxProfit(int[] prices) {
+        if (prices == null || prices.length < 1) {
+            return 0;
+        }
+        int[][] dp = new int[prices.length][2];
+        for (int i = 0; i < prices.length; i++) {
+            if (i - 1 < 0) {
+                dp[i][0] = 0;
+                dp[i][1] = -prices[i];
+                continue;
+            }
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], -prices[i]);
+        }
+        return dp[prices.length - 1][0];
+    }
+
+    //优化空间
+    public int maxProfit1(int[] prices) {
+        if (prices == null || prices.length < 1) {
+            return 0;
+        }
+        int rest = 0;
+        int buy = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (i - 1 < 0) {
+                rest = 0;
+                buy = -prices[i];
+                continue;
+            }
+            rest = Math.max(rest, buy + prices[i]);
+            buy = Math.max(buy, -prices[i]);
+        }
+        return rest;
+    }
+
+
+    /**
+     * 309. 最佳买卖股票时机含冷冻期
+     */
+    public int maxProfit309(int[] prices) {
+        int n = prices.length;
+        int[][] dp = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            if (i - 1 < 0) {
+                dp[i][0] = 0;
+                dp[i][1] = -prices[i];
+                continue;
+            }
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            //错！！！
+            dp[i][1] = Math.max(dp[i - 1][1], i - 2 < 0 ? 0 : dp[i - 2][0] - prices[i]);
+        }
+        return dp[n - 1][0];
+    }
+
+    public int maxProfit309right(int[] prices) {
+        if (prices == null || prices.length <= 1) {
+            return 0;
+        }
+        int n = prices.length;
+        int[][] dp = new int[n][2];
+        int pre = 0;//记录dp[i - 2][0]
+        for (int i = 0; i < n; i++) {
+            if (i - 1 < 0) {
+                dp[i][0] = 0;
+                dp[i][1] = -prices[i];
+                continue;
+            }
+            int temp = dp[i - 1][0];
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            dp[i][1] = Math.max(dp[i - 1][1], pre - prices[i]);
+            pre = temp;
+        }
+        return dp[n - 1][0];
+    }
+
+    /**
+     * 53. 最大子序和
+     * 最优子结构问题
+     */
+    public int maxSubArray(int[] nums) {
+        /*if (nums == null || nums.length < 1) {
+            return 0;
+        }
+        int n = nums.length;
+        int[] dp = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i == 0) {
+                dp[i] = nums[i];
+                continue;
+            }
+            dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+        }
+        return dp[n - 1];*/
+        //以上错误：要理解dp的定义，这里定义的是包含i位置元素时的最大子序和，它不一定是整个的最大值
+        //所以还需要一个值记录最大的值
+
+        if (nums == null || nums.length < 1) {
+            return 0;
+        }
+        int n = nums.length;
+        int[] dp = new int[n];
+        int max = nums[0];
+        dp[0] = nums[0];
+        for (int i = 1; i < n; i++) {
+            dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+            max = Math.max(max, dp[i]);
+        }
+        return max;
+    }
+
+    //空间优化
+    public int maxSubArray2(int[] nums) {
+        if (nums == null || nums.length < 1) {
+            return 0;
+        }
+        int max = nums[0];
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (sum > 0) {
+                sum += nums[i];
+            } else {
+                sum = nums[i];
+            }
+            max = Math.max(max, sum);
+        }
+        return max;
+    }
 }
