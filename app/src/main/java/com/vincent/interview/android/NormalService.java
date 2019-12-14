@@ -9,6 +9,10 @@ import android.os.Messenger;
 import android.support.annotation.Nullable;
 
 import com.vincent.projectanalysis.utils.LogUtil;
+import com.vincent.projectanalysis.widgets.event.TestEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 /**
  * Created by dengfa on 2019-11-25.
@@ -59,6 +63,7 @@ public class NormalService extends Service {
     public void onCreate() {
         super.onCreate();
         LogUtil.d("vincent", "NormalService - onCreate");
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -93,5 +98,12 @@ public class NormalService extends Service {
     public void onDestroy() {
         super.onDestroy();
         LogUtil.d("vincent", "NormalService - onDestroy");
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    @Subscribe
+    public void onEvent(TestEvent event) {
+        LogUtil.d("vincent", "NormalService - onEvent - " + event.msg);
     }
 }

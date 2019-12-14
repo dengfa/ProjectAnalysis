@@ -852,14 +852,60 @@ public class Normal {
             return true;
         }
 
-        public int firstUniqChar(String s) {
-
-            for (int i = 0; i < s.length(); i++) {
-                if (s.lastIndexOf(s.charAt(i)) == i) {
-                    return i;
+        /**
+         * 516. 最长回文子序列
+         */
+        public int longestPalindromeSubseq(String s) {
+            int l = s.length();
+            int[][] dp = new int[l][l];
+            for (int i = l - 1; i >= 0; i--) {
+                dp[i][i] = 1;
+                for (int j = i + 1; j < l; j++) {
+                    if (s.charAt(i) == s.charAt(j)) {
+                        dp[i][j] = dp[i + 1][j - 1] + 2;
+                    } else {
+                        dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                    }
                 }
             }
-            return -1;
+            return dp[0][l - 1];
+        }
+
+        /**
+         * 5. 最长回文子串
+         */
+        public String longestPalindrome3(String s) {
+            int n = s.length();
+            boolean[][] dp = new boolean[n][n];
+            String res = "";
+            for (int i = n - 1; i >= 0; i--) {
+                //1!!!for (int j = i + 1; j < n; j++) {
+                for (int j = i; j < n; j++) {
+                    //2!!!dp[i][j] = s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1];
+                    dp[i][j] = s.charAt(i) == s.charAt(j) && (j - i < 2 || dp[i + 1][j - 1]);
+                    if (dp[i][j] && j - i + 1 > res.length()) {
+                        res = s.substring(i, j + 1);
+                    }
+                }
+            }
+            return res;
+        }
+
+        /**
+         * 21. 合并两个有序链表
+         */
+        public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+            if (l1 == null)
+                return l2;
+            if (l2 == null)
+                return l1;
+            if (l1.val < l2.val) {
+                l1.next = mergeTwoLists(l1.next, l2);
+                return l1;
+            } else {
+                l2.next = mergeTwoLists(l1, l2.next);
+                return l2;
+            }
         }
     }
 }

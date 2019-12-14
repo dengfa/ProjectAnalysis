@@ -54,7 +54,9 @@
         <activity android:name=".activity.OrderHomeworkActivity" />
         <activity android:name=".activity.DraftPaperActivity" />
 
-        <service android:name="com.vincent.interview.android.PreDownLoadService" />
+        <service
+            android:name="com.vincent.interview.android.PreDownLoadService"
+            android:process=":new" android:exported="true" />
         <service android:name="com.vincent.interview.android.NormalService" />
     </application>
 

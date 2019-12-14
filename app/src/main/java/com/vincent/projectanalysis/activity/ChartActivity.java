@@ -17,12 +17,12 @@ public class ChartActivity extends AppCompatActivity implements AdapterView.OnIt
 
     private ListView mListView;
     private String[] tabs = {
-            "pie chart", "HorizontalBarChartActivity","MyCustomChart"};
+            "pie chart", "HorizontalBarChartActivity", "MyCustomChart"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_naivigate);
+        setContentView(R.layout.activity_my_custom_chart);
         mListView = (ListView) findViewById(R.id.lv);
         mListView.setAdapter(new ArrayAdapter<>(this, R.layout.item_main_listview, R.id.tv_item, tabs));
         mListView.setOnItemClickListener(this);

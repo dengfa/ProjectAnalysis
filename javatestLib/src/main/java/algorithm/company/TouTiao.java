@@ -359,4 +359,32 @@ public class TouTiao {
         }
         return max;
     }
+
+    //分治
+    public int maxSubArray3(int[] nums) {
+        return divid(nums, 0, nums.length - 1);
+    }
+
+    public int divid(int[] nums, int left, int right) {
+        if (left > right) {
+            return 0;
+        }
+        int mid = left + (right - left) / 2;
+        int maxLeft = divid(nums, left, mid);
+        int maxRight = divid(nums, mid + 1, right);
+
+        int maxSumLeft = 0;
+        int sumLeft = 0;
+        for (int i = mid; i >= left; i--) {
+            sumLeft += nums[i];
+            maxSumLeft = Math.max(maxLeft, sumLeft);
+        }
+        int maxSumRight = 0;
+        int sumRight = 0;
+        for (int i = mid + 1; i <= right; i++) {
+            sumRight += nums[i];
+            maxSumRight = Math.max(maxSumRight, sumRight);
+        }
+        return Math.max(maxSumLeft + maxSumRight, Math.max(maxLeft, maxRight));
+    }
 }

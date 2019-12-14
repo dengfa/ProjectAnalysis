@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager      mVpMain;
     MagicIndicator mIndicator;
-    private List<Fragment> mFragments    = new ArrayList<>();
-    private String[]       mModuleTitles = new String[]{"demo", "t2", "t3", "t4", "t5", "t6"};
-    private MainAdapter    mMainAdapter;
-    private StateFragment  stateFragment;
+    private List<Fragment>  mFragments    = new ArrayList<>();
+    private String[]        mModuleTitles = new String[]{"demo", "t2", "t3", "t4", "t5", "t6"};
+    private MainAdapter     mMainAdapter;
+    private StateFragment   stateFragment;
     private FragmentManager mFragmentManager;
 
     @Override
@@ -144,6 +144,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void floatClick(View view) {
+        LogUtil.d("vincent", "floatClick");
+        //view.invalidate();
+        view.requestLayout();
     }
 
     private class MainAdapter extends FragmentPagerAdapter {

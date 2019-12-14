@@ -5,17 +5,16 @@ package com.vincent.projectanalysis.widgets;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.RelativeLayout;
 
+import com.nineoldandroids.animation.ObjectAnimator;
 import com.vincent.projectanalysis.R;
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.view.ViewHelper;
-import com.nineoldandroids.view.ViewPropertyAnimator;
+import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.UIUtils;
 
 @SuppressLint("ClickableViewAccessibility")
@@ -36,6 +35,24 @@ public class DragablePanel extends RelativeLayout {
     }
 
     private float mDownX, mDownY;
+
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+        LogUtil.d("vincent", "DragablePanel draw");
+    }
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
+        LogUtil.d("vincent", "DragablePanel dispatchDraw");
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        LogUtil.d("vincent", "DragablePanel onLayout");
+    }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -87,24 +104,10 @@ public class DragablePanel extends RelativeLayout {
                 if (Math.abs(disX) > com.vincent.projectanalysis.utils.UIUtils.dip2px(2)
                         && Math.abs(disY) > UIUtils.dip2px(2)) {
                     mMoving = true;
-                    LayoutParams params = (LayoutParams) mDragView
-                            .getLayoutParams();
-                    params.rightMargin = (int) (params.rightMargin - disX);
-                    params.bottomMargin = (int) (params.bottomMargin - disY);
 
-                    if (params.rightMargin > getWidth() - mDragView.getWidth()) {
-                        params.rightMargin = getWidth() - mDragView.getWidth();
-                    }
-                    if (params.rightMargin < 0) {
-                        params.rightMargin = 0;
-                    }
-                    if (params.bottomMargin > getHeight() - mDragView.getHeight()) {
-                        params.bottomMargin = getHeight() - mDragView.getHeight();
-                    }
-                    if (params.bottomMargin < 0) {
-                        params.bottomMargin = 0;
-                    }
-                    requestLayout();
+                    //moveTargetView(disX, disY);
+                    transtionTarget(disX, disY);
+
                     mLastX = x;
                     mLastY = y;
                 }
@@ -127,6 +130,33 @@ public class DragablePanel extends RelativeLayout {
         return mDraging;
     }
 
+    private void transtionTarget(float disX, float disY) {
+        //通过setTranslationX方法移动后，原来位置和新位置都能响应点击事件！！！
+        mDragView.setTranslationX(mDragView.getTranslationX() + disX);
+        mDragView.setTranslationY(mDragView.getTranslationY() + disY);
+    }
+
+    private void moveTargetView(float disX, float disY) {
+        LayoutParams params = (LayoutParams) mDragView
+                .getLayoutParams();
+        params.rightMargin = (int) (params.rightMargin - disX);
+        params.bottomMargin = (int) (params.bottomMargin - disY);
+
+        if (params.rightMargin > getWidth() - mDragView.getWidth()) {
+            params.rightMargin = getWidth() - mDragView.getWidth();
+        }
+        if (params.rightMargin < 0) {
+            params.rightMargin = 0;
+        }
+        if (params.bottomMargin > getHeight() - mDragView.getHeight()) {
+            params.bottomMargin = getHeight() - mDragView.getHeight();
+        }
+        if (params.bottomMargin < 0) {
+            params.bottomMargin = 0;
+        }
+        requestLayout();
+    }
+
     private void onClick() {
         mDragView.performClick();
     }
@@ -140,7 +170,17 @@ public class DragablePanel extends RelativeLayout {
         } else {
             toLeft = false;
         }
-        ViewPropertyAnimator
+
+        //能响应点击事件，但是view的位置还在放手那一刻
+        ObjectAnimator.ofFloat(mDragView, "translationX",
+                toLeft ? -mDragView.getLeft() + UIUtils.dip2px(6)
+                : getWidth() - mDragView.getLeft()
+                - mDragView.getWidth()
+                - UIUtils.dip2px(6))
+                .setDuration(1200)
+                .start();
+
+        /*ViewPropertyAnimator
                 .animate(mDragView)
                 .setInterpolator(new AccelerateDecelerateInterpolator())
                 .setDuration(200)
@@ -175,6 +215,6 @@ public class DragablePanel extends RelativeLayout {
                     @Override
                     public void onAnimationCancel(Animator animation) {
                     }
-                }).start();
+                }).start();*/
     }
 }

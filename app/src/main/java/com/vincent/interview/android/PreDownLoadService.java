@@ -17,6 +17,9 @@ import com.vincent.projectanalysis.utils.AppPreferences;
 import com.vincent.projectanalysis.utils.LogUtil;
 import com.vincent.projectanalysis.utils.MD5Util;
 import com.vincent.projectanalysis.utils.UIUtils;
+import com.vincent.projectanalysis.widgets.event.TestEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -34,11 +37,12 @@ import java.net.URL;
  */
 public class PreDownLoadService extends IntentService {
 
-    public static final String TAG   = "preload";
-    private static      int    start = 5;
+    public static final  String TAG           = "preload";
+    private static       int    start         = 5;
     // 5MB. This is the max image header size we can handle, we preallocate a much smaller buffer but will resize up to
     // this amount if necessary.
-    private static final int MARK_POSITION = 5 * 1024 * 1024;
+    private static final int    MARK_POSITION = 5 * 1024 * 1024;
+
     public PreDownLoadService() {
         super(TAG);
     }
@@ -67,6 +71,8 @@ public class PreDownLoadService extends IntentService {
 
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
+        EventBus.getDefault().post(new TestEvent("PreDownLoadService"));
+
         String url = intent.getStringExtra("url");
         /*start = 5;
         while (start > 0) {

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.vincent.projectanalysis.widgets.DragablePanel
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.vincent.projectanalysis.widgets.DragablePanel xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,21 +8,27 @@
         android:id="@+id/indicator_main"
         android:layout_width="match_parent"
         android:layout_height="54dp"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/indicator_main"/>
+        android:layout_above="@id/indicator_main" />
 
-    <ImageView
+    <com.vincent.projectanalysis.widgets.RoundImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher" />
+
+    <com.vincent.projectanalysis.widgets.CImageView
         android:id="@+id/drag_handler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="80dp"
+        android:layout_alignParentBottom="true"
         android:layout_marginRight="15dp"
-        android:src="@drawable/protect_eyes_float_ball_green"/>
+        android:layout_marginBottom="80dp"
+        android:onClick="floatClick"
+        android:src="@drawable/protect_eyes_float_ball_green" />
 </com.vincent.projectanalysis.widgets.DragablePanel>
