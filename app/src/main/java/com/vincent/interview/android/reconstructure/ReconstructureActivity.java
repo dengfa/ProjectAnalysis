@@ -54,6 +54,16 @@ public class ReconstructureActivity extends AppCompatActivity {
         questionData.add(new QuestionData(2, "qdjg\nquestion\nDatas\nsdd\nsdfsdf"));
         questionData.add(new QuestionData(3, "qdjg"));
         questionData.add(new QuestionData(2, "qdjg\nquestion\nDatas\nsdd"));
+        questionData.add(new QuestionData(2, "qdjg\nquestion\nDatas\nsdd"));
+        questionData.add(new QuestionData(1, "qdjg\nquestion"));
+        questionData.add(new QuestionData(2, "qdjg\nquestion\nDatas\nsdd\nsdfsdf"));
+        questionData.add(new QuestionData(3, "qdjg"));
+        questionData.add(new QuestionData(2, "qdjg\nquestion\nDatas\nsdd"));
+        questionData.add(new QuestionData(2, "qdjg\nquestion\nDatas\nsdd"));
+        questionData.add(new QuestionData(1, "qdjg\nquestion"));
+        questionData.add(new QuestionData(2, "qdjg\nquestion\nDatas\nsdd\nsdfsdf"));
+        questionData.add(new QuestionData(3, "qdjg"));
+        questionData.add(new QuestionData(2, "qdjg\nquestion\nDatas\nsdd"));
         mAdapter.setDatas(questionData);
     }
 }

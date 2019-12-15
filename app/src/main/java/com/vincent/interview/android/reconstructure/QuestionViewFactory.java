@@ -15,7 +15,7 @@ public class QuestionViewFactory {
             case 1:
                 return new AQuestionView(context);
             case 2:
-                return new AQuestionView(context);
+                return new BQuestionView(context);
             default:
                 return new AQuestionView(context);
         }
