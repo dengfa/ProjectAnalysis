@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.vincent.interview.android.reconstructure.ReconstructureActivity;
 import com.vincent.projectanalysis.R;
 import com.vincent.projectanalysis.activity.DemoActivity;
 import com.vincent.projectanalysis.activity.FragmentTestActivity;
@@ -27,7 +28,8 @@ public class Main2Fragment extends Fragment implements AdapterView.OnItemClickLi
     private String[] tabs = {
             "MyMapSceneActivity",
             "DemoActivity",
-            "FragmentTestActivity"
+            "FragmentTestActivity",
+            "ReconstructureActivity"
     };
     private String   mTest;
 
@@ -104,6 +106,9 @@ public class Main2Fragment extends Fragment implements AdapterView.OnItemClickLi
                 break;
             case 2:
                 startActivity(new Intent(getActivity(), FragmentTestActivity.class));
+                break;
+            case 3:
+                startActivity(new Intent(getActivity(), ReconstructureActivity.class));
                 break;
         }
     }

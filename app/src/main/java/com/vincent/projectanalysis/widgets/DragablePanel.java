@@ -171,6 +171,8 @@ public class DragablePanel extends RelativeLayout {
             toLeft = false;
         }
 
+        ObjectAnimator.ofFloat(mDragView, "scaleX", 1.5f).setDuration(200).start();
+
         //能响应点击事件，但是view的位置还在放手那一刻
         ObjectAnimator.ofFloat(mDragView, "translationX",
                 toLeft ? -mDragView.getLeft() + UIUtils.dip2px(6)
