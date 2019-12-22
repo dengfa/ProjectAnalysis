@@ -92,9 +92,9 @@ public class PreDownLoadService extends IntentService {
         LogUtil.d("vincent", "downloadimage = " + url);
         URL myFileUrl;
         Bitmap bitmap = null;
+        HttpURLConnection conn = null;
         try {
             myFileUrl = new URL(url);
-            HttpURLConnection conn;
             conn = (HttpURLConnection) myFileUrl.openConnection();
             conn.setDoInput(true);
             conn.connect();
@@ -105,6 +105,9 @@ public class PreDownLoadService extends IntentService {
             loadBitmapFromStream(is, url);
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+
+            conn.disconnect();
         }
         return bitmap;
     }

@@ -1,8 +1,11 @@
 package com.vincent.interview.android;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.vincent.projectanalysis.utils.LogUtil;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Created by dengfa on 2019-11-25.
@@ -10,10 +13,11 @@ import com.vincent.projectanalysis.utils.LogUtil;
  */
 public class MyAsynctask extends AsyncTask {
 
-    private int start;
+    private int                    start;
+    private WeakReference<Context> mContext;
 
-    public MyAsynctask() {
-
+    public MyAsynctask(Context context) {
+        mContext = new WeakReference<Context>(context);
     }
 
     @Override
@@ -36,5 +40,6 @@ public class MyAsynctask extends AsyncTask {
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
         LogUtil.d("vincent", "onPostExecute - " + start);
+        Context context = mContext.get();
     }
 }

@@ -37,6 +37,17 @@ public class Basic {
     }
 
     /**
+     * 常见错误！！！
+     */
+    public void Attention(){
+        /**1.String 不能forEach**/
+        /*String s2 = "大法师地方";
+        for(Character c2 : s2){
+
+        }*/
+    }
+
+    /**
      * 常考算法整理！！！
      */
     static class Solution {

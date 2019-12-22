@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.vincent.interview.android.reflect.Son;
 import com.vincent.interview.android.retrofit.IpModel;
 import com.vincent.interview.android.retrofit.IpService;
 import com.vincent.projectanalysis.R;
@@ -27,6 +28,8 @@ import com.vincent.projectanalysis.utils.AppPreferences;
 import com.vincent.projectanalysis.utils.LogUtil;
 
 import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -51,12 +54,7 @@ public class InterviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interview);
         ButterKnife.bind(this);
-
-
-
         mIvImage = findViewById(R.id.iv_image);
-
-        mAsynctask = new MyAsynctask();
 
         AssetManager assetManager = new AssetManager();
         assetManager.addAssetPath("");
@@ -84,11 +82,44 @@ public class InterviewActivity extends AppCompatActivity {
         String path = AppPreferences.getStringValue("path");
         File file = new File(path);
         mIvImage.setImageURI(Uri.fromFile(file));
+
+        testReflect();
     }
 
+    public void testReflect() {
+        Field[] fields = Son.class.getFields();
+        LogUtil.d("Reflect", "fields:");
+        for (Field field : fields) {
+            LogUtil.d("Reflect", field.toString());
+        }
+        Field[] declaredFields = Son.class.getDeclaredFields();
+        LogUtil.d("Reflect", "declaredFields:");
+        for (Field field : declaredFields) {
+            LogUtil.d("Reflect", field.toString());
+        }
+
+        Method[] methods = Son.class.getMethods();
+        LogUtil.d("Reflect", "methods:");
+        for (Method method : methods) {
+            LogUtil.d("Reflect", method.toString());
+        }
+        Method[] declaredMethods = Son.class.getDeclaredMethods();
+        LogUtil.d("Reflect", "declaredMethods:");
+        for (Method method : declaredMethods) {
+            LogUtil.d("Reflect", method.toString());
+        }
+
+        try {
+            Son son = Son.class.newInstance();
+            son.getStr();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void test() {
-
         SparseArray<String> sparseArray = new SparseArray<>();
         sparseArray.put(1, "1");
     }

@@ -58,6 +58,9 @@ public class Normal {
         }
 
         HighFrequency.getRow(5);
+
+        //HighFrequency.pivotIndex(new int[]{-1,-1,-1,-1,-1,0});
+        HighFrequency.plusOne(new int[]{9, 9, 9});
     }
 
     /**
@@ -906,6 +909,76 @@ public class Normal {
                 l2.next = mergeTwoLists(l1, l2.next);
                 return l2;
             }
+        }
+
+        /**
+         * 101. 对称二叉树
+         * 思路：
+         * 找子问题
+         */
+        public boolean isSymmetric(TreeNode root) {
+            if (root == null)
+                return true;
+            return isSubSymmetric(root.left, root.right);
+        }
+
+        public boolean isSubSymmetric(TreeNode left, TreeNode right) {
+            if (left == null && right == null) {
+                return true;
+            }
+            if (left == null || right == null) {
+                return false;
+            }
+            return left.val == right.val && isSubSymmetric(left.left, right.right)
+                    && isSubSymmetric(left.right, right.left);
+        }
+
+        public static int pivotIndex(int[] nums) {
+            int l = 1;
+            int r = nums.length - 2;
+            int sumL = nums[l - 1], sumR = nums[r + 1];
+            while (l <= r) {
+                if (sumL < sumR) {
+                    sumL += nums[l++];
+                } else if (sumL > sumR) {
+                    sumR += nums[r--];
+                } else {
+                    if (r == l) {
+                        return l;
+                    }
+                    sumR += nums[r--];
+                    sumL += nums[l++];
+                }
+            }
+            return -1;
+        }
+
+        public static int[] plusOne(int[] digits) {
+            int add = 1;
+            for (int i = digits.length - 1; i >= 0; i--) {
+                int sum = digits[i] + add;
+                digits[i] = sum % 10;
+                add = sum / 10;
+            }
+            if (add != 0) {
+                int[] res = new int[digits.length + 1];
+                res[0] = add;
+                for (int i = 0; i < digits.length; i++) {
+                    res[i + 1] = digits[i];
+                }
+                return res;
+            } else {
+                return digits;
+            }
+        }
+
+        /**
+         * 567. 字符串的排列
+         * 给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。
+         * 换句话说，第一个字符串的排列之一是第二个字符串的子串。
+         */
+        public boolean checkInclusion(String s1, String s2) {
+            return false;
         }
     }
 }

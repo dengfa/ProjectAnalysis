@@ -29,7 +29,6 @@ public abstract class AbsQuestionAdapter<T, VH extends RecyclerView.ViewHolder>
         notifyDataSetChanged();
     }
 
-
     public void setDisPlayStratege(IDiasplayStrategy disPlayStratege) {
         mDisplayStrategy = disPlayStratege;
     }
